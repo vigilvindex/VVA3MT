@@ -1,8 +1,26 @@
 _name = "Russia (VDV)";
 _classname = "rhs_faction_vdv";
-_groups = ["Air","Armored","Infantry","Mechanized","Motorized"];
-_air = ["CUP_O_ChDKZ_Mi8Squadron"];
-_armored = ["CUP_O_ChDKZ_T55Section","CUP_O_ChDKZ_TankSection"];
-_infantry = ["CUP_O_ChDKZ_InfSection_AA","CUP_O_ChDKZ_InfSection_AT","CUP_O_ChDKZ_InfSquad","CUP_O_ChDKZ_InfSquad_Weapons","CUP_O_ChDKZ_SniperTeam"];
-_mechanized = ["CUP_O_ChDKZ_MechInfSection","CUP_O_ChDKZ_MechInfSection_AT"];
-_motorized = ["CUP_O_ChDKZ_MotInfSection","CUP_O_ChDKZ_MotInfSquad"];
+_groups = [
+	"rhs_group_rus_vdv_2s25", // Armored
+	"rhs_group_rus_vdv_bm21", // Artillery
+	"rhs_group_rus_vdv_bmd1", // Mechanized
+	"rhs_group_rus_vdv_bmd2", // Mechanized
+	"rhs_group_rus_vdv_bmd4", // Mechanized
+	"rhs_group_rus_vdv_bmd4m", // Mechanized
+	"rhs_group_rus_vdv_bmd4ma", // Mechanized
+	"rhs_group_rus_vdv_bmp1", // Mechanized
+	"rhs_group_rus_vdv_bmp2", // Mechanized
+	"rhs_group_rus_vdv_btr60", // Mechanized
+	"rhs_group_rus_vdv_btr70", // Mechanized
+	"rhs_group_rus_vdv_BTR80", // Mechanized
+	"rhs_group_rus_vdv_BTR80a", // Mechanized
+	"rhs_group_rus_vdv_des_infantry", // Inf. (EMR-Desert)
+	"rhs_group_rus_vdv_gaz66", // Motorized
+	"rhs_group_rus_vdv_infantry", // Inf. (EMR)
+	"rhs_group_rus_vdv_infantry_flora", // Inf. (Flora)
+	"rhs_group_rus_vdv_infantry_mflora", // Inf. (M. Flora)
+	"rhs_group_rus_vdv_infantry_recon", // Inf. (Recon)
+	"rhs_group_rus_vdv_mi24", // Air (Recon)
+	"rhs_group_rus_vdv_mi8", // Air (Assault)
+	"rhs_group_rus_vdv_Ural" // Mot. Inf.
+];
