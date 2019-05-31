@@ -1,0 +1,1 @@
+player addEventHandler ['Respawn',{ {player addOwnedMine _x;} count (getAllOwnedMines (_this select 1)); }];

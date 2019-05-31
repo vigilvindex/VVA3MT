@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project name="NRE Earplugs">
+	<Package name="NREEarplugs">
+		<Key ID="STR_NREEP_IN_HINT">
+			<Original>You have inserted the earplugs!</Original>
+			<Russian>Беруши вставлены!</Russian>
+			<German>Du hast die Ohrstoepsel eingesteckt!</German>
+			<Spanish>¡Te has puesto los tapones!</Spanish>
+		</Key>
+		<Key ID="STR_NREEP_OUT_HINT">
+			<Original>You have removed the earplugs!</Original>
+			<Russian>Беруши вытащены!</Russian>
+			<German>Du hast die Ohrstoepsel rausgenommen!</German>
+			<Spanish>¡Te has quitado los tapones!</Spanish>
+		</Key>
+		<Key ID="STR_NREEP_IN_ACTION">
+			<Original>Insert Earplugs</Original>
+			<Russian>Вставить беруши</Russian>
+			<German>Ohrstoepsel einstecken</German>
+			<Spanish>Ponerte los tapones</Spanish>
+		</Key>
+		<Key ID="STR_NREEP_OUT_ACTION">
+			<Original>Remove Earplugs</Original>
+			<Russian>Вытащить беруши!</Russian>
+			<German>Ohrstoepsel rausnehmen</German>
+			<Spanish>Quitarte los tapones</Spanish>
+		</Key>
+	</Package>
+</Project>
+<Project name="CH View Distance">
+  <Package name="Main">
+    <Key ID="STR_chvd_title">
+      <Original>View Distance Settings</Original>
+      <Russian>Настройки Дальности Обзора</Russian>
+      <German>Sichtweiten Einstellung</German>
+      <French>Conf. de la distance de vue</French>
+    </Key>
+    <Key ID="STR_chvd_foot">
+      <Original>ON FOOT</Original>
+      <Russian>ПЕШКОМ</Russian>
+      <German>ZU FUß</German>
+      <French>A PIED</French>
+    </Key>
+    <Key ID="STR_chvd_car">
+      <Original>IN CAR</Original>
+      <Russian>В МАШИНЕ</Russian>
+      <German>IM FAHRZEUG</German>
+      <French>EN VOITURE</French>
+    </Key>
+    <Key ID="STR_chvd_air">
+      <Original>IN AIR</Original>
+      <Russian>В ВОЗДУХЕ</Russian>
+      <German>IM FLUGZEUG</German>
+      <French>DANS LES AIRS</French>
+    </Key>
+    <Key ID="STR_chvd_view">
+      <Original>VIEW:</Original>
+      <Russian>ОБЩЕЕ:</Russian>
+      <German>SICHTWEITE:</German>
+      <French>VUE :</French>
+    </Key>
+    <Key ID="STR_chvd_object">
+      <Original>OBJECT:</Original>
+      <Russian>ОБЪЕКТЫ:</Russian>
+      <German>OBJEKT:</German>
+      <French>OBJET :</French>
+    </Key>
+    <Key ID="STR_chvd_terrain">
+      <Original>TERRAIN:</Original>
+      <Russian>ЛАНДШАФТ:</Russian>
+      <German>GELÄNDE:</German>
+      <French>TERRAIN :</French>
+    </Key>
+    <Key ID="STR_chvd_sync">
+      <Original>SYNC MODE:</Original>
+      <Russian>СИНХРОН.:</Russian>
+      <German>SYNC MODE:</German>
+      <French>SYNC. :</French>
+    </Key>
+    <Key ID="STR_chvd_close">
+      <Original>Close</Original>
+      <Russian>Закрыть</Russian>
+      <German>Schließen</German>
+      <French>Fermer</French>
+    </Key>
+    <Key ID="STR_chvd_disabled">
+      <Original>Disabled</Original>
+      <Russian>Отключена</Russian>
+      <German>Disabled</German>
+      <French>Désactivé</French>
+    </Key>
+    <Key ID="STR_chvd_dynamic">
+      <Original>Dynamic</Original>
+      <Russian>Динамическая</Russian>
+      <German>Dynamic</German>
+      <French>Dynamique</French>
+    </Key>
+    <Key ID="STR_chvd_fov">
+      <Original>FOV</Original>
+      <Russian>FOV</Russian>
+      <German>FOV</German>
+      <French>FOV</French>
+    </Key>
+    <Key ID="STR_chvd_low">
+      <Original>Low</Original>
+      <Russian>Низкое</Russian>
+      <German>Niedrig</German>
+      <French>Bas</French>
+    </Key>
+    <Key ID="STR_chvd_standard">
+      <Original>Standard</Original>
+      <Russian>Стандартное</Russian>
+      <German>Standart</German>
+      <French>Standart</French>
+    </Key>
+    <Key ID="STR_chvd_high">
+      <Original>High</Original>
+      <Russian>Высокое</Russian>
+      <German>Hoch</German>
+      <French>Elevé</French>
+    </Key>
+    <Key ID="STR_chvd_veryHigh">
+      <Original>Very High</Original>
+      <Russian>Очень высокое</Russian>
+      <German>Sehr Hoch</German>
+      <French>Très élevé</French>
+    </Key>
+    <Key ID="STR_chvd_ultra">
+      <Original>Ultra</Original>
+      <Russian>Ультра</Russian>
+      <German>Ultra</German>
+      <French>Ultra</French>
+    </Key>
+    <Key ID="STR_chvd_openSettings">
+      <Original>Open view distance settings</Original>
+      <Russian>Открыть настройки дальности обзора</Russian>
+      <German>Open view distance settings</German>
+      <French>Ouvrir la configuration de la distance de vue</French>
+    </Key>
+    <Key ID="STR_chvd_decreaseVD">
+      <Original>Decrease view distance</Original>
+      <Russian>Уменьшить дальность обзора</Russian>
+      <German>Decrease view distance</German>
+      <French>Diminuer la distance de vue</French>
+    </Key>
+    <Key ID="STR_chvd_increaseVD">
+      <Original>Increase view distance</Original>
+      <Russian>Увеличить дальность обзора</Russian>
+      <German>Increase view distance</German>
+      <French>Augmenter la distance de vue</French>
+    </Key>
+    <Key ID="STR_chvd_viewDistance">
+      <Original>View Distance</Original>
+      <Russian>Дальность Обзора</Russian>
+      <German>View Distance</German>
+      <French>Distance de vue</French>
+    </Key>
+    <Key ID="STR_chvd_objViewDistance">
+      <Original>Object View Distance</Original>
+      <Russian>Дальность Обзора Объектов</Russian>
+      <German>Object View Distance</German>
+      <French>Distance de vue des objets</French>
+    </Key>
+    <Key ID="STR_chvd_terrainQuality">
+      <Original>Terrain Quality</Original>
+      <Russian>Качество Рельефа</Russian>
+      <German>Terrain Quality</German>
+      <French>Terrain Quality</French>
+    </Key>
+    <Key ID="STR_chvd_terrainGrid">
+      <Original>Terrain Grid</Original>
+      <Russian>Сетка Рельефа</Russian>
+      <German>Terrain Grid</German>
+      <French>Terrain Grid</French>
+    </Key>
+  </package>
+</Project>
+<Project name="vet_unflipping">
+    <!-- Settings  -->
+    <Key ID="STR_vet_unflipping_unit_mass_limit">
+        <Original>Unit mass limit</Original>
+        <Polish>Limit masy na jednostke</Polish>
+        <Russian>Предел массы техники</Russian>
+        <Spanish>Límite de masa de unidad</Spanish>
+    </Key>
+    <Key ID="STR_vet_unflipping_unit_mass_limit_desc">
+        <Original>
+            Defines how much mass can be unflipped by single unit.
+            Default value should allow single unit to unflip most of small vehicles.
+        </Original>
+        <Polish>
+            Określa jak cięzki obiekt może być obrócony przez jedną jednostke.
+            Domyślna wartość powinna pozwolić na obrócenie większości małych pojazdów.
+        </Polish>
+        <Russian>
+            Масса техники, которую может перевернуть один игрок.
+            Дефолтное значение позволяет перевернуть одному игроку небольшой транспорт.
+        </Russian>
+        <Spanish>
+            Define cuánta masa puede ser volteada por una sola unidad.
+            El valor por defecto debería permitir a un hombre voltear la mayoría de vehículos pequeños.
+        </Spanish>
+    </Key>
+    <Key ID="STR_vet_unflipping_unit_man_limit">
+        <Original>Man limit</Original>
+        <Polish>Limit osób</Polish>
+        <Russian>Необходимое кол-во людей</Russian>
+        <Spanish>Límite de hombres</Spanish>
+    </Key>
+    <Key ID="STR_vet_unflipping_unit_man_limit_desc">
+        <Original>Defines maximal amount of people that can be needed for unflip.</Original>
+        <Polish>Określa maksymalną liczbe osób jaka może być potrzebna do obrócenia pojazdu.</Polish>
+        <Russian>Необходимое количество игроков для переворота техники</Russian>
+        <Spanish>Define la cantidad máxima de personas que pueden necesitarse para voltear.</Spanish>
+    </Key>
+    <Key ID="STR_vet_unflipping_time">
+        <Original>Unflipping time</Original>
+        <Polish>Czas odwracania</Polish>
+        <Russian>Время переворота</Russian>
+        <Spanish>Tiempo para voltear</Spanish>
+    </Key>
+    <Key ID="STR_vet_unflipping_time_desc">
+        <Original>Defines how long it will take to unflip the vehicle.</Original>
+        <Polish>Określa jak długo będzie trwało obracanie pojazdu.</Polish>
+        <Russian>Время, необходимое для переворота техники</Russian>
+        <Spanish>Define cuánto tiempo tomará voltear el vehículo.</Spanish>
+    </Key>
+    <Key ID="STR_vet_unflipping_vehicle_mass_limit">
+        <Original>Maximum unflip weight</Original>
+        <Polish>Maksymalna masa odwracanego pojazdu</Polish>
+    </Key>
+    <Key ID="STR_vet_unflipping_vehicle_mass_limit_desc">
+        <Original>Vehicles with weight above this limit will be not unflippable.</Original>
+        <Polish>Pojazdy z masą powyżej tego limitu nie będą mogły być obrócone.</Polish>
+    </Key>
+    <!-- Actions -->
+    <Key ID="STR_vet_unflipping_act">
+        <Original>Unflip</Original>
+        <Polish>Obróć</Polish>
+        <Russian>Перевернуть</Russian>
+        <Spanish>Voltear</Spanish>
+    </Key>
+    <Key ID="STR_vet_unflipping_required">
+        <Original>Required people to unflip: %1</Original>
+        <Polish>Liczba osób potrzebna aby obrócić: %1</Polish>
+        <Russian>Требуется людей для переворота: %1 чел.</Russian>
+        <Spanish>Gente necesaria para volcar: %1</Spanish>
+    </Key>
+    <Key ID="STR_vet_unflipping_need_more">
+        <Original>You need more people.</Original>
+        <Polish>Potrzeba więcej osób.</Polish>
+        <Russian>Вам нужно больше людей</Russian>
+        <Spanish>Se necesitan más personas</Spanish>
+    </Key>
+    <Key ID="STR_vet_unflipping_waiting">
+        <Original>Not enough people. Waiting...</Original>
+        <Polish>Brak wystarczającej ilości osób. Oczekiwanie...</Polish>
+        <Russian>Не хватает людей! Ожидайте или отмените действие...</Russian>
+        <Spanish>No hay personas suficientes. Esperando...</Spanish>
+    </Key>
+    <Key ID="STR_vet_unflipping_doing">
+        <Original>Unfliping...</Original>
+        <Polish>Obracanie...</Polish>
+        <Russian>Переворачиваем...</Russian>
+        <Spanish>Volteando...</Spanish>
+    </Key>
+    <Key ID="STR_vet_unflipping_to_heavy">
+        <Original>To heavy</Original>
+        <Polish>Za ciężkie</Polish>
+    </Key>
+</Project>
