@@ -1,13 +1,10 @@
 /* Modules.hpp - Module definitions for the mission. - vigil.vindex@gmail.com - https://creativecommons.org/licenses/by-sa/4.0/ */
 __EXEC (MISSION_MODS = ["CoreTime","Cron","DateTime","FTPP","JIPTP","RandomWeather","SHK","VVM","VVS"])
-#ifndef modCoreTime
-	#define modCoreTime
+#ifndef modCrewInfo
+	#define modCrewInfo
 #endif
 #ifndef modCron
 	#define modCron
-#endif
-#ifndef modDateTime
-	#define modDateTime
 #endif
 #ifndef modFTPP
 	#define modFTPP
@@ -20,6 +17,12 @@ __EXEC (MISSION_MODS = ["CoreTime","Cron","DateTime","FTPP","JIPTP","RandomWeath
 #endif
 #ifndef modSHK
 	#define modSHK
+#endif
+#ifndef modVVDT
+	#define modVVDT
+#endif
+#ifndef modVVLO
+	#define modVVLO
 #endif
 #ifndef modVVM
 	#define modVVM

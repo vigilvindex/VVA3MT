@@ -13,13 +13,10 @@ class Params { // https://community.bistudio.com/wiki/Arma_3_Mission_Parameters
     default = 0;
   };
   #ifdef modCoreTime
-    #include "..\mods\CoreTime\params.hpp"
+    // #include "..\mods\CoreTime\params.hpp"
   #endif
   #ifdef modCron
     #include "..\mods\Cron\params.hpp"
-  #endif
-  #ifdef modDateTime
-    #include "..\mods\DateTime\params.hpp"
   #endif
   #ifdef modFTPP
     #include "..\mods\FTPP\params.hpp"
@@ -30,8 +27,8 @@ class Params { // https://community.bistudio.com/wiki/Arma_3_Mission_Parameters
   #ifdef modRandomWeather
     #include "..\mods\RandomWeather\params.hpp"
   #endif
-  #ifdef modSHK
-    #include "..\mods\SHK\params.hpp"
+  #ifdef modVVDT
+    #include "..\mods\VVDT\params.hpp"
   #endif
   #ifdef modVVM
     #include "..\mods\VVM\params.hpp"
