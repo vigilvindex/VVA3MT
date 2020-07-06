@@ -1,0 +1,9 @@
+_name = "AAF";
+_classname = "IND_F";
+_groups = ["Armored","Infantry","Mechanized","Motorized","SpecOps","Support"];
+_armored = ["HAF_TankPlatoon","HAF_TankPlatoon_AA","HAF_TankSection","I_LTankPlatoon_AA","I_LTankPlatoon_combined","I_LTankSection_AA","I_LTankSection_Assault","I_LTankSection_AT","I_LTankSection_Recon"];
+_infantry = ["HAF_InfSentry","HAF_InfSquad","HAF_InfSquad_Weapons","HAF_InfTeam","HAF_InfTeam_AA","HAF_InfTeam_AT","HAF_SniperTeam","I_InfTeam_Light"];
+_mechanized = ["HAF_MechInf_AA","HAF_MechInf_AT","HAF_MechInf_Support","HAF_MechInfSquad"];
+_motorized = ["HAF_MotInf_AA","HAF_MotInf_AT","HAF_MotInf_GMGTeam","HAF_MotInf_MGTeam","HAF_MotInf_MortTeam","HAF_MotInf_Reinforce","HAF_MotInf_Team"];
+_specops = ["HAF_AttackTeam_UAV","HAF_AttackTeam_UGV","HAF_DiverTeam","HAF_DiverTeam_Boat","HAF_DiverTeam_SDV","HAF_ReconTeam_UAV","HAF_ReconTeam_UGV","HAF_SmallTeam_UAV"];
+_support = ["HAF_Support_CLS","HAF_Support_ENG","HAF_Support_EOD","HAF_Support_GMG","HAF_Support_MG","HAF_Support_Mort"];

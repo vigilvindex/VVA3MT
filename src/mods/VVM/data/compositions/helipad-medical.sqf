@@ -1,0 +1,19 @@
+_return = [
+	["Land_HelipadRescue_F",[-0.536987,0.00402832,0],0,1,0,[0,0],"","",true,false],
+	["Land_BagFence_Corner_F",[-6.51862,6.0954,-0.000999928],271.8,1,0,[0,0],"","",true,false],
+	["Land_BagFence_Corner_F",[-6.67853,-6.19373,-0.000999928],179.28,1,0,[0,-0],"","",true,false],
+	["Land_BagFence_Corner_F",[5.49463,-6.17365,-0.000999928],89.8264,1,0,[0,0],"","",true,false],
+	["Land_BagFence_Corner_F",[5.5426,6.01025,-0.000999928],0,1,0,[0,0],"","",true,false],
+	["Land_BagFence_End_F",[-4.7077,-6.23657,-0.000999928],0,1,0,[0,0],"","",true,false],
+	["Land_BagFence_End_F",[-4.85553,6.00842,-0.000999928],0,1,0,[0,0],"","",true,false],
+	["Land_BagFence_End_F",[-6.53448,4.09692,-0.000999928],87.3626,1,0,[0,0],"","",true,false],
+	["Land_BagFence_End_F",[-6.73743,-4.51404,-0.000999928],268.406,1,0,[0,0],"","",true,false],
+	["Land_BagFence_End_F",[3.58148,6.00958,-0.000999928],177.927,1,0,[0,-0],"","",true,false],
+	["Land_BagFence_End_F",[3.81238,-6.15253,-0.000999928],178.466,1,0,[0,-0],"","",true,false],
+	["Land_BagFence_End_F",[5.53003,-4.17896,-0.000999928],269.304,1,0,[0,0],"","",true,false],
+	["Land_BagFence_End_F",[5.54474,4.354,-0.000999928],88.05,1,0,[0,0],"","",true,false],
+	["PortableHelipadLight_01_red_F",[-6.15613,5.61127,-0.00117397],0,1,0,[0,0],"","",true,false],
+	["PortableHelipadLight_01_red_F",[-6.14404,-5.62555,-0.00117397],0,1,0,[0,0],"","",true,false],
+	["PortableHelipadLight_01_red_F",[5.06219,-5.5824,-0.00117397],0,1,0,[0,0],"","",true,false],
+	["PortableHelipadLight_01_red_F",[5.07843,5.62183,-0.00117397],0,1,0,[0,0],"","",true,false]
+];

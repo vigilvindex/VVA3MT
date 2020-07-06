@@ -1,0 +1,30 @@
+/* description.ext - http://community.bistudio.com/wiki/Description.ext - vigil.vindex@gmail.com - https://creativecommons.org/licenses/by-sa/4.0/ */
+#include "cfg\Init.hpp"
+class Header { // http://goo.gl/Xd3vW#header
+  gameType = COOP; // http://community.bistudio.com/wiki/Multiplayer_Game_Types
+  minPlayers = 1;
+  maxPlayers = 4;
+  playerCountMultipleOf = 1;
+};
+author = "VigilVindex"; // http://goo.gl/Xd3vW#author
+loadScreen = "loadScreen.jpg"; // http://goo.gl/Xd3vW#loadScreen
+onLoadIntro = "VVA3MT onLoadIntro";
+onLoadIntroTime = 1;
+onLoadMission = "VVA3MT onLoadMission"; // http://goo.gl/Xd3vW#onLoadMission
+onLoadMissionTime = 1;
+onLoadName = "VVA3MT onLoadName"; // http://goo.gl/Xd3vW#onLoadName
+overviewPicture = "overviewPicture.jpg"; // 1024x512, PAA, 2:1 AR - http://goo.gl/Xd3vW#overviewPicture
+overviewText = "VVA3MT overviewText"; // http://goo.gl/Xd3vW#overviewText
+overviewTextLocked = "VVA3MT overviewTextLocked"; // http://goo.gl/Xd3vW#overviewTextLocked
+aiKills = 0; // http://goo.gl/Xd3vW#aiKills
+disabledAI = 1; // http://goo.gl/Xd3vW#disabledAI
+disableRandomization[] = {"All"}; // http://goo.gl/Xd3vW#disableRandomization
+enableItemsDropping = 0; // http://goo.gl/Xd3vW#enableItemsDropping
+enableTeamSwitch = 0; // http://goo.gl/Xd3vW#enableTeamSwitch
+forceRotorLibSimulation = 0; // http://goo.gl/Xd3vW#forceRotorLibSimulation
+joinUnassigned = 0; // http://goo.gl/Xd3vW#joinUnassigned
+onPauseScript = "scripts\onPause.sqf"; // http://goo.gl/Xd3vW#onPauseScript
+saving = 0; // http://goo.gl/Xd3vW#saving
+scriptedPlayer = 0; // http://goo.gl/Xd3vW#scriptedPlayer
+skipLobby = 0; // http://goo.gl/Xd3vW#skipLobby
+weaponPool = 0;
