@@ -1,4 +1,6 @@
 // _co = 0 call VVM_fnc_getRole;
+diag_log format ["# %1 #% 2 # %3 # VVM_fnc_getRole _this = %4 #",time,__FILE__ select [count PATH],__LINE__,_this];
+_return = [];
 _roles = [ // KEY, TITLE, INDEX
 	["CO","Commanding Officer"], // 0
 	["SL","Squad Leader"], // 1

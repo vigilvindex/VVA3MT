@@ -1,4 +1,5 @@
 // _accessories = 0 call VVM_fnc_getAttachments; _bipods = 1 call VVM_fnc_getAttchments;
+_return = [];
 switch (_this) do {
 	case 0: { // Accessories
 		_return = [

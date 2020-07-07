@@ -19,22 +19,27 @@ if (modVVMSwitch == 1) then {
     WESTHQPOS = [500,500];
     WHQX = WESTHQPOS select 0;
     WHQY = WESTHQPOS select 1;
-    // [[1500,1500],[3000,3000]] call VVM_fnc_bordersToMapGlobal;
-    _aomarker = [[[1000,1000],[1000,2000],[2000,2000],[2000,1000],[1000,1000]],10,["ColorGreen",1]] call VVM_fnc_lineToMapGlobal;
-    _aotextmarker= [[1250,950],[0,2],["AREA OF OPERATION","ColorBlack",1]] call VVM_fnc_textToMapGlobal;
-    _qrfmarker = [[1170,785],[25,450,80,10],["ColorOrange",1],["QRF!","center","ColorBlack",1]] call VVM_fnc_arrowToMapGlobal;
-    respawn_east = [["n","respawn_east"],["p",EASTHQPOS],["c",9],["a",1]] call VVM_fnc_createMarker;
+    [[1500,1500],[3000,3000]] call VVM_fnc_bordersToMapGlobal;
+    _aomarker = [[[1000,1000],[1000,2000],[2000,2000],[2000,1000],[1000,1000]],10,["ColorOrange",1]] call VVM_fnc_lineToMapGlobal;
+    _aotextmarker= [[1250,950],[0,2],["AREA OF OPERATION","ColorBlack",0.5]] call VVM_fnc_textToMapGlobal;
+    _qrfmarker = [[1170,785],[45,450,80,10],["ColorRed",1],["QRF!","center","ColorBlack",0.5]] call VVM_fnc_arrowToMapGlobal;
+    respawn_east = [["n","respawn_east"],["p",EASTHQPOS],["c",9],["ty",8],["a",0]] call VVM_fnc_createMarker;
     _eastbase = [EASTHQPOS] execVM "mods\VVM\functions\compositions\rusheast.sqf";
     _eastbasemarker = [[[EHQX - 20,EHQY - 20],[EHQX + 20,EHQY - 20],[EHQX + 20,EHQY + 20],[EHQX - 20,EHQY + 20],[EHQX - 20,EHQY - 20]],2,["ColorRed",1]] call VVM_fnc_lineToMapGlobal;
-    _eastbasetextmarker = [[EHQX + 40 ,EHQY],[0,2],["EAST HQ","ColorBlack",1]] call VVM_fnc_textToMapGlobal;
-    respawn_west = [["n","respawn_west"],["p",WESTHQPOS],["c",2],["a",1]] call VVM_fnc_createMarker;
+    _eastbasetextmarker = [[EHQX + 40 ,EHQY],[0,2],["EAST HQ","ColorBlack",0.5]] call VVM_fnc_textToMapGlobal;
+    respawn_west = [["n","respawn_west"],["p",WESTHQPOS],["c",2],["ty",8],["a",0]] call VVM_fnc_createMarker;
     _westbase = [WESTHQPOS] execVM "mods\VVM\functions\compositions\rushwest.sqf";
     _westbasemarker = [[[WHQX - 20,WHQY - 20],[WHQX + 20,WHQY - 20],[WHQX + 20,WHQY + 20],[WHQX - 20,WHQY + 20],[WHQX - 20,WHQY - 20]],2,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
-    _awestbasetextmarker = [[WHQX + 40 ,WHQY],[0,2],["WEST HQ","ColorBlack",1]] call VVM_fnc_textToMapGlobal;
+    _awestbasetextmarker = [[WHQX + 40 ,WHQY],[0,2],["WEST HQ","ColorBlack",0.5]] call VVM_fnc_textToMapGlobal;
     {
       if (side _x == east) then {_x setPos EASTHQPOS};
       if (side _x == west) then {_x setPos WESTHQPOS};
     } forEach allPlayers;
+
+    _loamarker = [[[1365,2260],[2220,1490]],10,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
+    _loatextmarker= [[1465,2210],[([2220,1490] getDir [1365,2260])+5,2],["LOA 1","ColorBlue",0.5]] call VVM_fnc_textToMapGlobal;
+    _loamarker2 = [[[1095,2110],[2065,1210]],10,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
+    _loatextmarker2= [[1195,2060],[([2065,1210] getDir [1095,2110])+5,2],["LOA 2","ColorBlue",0.5]] call VVM_fnc_textToMapGlobal;
 
     _signalspos = [-30,405];
     _spx = _signalspos select 0;
@@ -74,5 +79,7 @@ if (modVVMSwitch == 1) then {
     _orbattextmarker= [[_opx - 460,_opy - 420],[0,1], ["ECHO       SR 5","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
     _orbattextmarker= [[_opx - 460,_opy - 450],[0,1], ["EAGLE      LR 1","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
     _orbattextmarker= [[_opx - 460,_opy - 480],[0,1], ["HAWK       LR 1","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+
+    _nato_co = ["NATO",0] call VVM_fnc_getFactionRole;
   };
 };
