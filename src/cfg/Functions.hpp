@@ -12,13 +12,13 @@ class CfgFunctions { // https://community.bistudio.com/wiki/Description.ext#CfgF
       class preInit {preInit = 1;};
   	};
   };
-  #ifdef modSHK
-    #include "..\mods\SHK\functions.hpp"
+  #ifdef modVVDT
+    #include "..\mods\VVDT\functions.hpp"
   #endif
   #ifdef modVVM
     #include "..\mods\VVM\functions.hpp"
   #endif
   #ifdef modVVS
-    #include "..\mods\VVS\functions.h"
+    #include "..\mods\VVS\functions.hpp"
   #endif
 };

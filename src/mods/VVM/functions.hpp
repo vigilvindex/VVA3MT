@@ -18,6 +18,15 @@ class VVM {
     class createGarage {};
     class createVVS {};
   };
+  class cron {
+    file = "mods\VVM\functions\cron";
+    class cronInit {
+		  postInit = 1;
+		};
+		class cronJobAdd {};
+		class cronJobRemove {};
+		class cronJobRun {};
+  };
   class environment {
     file = "mods\VVM\functions\environment";
   };
@@ -31,9 +40,39 @@ class VVM {
     file = "mods\VVM\functions\markers";
     class createMarker {};
     class setRespawnMarkerAlpha {};
+    class arrowToMapGlobal {};
+    class arrowToMapLocal {};
+    class bordersToMapGlobal {};
+    class bordersToMapLocal {};
+    class lineToMapGlobal {};
+    class lineToMapLocal {};
+    class textToMapFont {};
+    class textToMapGlobal {};
+    class textToMapLocal {};
   };
   class modules {
     file = "mods\VVM\functions\modules";
+  };
+  class positions {
+		file = "mods\VVM\functions\positions";
+		class executeFindPosition {};
+		class findClosestPosition {};
+		class findPosition {};
+		class findRandomPositionInMarker {};
+		class getMarkerCorners {};
+		class getMarkerShape {};
+		class getPos {};
+		class getPosFromCircle {};
+		class getPosFromEllipse {};
+		class getPosFromRectangle {};
+		class getPosFromSquare {};
+		class isBlacklisted {};
+		class isInCircle {};
+		class isInEllipse {};
+		class isInRectangle {};
+		class isSamePosition {};
+		class rotatePosition {};
+		class startingPositionRandomizer {};
   };
   class tasks {
     file = "mods\VVM\functions\task";
