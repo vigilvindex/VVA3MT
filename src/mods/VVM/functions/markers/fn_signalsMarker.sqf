@@ -1,0 +1,17 @@
+_signalspos = [-30,225];
+_spx = _signalspos select 0;
+_spy = _signalspos select 1;
+_signalsmarker = [[[_spx,_spy],[_spx,_spy - 240],[_spx - 240,_spy - 240],[_spx - 240,_spy],[_spx,_spy]],10,["ColorWhite",1]] call VVM_fnc_lineToMapGlobal;
+_signalstextmarker= [[_spx - 220,_spy - 30],[0,1],[" - - SIGNALS - - ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_signalstextmarker= [[_spx - 220,_spy - 60],[0,1],["LR CH 0 - 50HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_signalstextmarker= [[_spx - 220,_spy - 90],[0,1],["LR CH 1 - 60HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_signalstextmarker= [[_spx - 220,_spy - 90],[0,1],["LR CH 1 - 70HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_signalstextmarker= [[_spx - 220,_spy - 120],[0,1],["SR CH 0 - 100HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_signalstextmarker= [[_spx - 220,_spy - 150],[0,1],["SR CH 1 - 110HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_signalstextmarker= [[_spx - 220,_spy - 180],[0,1],["SR CH 2 - 120HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_signalstextmarker= [[_spx - 220,_spy - 210],[0,1],["SR CH 3 - 130HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_signalstextmarker= [[_spx - 220,_spy - 210],[0,1],["SR CH 4 - 140HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_signalstextmarker= [[_spx - 220,_spy - 210],[0,1],["SR CH 5 - 150HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_signalstextmarker= [[_spx - 220,_spy - 210],[0,1],["SR CH 6 - 160HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_signalstextmarker= [[_spx - 220,_spy - 210],[0,1],["SR CH 7 - 170HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_signalstextmarker= [[_spx - 220,_spy - 210],[0,1],["SR CH 8 - 180HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;

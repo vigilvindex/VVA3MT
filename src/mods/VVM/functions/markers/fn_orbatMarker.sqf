@@ -1,0 +1,13 @@
+_orbatpos = [-30,625];
+_opx = _orbatpos select 0;
+_opy = _orbatpos select 1;
+_orbatmarker = [[[_opx,_opy],[_opx,_opy - 290],[_opx - 290,_opy - 290],[_opx - 290,_opy],[_opx,_opy]],10,["ColorWhite",1]] call VVM_fnc_lineToMapGlobal;
+_orbattextmarker= [[_opx - 270,_opy - 30],[0,1],[" - - - ORBAT - - - ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_orbattextmarker= [[_opx - 270,_opy - 60],[0,1],["CO","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_orbattextmarker= [[_opx - 270,_opy - 90],[0,1],["ALPHA","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_orbattextmarker= [[_opx - 270,_opy - 120],[0,1],["BRAVO","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_orbattextmarker= [[_opx - 270,_opy - 150],[0,1],["CHARLIE","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_orbattextmarker= [[_opx - 270,_opy - 180],[0,1],["DELTA","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_orbattextmarker= [[_opx - 270,_opy - 210],[0,1],["ECHO","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_orbattextmarker= [[_opx - 270,_opy - 240],[0,1],["EAGLE","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+_orbattextmarker= [[_opx - 270,_opy - 270],[0,1],["HAWK","ColorWhite",1]] call VVM_fnc_textToMapGlobal;

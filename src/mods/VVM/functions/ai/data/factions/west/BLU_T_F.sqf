@@ -1,9 +1,0 @@
-_name = "NATO (Pacific)";
-_classname = "BLU_T_F";
-_groups = ["Armored","Infantry","Mechanized","Motorized","SpecOps","Support"];
-_armored = ["B_T_SPGPlatoon_Scorcher","B_T_SPGSection_MLRS","B_T_SPGSection_Scorcher","B_T_TankDestrSection_Rhino","B_T_TankDestrSection_RhinoUP","B_T_TankPlatoon","B_T_TankPlatoon_AA","B_T_TankSection"];
-_infantry = ["B_T_InfSentry","B_T_InfSquad","B_T_InfSquad_Weapons","B_T_InfTeam","B_T_InfTeam_AA","B_T_InfTeam_AT","B_T_InfTeam_Light","B_T_ReconPatrol","B_T_ReconSentry","B_T_ReconTeam","B_T_SniperTeam"];
-_mechanized = ["B_T_MechInf_AA","B_T_MechInf_AT","B_T_MechInf_Support","B_T_MechInfSquad"];
-_motorized = ["B_T_MotInf_AA","B_T_MotInf_AT","B_T_MotInf_GMGTeam","B_T_MotInf_MGTeam","B_T_MotInf_MortTeam","B_T_MotInf_Reinforcements","B_T_MotInf_Team"];
-_specops = ["B_T_AttackTeam_UAV","B_T_AttackTeam_UGV","B_T_DiverTeam","B_T_DiverTeam_Boat","B_T_DiverTeam_SDV","B_T_ReconTeam_UAV","B_T_ReconTeam_UGV","B_T_SmallTeam_UAV"];
-_support = ["B_T_Recon_EOD","B_T_Support_CLS","B_T_Support_ENG","B_T_Support_EOD","B_T_Support_GMG","B_T_Support_MG","B_T_Support_Mort"];

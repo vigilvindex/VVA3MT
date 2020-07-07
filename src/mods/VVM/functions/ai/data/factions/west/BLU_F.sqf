@@ -1,9 +1,0 @@
-_name = "NATO";
-_classname = "BLU_F";
-_groups = ["Armored","Infantry","Mechanized","Motorized","SpecOps","Support"];
-_armored = ["B_TankDestrSection_Rhino","B_TankDestrSection_RhinoUP","BUS_SPGPlatoon_Scorcher","BUS_SPGSection_MLRS","BUS_SPGSection_Scorcher","BUS_TankPlatoon""BUS_TankPlatoon_AA","BUS_TankSection"];
-_infantry = ["B_InfTeam_Light","BUS_InfAssault","BUS_InfSentry","BUS_InfSquad","BUS_InfSquad_Weapons","BUS_InfTeam","BUS_InfTeam_AA","BUS_InfTeam_AT","BUS_ReconPatrol","BUS_ReconSentry","BUS_ReconSquad","BUS_ReconTeam","BUS_SniperTeam"];
-_mechanized = ["BUS_MechInf_AA","BUS_MechInf_AT","BUS_MechInf_Support","BUS_MechInfSquad"];
-_motorized = ["BUS_MotInf_AA","BUS_MotInf_AT","BUS_MotInf_GMGTeam","BUS_MotInf_MGTeam","BUS_MotInf_MortTeam","BUS_MotInf_Reinforce","BUS_MotInf_Team"];
-_specops = ["BUS_AttackTeam_UAV","BUS_AttackTeam_UGV","BUS_DiverTeam","BUS_DiverTeam_Boat","BUS_DiverTeam_SDV","BUS_ReconTeam_UAV","BUS_ReconTeam_UGV","BUS_SmallTeam_UAV"];
-_support = ["BUS_Recon_EOD","BUS_Support_CLS","BUS_Support_ENG","BUS_Support_EOD","BUS_Support_GMG","BUS_Support_MG","BUS_Support_Mort"];

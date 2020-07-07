@@ -6,6 +6,9 @@ Created: 2016/08/09 Updated: 2020/06/16 Version: 0.0.1
 */
 class VVM {
 	tag = "VVM";
+  class actions {
+    file = "mods\VVM\functions\actions";
+  };
   class ai {
     file = "mods\VVM\functions\ai";
   };
@@ -27,8 +30,17 @@ class VVM {
 		class cronJobRemove {};
 		class cronJobRun {};
   };
+  class data {
+    file = "mods\VVM\functions\data";
+  };
   class environment {
     file = "mods\VVM\functions\environment";
+  };
+  class loadouts {
+    file = "mods\VVM\functions\loadouts";
+    class getItems {};
+    class getMagazines {};
+    class getWeapon {};
   };
   class locations {
     file = "mods\VVM\functions\locations";
@@ -76,6 +88,7 @@ class VVM {
   };
   class tasks {
     file = "mods\VVM\functions\task";
+    class taskMaster {};
   };
   class triggers {
     file = "mods\VVM\functions\triggers";
@@ -84,5 +97,6 @@ class VVM {
   class waypoints {
     file = "mods\VVM\functions\waypoints";
     class createWaypoint {};
+    class patrol {};
   };
 };
