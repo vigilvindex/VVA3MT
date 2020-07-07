@@ -8,7 +8,6 @@ _content = ["Vanilla","Tanoa","Mark","GM"]; // FACTION CONTENT = Vanilla; DLC: T
 _climates = [0,1,2]; // "Arid","Urban","Lush": _environment selectRandom _environments; _uniform + _environment;
 _camo = ["MTP","Tropic","Woodland"];
 _traits = [[0,0,0,0],[0,0,1,0],[1,0,0,0],[0,1,0,0],[1,1,0,0],[0,0,0,1]]; // [ENG,EXP,MED,UAV] 0 = OFF, 1 = ON. [NONE,MED,ENG,ENGM,EOD,UAV]
-_rolekeys = ["co","sl","ftl","med","eng","engm","eod","uav","r","rat","gre","ar","aar","mmg","mmga","hmg","hmga","mat","mata","hat","hata","mrt","mrta","msam","msama","hsam","hsama","dm","sn","sp","div","car","smg","vc","vg","vd","p"]; // FACTION ROLE KEYS
 _roles = [
 	// ROLE		TRAITS	VOICE				FACE				UNIFORM	HEADGEAR	BACKPACK	VEST	NVG	FACEWEAR	BINOCULAR	TERMINAL	PRIMARY																			SECONDARY								LAUNCHER								MEDICAL			CHEMLIGHTS	SMOKES						GRENADES		EXPLOSIVES		MINES									COMPASS		MAP		WATCH	RADIO		TOOLS
 	["co",		0,		floor random 12,	floor random 20,	0,		0,			-1,			0,		-1,	-1,			1,			0,			[[1,2,[1,5],[1,5],-1,-1,-1,0,1,1,1]],											[1,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0],	-1,										[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
@@ -243,8 +242,21 @@ _result = _roles select _role; // SELECT FACTION ROLE
 		case 9: {_result set [_forEachIndex,_facewear select _x]}; // FACEWEAR
 		case 10: {_result set [_forEachIndex,_binoculars select _x]}; // BINOCULAR
 		case 11: {_result set [_forEachIndex,_terminals select _x]}; // TERMINAL
-		case 12: { // PRIMARY
-			{	_key = _x select 0;
+		case 12: { // PRIMARY [[1,2,[1,5],[1,5],-1,-1,-1,0,1,1,1]], _return = [_variants,_magazines,_tracers,_grenades,_flares,_smokes,_accessories,_bipods,_muzzles,_optics];
+			{	_index = _x select 0;
+				_key = _primaries select _index;
+				_weapon = _key call VVM_fnc_getWeapon;
+				_variants = _weapon select 1;
+				_magazines = _weapon select 2;
+				_tracers = _weapon select 3;
+				_grenades = _weapon select 4;
+				_flares = _weapon select 5;
+				_smokes = _weapon select 6;
+				_accessories = _weapon select 7;
+				_bipods = _weapon select 8;
+				_muzzles = _weapon select 9;
+				_optics = _weapon select 10;
+				if (_variants >= 0) then {};
 			} forEach _x;
 			_result set [_forEachIndex,_x];
 		};

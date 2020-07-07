@@ -16,8 +16,7 @@ _variants = [
 	"launch_Titan_F" // 7
 ];
 _magazines = [
-	"Titan_AA", // 0
-	"Titan AA Missile" // 1
+	"Titan_AA" // 0
 ];
 _tracers = [];
 _grenades = [];

@@ -24,11 +24,11 @@ if (modVVMSwitch == 1) then {
     _aotextmarker= [[1250,950],[0,2],["AREA OF OPERATION","ColorBlack",1]] call VVM_fnc_textToMapGlobal;
     _qrfmarker = [[1170,785],[25,450,80,10],["ColorOrange",1],["QRF!","center","ColorBlack",1]] call VVM_fnc_arrowToMapGlobal;
     respawn_east = [["n","respawn_east"],["p",EASTHQPOS],["c",9],["a",1]] call VVM_fnc_createMarker;
-    _eastbase = [EASTHQPOS] execVM "mods\VVM\functions\compositions\bases\rusheast.sqf";
+    _eastbase = [EASTHQPOS] execVM "mods\VVM\functions\compositions\rusheast.sqf";
     _eastbasemarker = [[[EHQX - 20,EHQY - 20],[EHQX + 20,EHQY - 20],[EHQX + 20,EHQY + 20],[EHQX - 20,EHQY + 20],[EHQX - 20,EHQY - 20]],2,["ColorRed",1]] call VVM_fnc_lineToMapGlobal;
     _eastbasetextmarker = [[EHQX + 40 ,EHQY],[0,2],["EAST HQ","ColorBlack",1]] call VVM_fnc_textToMapGlobal;
     respawn_west = [["n","respawn_west"],["p",WESTHQPOS],["c",2],["a",1]] call VVM_fnc_createMarker;
-    _westbase = [WESTHQPOS] execVM "mods\VVM\functions\compositions\bases\rushwest.sqf";
+    _westbase = [WESTHQPOS] execVM "mods\VVM\functions\compositions\rushwest.sqf";
     _westbasemarker = [[[WHQX - 20,WHQY - 20],[WHQX + 20,WHQY - 20],[WHQX + 20,WHQY + 20],[WHQX - 20,WHQY + 20],[WHQX - 20,WHQY - 20]],2,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
     _awestbasetextmarker = [[WHQX + 40 ,WHQY],[0,2],["WEST HQ","ColorBlack",1]] call VVM_fnc_textToMapGlobal;
     {

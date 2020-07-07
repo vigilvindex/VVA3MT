@@ -38,9 +38,15 @@ class VVM {
   };
   class loadouts {
     file = "mods\VVM\functions\loadouts";
+    class clearGear {};
+    class getAttachments {};
+    class getFactionRole {};
     class getItems {};
     class getMagazines {};
+    class getRole {};
     class getWeapon {};
+    class setLoadout {};
+    class setTraits {};
   };
   class locations {
     file = "mods\VVM\functions\locations";
@@ -87,7 +93,7 @@ class VVM {
 		class startingPositionRandomizer {};
   };
   class tasks {
-    file = "mods\VVM\functions\task";
+    file = "mods\VVM\functions\tasks";
     class taskMaster {};
   };
   class triggers {
