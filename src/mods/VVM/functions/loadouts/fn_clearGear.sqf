@@ -1,6 +1,15 @@
-if (_this isEqualType "MAN") then {
-	removeBackpack _this;
-	removeAllWeapons _this;
-	removeAllItemsWithMagazines _this;
-	removeAllAssignedItems _this;
-};
+private _unit = _this select 0;
+removeBackpack _unit;
+removeBackpackGlobal _unit;
+removeAllWeapons _unit;
+removeAllAssignedItems _unit;
+removeAllContainers _unit;
+removeUniform _unit;
+removeVest _unit;
+clearAllItemsFromBackpack _unit;
+deleteVehicle objectParent unitBackpack _unit;
+removeGoggles _unit;
+removeHeadgear _unit;
+removeAllItems _unit;
+removeAllWeapons _unit;
+removeAllItemsWithMagazines _unit;

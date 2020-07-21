@@ -16,7 +16,6 @@ Functions to set a load out of gear for a crate, unit or vehicle.
 
 ```sqf
 _result = [_unit,_side,_faction,_role] call VVLO_fnc_createLoadout;
-_result = [_unit,_side,_faction,_role,_primary,_secondary,_launcher] call VVLO_fnc_createLoadout;
 ```
 
 ## TODO

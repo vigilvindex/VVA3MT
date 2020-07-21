@@ -1,6 +1,6 @@
 // _binoculars = 0 call VVM_fnc_getItems; _compasses = 1 call VVM_fnc_getItems;
-diag_log format ["# %1 #% 2 # %3 # VVM_fnc_getItems _this = %4 #",time,__FILE__ select [count PATH],__LINE__,_this];
-_return = [];
+// diag_log format ["# %1 #% 2 # %3 # VVM_fnc_getItems _this = %4 #",time,__FILE__ select [count PATH],__LINE__,_this];
+private _return = [];
 switch (_this) do {
 	case 0: { // Binoculars
 		_return = [
@@ -175,6 +175,5 @@ switch (_this) do {
 		];
 	};
 	case 10: {_return = ["ItemWatch"];}; // Watches
-	default {_return = null;};
 };
 _return;

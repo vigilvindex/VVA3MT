@@ -1,6 +1,6 @@
 // _chemlights = 0 call VVM_fnc_getMagazines; _explosives = 1 call VVM_fnc_getMagazines;
-diag_log format ["# %1 #% 2 # %3 # VVM_fnc_getMagazines _this = %4 #",time,__FILE__ select [count PATH],__LINE__,_this];
-_return = [];
+// diag_log format ["# %1 #% 2 # %3 # VVM_fnc_getMagazines _this = %4 #",time,__FILE__ select [count PATH],__LINE__,_this];
+private _return = [];
 switch (_this) do {
 	case 0: { // Chemlights
 		_return = [
@@ -57,6 +57,5 @@ switch (_this) do {
 			"SmokeShellPurple" // 6
 		];
 	};
-	default {_return = null};
 };
 _return;

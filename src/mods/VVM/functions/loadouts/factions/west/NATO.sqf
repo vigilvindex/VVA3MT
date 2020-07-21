@@ -1,6 +1,7 @@
 // Usage: _co = 0 call compile preprocessFileLineNumbers "NATO.sqf";
 // TODO: Default is daytime gear. Need a switch for night time gear. Maybe also a switch for stealth gear.
-diag_log format ["# %1 # NATO.sqf _this = %2 #",time,_this];
+// diag_log format ["# %1 # NATO.sqf _this = %2 #",time,_this];
+private ["_key","_side","_year","_classname","_content","_climates","_camo","_roles","_primaries","_secondaries","_launchers","_voices","_faces","_uniforms","_headgear","_backpacks","_vests","_rolekeys","_role","_return"];
 _key = "NATO"; // FACTION KEY https://armedassault.fandom.com/wiki/NATO
 _side = WEST; // FACTION SIDE
 _year = 2035; // FACTION YEAR
@@ -8,49 +9,48 @@ _classname = "BLU_F"; // FACTION CLASSNAME
 _content = ["Vanilla","Tanoa","Mark","GM"]; // FACTION CONTENT = Vanilla; DLC: TANOA,TANKS,MARKS,GM; MODS: CUP,RHS,BAF,IFA3,GEIST,CFP;
 _climates = [0,1,2]; // "Arid","Urban","Lush": _environment selectRandom _environments; _uniform + _environment;
 _camo = ["MTP","Tropic","Woodland"];
-_traits = [[0,0,0,0],[0,0,1,0],[1,0,0,0],[0,1,0,0],[1,1,0,0],[0,0,0,1]]; // [ENG,EXP,MED,UAV] 0 = OFF, 1 = ON. [NONE,MED,ENG,ENGM,EOD,UAV]
+_voice = floor random 12;
+_face = floor random 20;
 _roles = [
-	// ROLE		TRAITS	VOICE				FACE				UNIFORM	HEADGEAR	BACKPACK	VEST	NVG	FACEWEAR	BINOCULAR	TERMINAL	PRIMARY																													SECONDARY									LAUNCHER									MEDICAL			CHEMLIGHTS	SMOKES						GRENADES		EXPLOSIVES		MINES									COMPASS		MAP		WATCH	RADIO		TOOLS
-	["co",		0,		floor random 12,	floor random 20,	0,		0,			-1,			0,		-1,	-1,			1,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[1,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["sl",		0,		floor random 12,	floor random 20,	0,		1,			3,			0,		-1,	-1,			1,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[1,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["ftl",		0,		floor random 12,	floor random 20,	0,		3,			3,			0,		-1,	-1,			1,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[1,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["med",		1,		floor random 12,	floor random 20,	0,		3,			7,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[1,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,10],[1,1]],	-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["eng",		2,		floor random 12,	floor random 20,	0,		3,			7,			9,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[1,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	[[1,1]]],
-	["engm",	3,		floor random 12,	floor random 20,	0,		3,			7,			9,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[1,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				[[0,2],[1,2],[2,2],[3,2],[4,2],[5,2]],	0,			0,		0,		[[0,1]],	[[0,1],[1,1]]],
-	["eod",		4,		floor random 12,	floor random 20,	0,		3,			7,			9,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[1,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	[[0,4],[1,2]],	-1,										0,			0,		0,		[[0,1]],	[[0,1]]],
-	["uav",		5,		floor random 12,	floor random 20,	0,		3,			21,			0,		-1,	-1,			0,			1,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[1,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["r",		0,		floor random 12,	floor random 20,	0,		3,			3,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["rat",		0,		floor random 12,	floor random 20,	0,		3,			3,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["ar",		0,		floor random 12,	floor random 20,	0,		3,			3,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["aar",		0,		floor random 12,	floor random 20,	0,		3,			3,			0,		-1,	-1,			0,			0,			[[1,2,[1,5],[1,5],[-1],[-1],[-1],[0,1],[1,1],[1,1],[1,1]],[1,-1,[1,5],[1,5],[-1],[-1],[-1],[0,1],[1,1],[1,1],[1,1]]],	[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["mat",		0,		floor random 12,	floor random 20,	0,		3,			3,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["mata",	0,		floor random 12,	floor random 20,	0,		3,			7,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	[[0,-1,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["hat",		0,		floor random 12,	floor random 20,	0,		3,			20,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["hata",	0,		floor random 12,	floor random 20,	0,		3,			9,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	[[0,-1,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["mmg",		0,		floor random 12,	floor random 20,	0,		3,			3,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["mmga",	0,		floor random 12,	floor random 20,	0,		3,			7,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["hmg",		0,		floor random 12,	floor random 20,	0,		3,			11,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["hmga",	0,		floor random 12,	floor random 20,	0,		3,			9,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["msam",	0,		floor random 12,	floor random 20,	0,		3,			3,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["msama",	0,		floor random 12,	floor random 20,	0,		3,			7,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["hsam",	0,		floor random 12,	floor random 20,	0,		3,			19,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["hsama",	0,		floor random 12,	floor random 20,	0,		3,			9,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["mrt",		0,		floor random 12,	floor random 20,	0,		3,			17,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["mrta",	0,		floor random 12,	floor random 20,	0,		3,			18,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["gre",		0,		floor random 12,	floor random 20,	0,		3,			3,			9,		-1,	-1,			0,			0,			[[1,4,[1,5],[1,5],[-1],[-1],-1,[0,1],[1,1],[1,1],[1,1]]],																[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["dm",		0,		floor random 12,	floor random 20,	0,		3,			3,			0,		-1,	-1,			1,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[1,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["sn",		0,		floor random 12,	floor random 20,	9,		6,			3,			0,		-1,	-1,			1,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[1,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["sp",		0,		floor random 12,	floor random 20,	6,		6,			3,			0,		-1,	-1,			1,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[1,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["div",		0,		floor random 12,	floor random 20,	17,		-1,			-1,			12,		-1,	0,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[1,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["vc",		0,		floor random 12,	floor random 20,	0,		3,			-1,			-1,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["vd",		0,		floor random 12,	floor random 20,	0,		3,			-1,			-1,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["vg",		0,		floor random 12,	floor random 20,	0,		3,			-1,			-1,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["p",		0,		floor random 12,	floor random 20,	16,		27,			23,			-1,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[1,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["car",		0,		floor random 12,	floor random 20,	0,		3,			3,			0,		-1,	-1,			0,			0,			[[1,7,[1,5],[1,5],[-1],[-1],[-1],[0,1],[1,1],[1,1],[1,1]]],																[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1],
-	["smg",		0,		floor random 12,	floor random 20,	0,		3,			3,			0,		-1,	-1,			0,			0,			[[1,2,[[1,5]],[[1,5]],[-1],[-1],[-1],[0,1],[0,1],[1,1],[1,1]]],															[[0,0,[0,0],[0,0],[0,0],[0,0],0,0,0,0]],	-1,											[[0,1]],		-1,			[[0,2],[1,2],[2,2],[4,2]],	[[0,2],[1,2]],	-1,				-1,										0,			0,		0,		[[0,1]],	-1]
+//INDEX ROLE TRAITS  VOICE   FACE   UNIFORM HEADGEAR BACKPACK VEST NVG FACEWEAR BINOCULAR TERMINAL	PRIMARY																																SECONDARY												LAUNCHER									MEDICAL 		CHEMLIGHTS 					SMOKES 					   GRENADES 	  EXPLOSIVES 	 MINES 						COMPASS MAP WATCH RADIO TOOLS
+/*0*/	["co",    0, _voice, _face, 0, 		0, 		 0,		  0,   -1, -1,		1,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]], -1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*1*/	["sl",    0, _voice, _face,	0,		1,		 3,		  0,   -1, -1,		1,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*2*/	["ftl",   0, _voice, _face,	0,		2,		 3,		  0,   -1, -1,		1,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*3*/	["med",   1, _voice, _face,	0,		2,		 7,		  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,10],[1,1]],	[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*4*/	["eng",   2, _voice, _face,	0,		2,		 7,		  9,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],[[1,1]]],
+/*5*/	["engm",  3, _voice, _face,	0,		2,		 7,		  9,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 [[0,1],[1,1],[2,1],[3,1],[4,1],[5,1]],	0,0,0,[[0,1]],[[0,1],[1,1]]],
+/*6*/	["eod",   4, _voice, _face,	0,		2,		 7,		  9,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], [[0,2],[1,1]], -1,									0,0,0,[[0,1]],[[0,1]]],
+/*7*/	["uav",   5, _voice, _face,	0,		2,		 21,	  0,   -1, -1,		0,		  1,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*8*/	["r",     0, _voice, _face,	0,		2,		 3,		  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*9*/	["rat",   0, _voice, _face,	0,		2,		 3,		  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		[[0,0,[[0,2]],-1,-1,-1,-1,-1,-1,-1]],		[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*10*/	["ar",    0, _voice, _face,	0,		2,		 3,		  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*11*/	["aar",   0, _voice, _face,	0,		2,		 3,		  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]],[1,-1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[1,1]]]],	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*12*/	["mat",   0, _voice, _face,	0,		2,		 3,		  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		[[0,0,[[0,2],[1,2]],-1,-1,-1,-1,-1,-1,-1]],	[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*13*/	["mata",  0, _voice, _face,	0,		2,		 7,		  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		[[0,-1,[[0,2],[1,2]],-1,-1,-1,-1,-1,-1,-1]],[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*14*/	["hat",   0, _voice, _face,	0,		2,		 20,	  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		[[0,0,[[0,2],[1,2]],-1,-1,-1,-1,-1,-1,-1]],	[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*15*/	["hata",  0, _voice, _face,	0,		2,		 9,		  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		[[0,-1,[[0,2],[1,2]],-1,-1,-1,-1,-1,-1,-1]],[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*16*/	["mmg",   0, _voice, _face,	0,		2,		 3,		  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*17*/	["mmga",  0, _voice, _face,	0,		2,		 7,		  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*18*/	["hmg",   0, _voice, _face,	0,		2,		 11,	  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*19*/	["hmga",  0, _voice, _face,	0,		2,		 9,		  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*20*/	["msam",  0, _voice, _face,	0,		2,		 3,		  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*21*/	["msama", 0, _voice, _face,	0,		2,		 7,		  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*22*/	["hsam",  0, _voice, _face,	0,		2,		 19,	  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*23*/	["hsama", 0, _voice, _face,	0,		2,		 9,		  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*24*/	["mrt",   0, _voice, _face,	0,		2,		 17,	  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*25*/	["mrta",  0, _voice, _face,	0,		2,		 18,	  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*26*/	["gre",   0, _voice, _face,	0,		2,		 3,		  9,   -1, -1,		0,		  0,		[[1,4,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*27*/	["dm",    0, _voice, _face,	0,		2,		 3,		  0,   -1, -1,		1,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*28*/	["sn",    0, _voice, _face,	9,		6,		 3,		  0,   -1, -1,		1,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*29*/	["sp",    0, _voice, _face,	6,		6,		 3,		  0,   -1, -1,		1,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*30*/	["div",   0, _voice, _face,	17,		-1,		 0,		  12,  -1, 0,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*31*/	["vc",    0, _voice, _face,	0,		2,		 0,		  -1,  -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*32*/	["vd",    0, _voice, _face,	0,		2,		 0,		  -1,  -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*33*/	["vg",    0, _voice, _face,	0,		2,		 0,		  -1,  -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*34*/	["p",     0, _voice, _face,	16,		27,		 23,	  -1,  -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*35*/	["car",   0, _voice, _face,	0,		2,		 3,		  0,   -1, -1,		0,		  0,		[[1,7,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*36*/	["smg",   0, _voice, _face,	0,		2,		 3,		  0,   -1, -1,		0,		  0,		[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],																	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1]
 ]; // FACTION ROLES
-_result = _roles select _this; // SELECT FACTION ROLE
-_rolekeys = []; {_rolekeys set [count _rolekeys, _x select 0]} forEach _roles;
 _primaries = [
 	"VERMIN",	// 0 SMG
 	"MX",		// 1 AR
@@ -214,409 +214,6 @@ _vests = [
 	"V_PlateCarrierGL_wdl",		// 11 GL Woodland
 	"V_RebreatherB"				// 12
 ]; // FACTION VESTS
-_binoculars = 0 call VVM_fnc_getItems;
-diag_log format ["# %1 # NATO.sqf _binoculars = %2 #",time,_binoculars];
-_compasses = 1 call VVM_fnc_getItems;
-_facewear = 2 call VVM_fnc_getItems;
-_maps = 4 call VVM_fnc_getItems;
-_medical = 5 call VVM_fnc_getItems;
-_nvgs = 6 call VVM_fnc_getItems;
-_radios = 7 call VVM_fnc_getItems;
-_terminals = 8 call VVM_fnc_getItems;
-_tools = 9 call VVM_fnc_getItems;
-_watches = 10 call VVM_fnc_getItems;
-_chemlights = 0 call VVM_fnc_getMagazines;
-_explosives = 1 call VVM_fnc_getMagazines;
-_grenades = 3 call VVM_fnc_getMagazines;
-_mines = 4 call VVM_fnc_getMagazines;
-_smokes = 5 call VVM_fnc_getMagazines;
-{	switch (_forEachIndex) do {
-		case 0: {_result set [_forEachIndex,toUpper _x]}; // ROLE
-		case 1: {_result set [_forEachIndex,_traits select _x]}; // TRAITS
-		case 2: {_result set [_forEachIndex,_voices select _x]}; // VOICE
-		case 3: {_result set [_forEachIndex,_faces select _x]}; // FACE
-		case 4: {_result set [_forEachIndex,_uniforms select _x]}; // UNIFORM
-		case 5: {if (_x isEqualType []) then { _result set [_forEachIndex,_headgear select _x]}};// HEADGEAR
-		case 6: {if (_x isEqualType []) then { _result set [_forEachIndex,_backpacks select _x]}}; // BACKPACK
-		case 7: {if (_x isEqualType []) then { _result set [_forEachIndex,_vests select _x]}}; // VEST
-		case 8: {if (_x isEqualType []) then { _result set [_forEachIndex,_nvgs select _x]}}; // NVG
-		case 9: {if (_x isEqualType []) then { _result set [_forEachIndex,_facewear select _x]}}; // FACEWEAR
-		case 10: {if (_x isEqualType []) then { _result set [_forEachIndex,_binoculars select _x]}}; // BINOCULAR
-		case 11: {if (_x isEqualType []) then { _result set [_forEachIndex,_terminals select _x]}}; // TERMINAL
-		case 12: { // PRIMARY
-			if (_x isEqualType []) then {
-				diag_log format ["# %1 # NATO.sqf _x = %2 #",time,_x];
-				{	_key = _primaries select (_x select 0);
-					diag_log format ["# %1 # NATO.sqf _key = %2 #",time,_key];
-					_weapon = _key call VVM_fnc_getWeapon;
-					diag_log format ["# %1 # NATO.sqf _weapon = %2 #",time,_weapon];
-					_variants = _weapon select 0;
-					diag_log format ["# %1 # NATO.sqf _variants = %2 #",time,_variants];
-					_magazines = _weapon select 1;
-					diag_log format ["# %1 # NATO.sqf _magazines = %2 #",time,_magazines];
-					_tracers = _weapon select 2;
-					diag_log format ["# %1 # NATO.sqf _tracers = %2 #",time,_tracers];
-					_grenades = _weapon select 3;
-					diag_log format ["# %1 # NATO.sqf _grenades = %2 #",time,_grenades];
-					_flares = _weapon select 4;
-					diag_log format ["# %1 # NATO.sqf _flares = %2 #",time,_flares];
-					_smokes = _weapon select 5;
-					diag_log format ["# %1 # NATO.sqf _smokes = %2 #",time,_smokes];
-					_accessories = _weapon select 6;
-					diag_log format ["# %1 # NATO.sqf _accessories = %2 #",time,_accessories];
-					_bipods = _weapon select 7;
-					diag_log format ["# %1 # NATO.sqf _bipods = %2 #",time,_bipods];
-					_muzzles = _weapon select 8;
-					diag_log format ["# %1 # NATO.sqf _muzzles = %2 #",time,_muzzles];
-					_optics = _weapon select 9;
-					diag_log format ["# %1 # NATO.sqf _optics = %2 #",time,_optics];
-					if ((_x select 1) isEqualType []) then { _result set [_forEachIndex,_variants select _x]; };
-					if ((_x select 2) isEqualType []) then {
-						diag_log format ["# %1 # NATO.sqf _magazines = %2 #",time,(_x select 2)];
-						_mags = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_mags set [count _mags, _magazines select _forEachIndex];
-							};
-						} forEach (_x select 2);
-						_result set [_forEachIndex,_mags];
-						diag_log format ["# %1 # NATO.sqf _magazines = %2 #",time,_result select _forEachIndex];
-					};
-					if (_tracers isEqualType []) then {
-						_tracs = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_tracs set [count _tracs, _tracers select _forEachIndex];
-							};
-						} forEach _tracers;
-						_result set [_forEachIndex,_tracs];
-					};
-					if (_grenades isEqualType []) then {
-						_grens = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_grens set [count _grens, _grenades select _forEachIndex];
-							};
-						} forEach _grenades;
-						_result set [_forEachIndex,_grens];
-					};
-					if (_flares isEqualType []) then {
-						_flas = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_flas set [count _flas, _flares select _forEachIndex];
-							};
-						} forEach _flares;
-						_result set [_forEachIndex,_flas];
-					};
-					if (_smokes isEqualType []) then {
-						_smos = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_smos set [count _smos, _smokes select _forEachIndex];
-							};
-						} forEach _smokes;
-						_result set [_forEachIndex,_smos];
-					};
-					if (_accessories isEqualType []) then {
-						_accs = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_accs set [count _accs, _accessories select _forEachIndex];
-							};
-						} forEach _accessories;
-						_result set [_forEachIndex,_accs];
-					};
-					if (_bipods isEqualType []) then {
-						_bips = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_bips set [count _bips, _bipods select _forEachIndex];
-							};
-						} forEach _bipods;
-						_result set [_forEachIndex,_bips];
-					};
-					if (_muzzles isEqualType []) then {
-						_muzs = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_muzs set [count _muzs, _muzzles select _forEachIndex];
-							};
-						} forEach _muzzles;
-						_result set [_forEachIndex,_muzs];
-					};
-					if (_optics isEqualType []) then {
-						_opts = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_opts set [count _opts, _optics select _forEachIndex];
-							};
-						} forEach _optics;
-						_result set [_forEachIndex,_opts];
-					};
-				} forEach _x;
-				_result set [_forEachIndex,_x];
-			};
-		};
-		case 13: { // SECONDARY
-			if (_x isEqualType []) then {
-				diag_log format ["# %1 # NATO.sqf _x = %2 #",time,_x];
-				{	_key = _secondaries select (_x select 0);
-					_weapon = _key call VVM_fnc_getWeapon;
-					_variants = _weapon select 0;
-					_magazines = _weapon select 1;
-					_tracers = _weapon select 2;
-					_grenades = _weapon select 3;
-					_flares = _weapon select 4;
-					_smokes = _weapon select 5;
-					_accessories = _weapon select 6;
-					_bipods = _weapon select 7;
-					_muzzles = _weapon select 8;
-					_optics = _weapon select 9;
-					if (_variants isEqualType []) then { _result set [_forEachIndex,_variants select _x]; };
-					if (_magazines isEqualType []) then {
-						_mags = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_mags set [count _mags, _magazines select _forEachIndex];
-							};
-						} forEach _magazines;
-						_result set [_forEachIndex,_mags];
-					};
-					if (_tracers isEqualType []) then {
-						_tracs = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_tracs set [count _tracs, _tracers select _forEachIndex];
-							};
-						} forEach _tracers;
-						_result set [_forEachIndex,_tracs];
-					};
-					if (_grenades isEqualType []) then {
-						_grens = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_grens set [count _grens, _grenades select _forEachIndex];
-							};
-						} forEach _grenades;
-						_result set [_forEachIndex,_grens];
-					};
-					if (_flares isEqualType []) then {
-						_flas = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_flas set [count _flas, _flares select _forEachIndex];
-							};
-						} forEach _flares;
-						_result set [_forEachIndex,_flas];
-					};
-					if (_smokes isEqualType []) then {
-						_smos = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_smos set [count _smos, _smokes select _forEachIndex];
-							};
-						} forEach _smokes;
-						_result set [_forEachIndex,_smos];
-					};
-					if (_accessories isEqualType []) then {
-						_accs = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_accs set [count _accs, _accessories select _forEachIndex];
-							};
-						} forEach _accessories;
-						_result set [_forEachIndex,_accs];
-					};
-					if (_bipods isEqualType []) then {
-						_bips = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_bips set [count _bips, _bipods select _forEachIndex];
-							};
-						} forEach _bipods;
-						_result set [_forEachIndex,_bips];
-					};
-					if (_muzzles isEqualType []) then {
-						_muzs = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_muzs set [count _muzs, _muzzles select _forEachIndex];
-							};
-						} forEach _muzzles;
-						_result set [_forEachIndex,_muzs];
-					};
-					if (_optics isEqualType []) then {
-						_opts = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_opts set [count _opts, _optics select _forEachIndex];
-							};
-						} forEach _optics;
-						_result set [_forEachIndex,_opts];
-					};
-				} forEach _x;
-				_result set [_forEachIndex,_x];
-			};
-		};
-		case 14: { // LAUNCHER
-			if (_x isEqualType []) then {
-				diag_log format ["# %1 # NATO.sqf _x = %2 #",time,_x];
-				{	_key = _launchers select (_x select 0);
-					_weapon = _key call VVM_fnc_getWeapon;
-					_variants = _weapon select 0;
-					_magazines = _weapon select 1;
-					_tracers = _weapon select 2;
-					_grenades = _weapon select 3;
-					_flares = _weapon select 4;
-					_smokes = _weapon select 5;
-					_accessories = _weapon select 6;
-					_bipods = _weapon select 7;
-					_muzzles = _weapon select 8;
-					_optics = _weapon select 9;
-					if (_variants isEqualType []) then { _result set [_forEachIndex,_variants select _x]; };
-					if (_magazines isEqualType []) then {
-						_mags = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_mags set [count _mags, _magazines select _forEachIndex];
-							};
-						} forEach _magazines;
-						_result set [_forEachIndex,_mags];
-					};
-					if (_tracers isEqualType []) then {
-						_tracs = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_tracs set [count _tracs, _tracers select _forEachIndex];
-							};
-						} forEach _tracers;
-						_result set [_forEachIndex,_tracs];
-					};
-					if (_grenades isEqualType []) then {
-						_grens = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_grens set [count _grens, _grenades select _forEachIndex];
-							};
-						} forEach _grenades;
-						_result set [_forEachIndex,_grens];
-					};
-					if (_flares isEqualType []) then {
-						_flas = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_flas set [count _flas, _flares select _forEachIndex];
-							};
-						} forEach _flares;
-						_result set [_forEachIndex,_flas];
-					};
-					if (_smokes isEqualType []) then {
-						_smos = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_smos set [count _smos, _smokes select _forEachIndex];
-							};
-						} forEach _smokes;
-						_result set [_forEachIndex,_smos];
-					};
-					if (_accessories isEqualType []) then {
-						_accs = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_accs set [count _accs, _accessories select _forEachIndex];
-							};
-						} forEach _accessories;
-						_result set [_forEachIndex,_accs];
-					};
-					if (_bipods isEqualType []) then {
-						_bips = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_bips set [count _bips, _bipods select _forEachIndex];
-							};
-						} forEach _bipods;
-						_result set [_forEachIndex,_bips];
-					};
-					if (_muzzles isEqualType []) then {
-						_muzs = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_muzs set [count _muzs, _muzzles select _forEachIndex];
-							};
-						} forEach _muzzles;
-						_result set [_forEachIndex,_muzs];
-					};
-					if (_optics isEqualType []) then {
-						_opts = [];
-						{	for "_i" from 1 to (_x select 1) do {
-								_opts set [count _opts, _optics select _forEachIndex];
-							};
-						} forEach _optics;
-						_result set [_forEachIndex,_opts];
-					};
-				} forEach _x;
-				_result set [_forEachIndex,_x];
-			};
-		};
-		case 15: { // MEDICAL
-			if (_x isEqualType []) then {
-				_meds = [];
-				{	for "_i" from 1 to (_x select 1) do {
-						_meds set [count _meds, _medical select 0];
-					};
-				} forEach _x;
-				_result set [_forEachIndex,_meds];
-			};
-		};
-		case 16: { // CHEMLIGHTS
-			if (_x isEqualType []) then {
-				_chems = [];
-				{	for "_i" from 1 to (_x select 1) do {
-						_chems set [count _chems, _chemlights select 0];
-					};
-				} forEach _x;
-				_result set [_forEachIndex,_chems];
-			};
-		};
-		case 17: { // SMOKES
-			if (_x isEqualType []) then {
-				_smoks = [];
-				{	for "_i" from 1 to (_x select 1) do {
-						_smoks set [count _smoks, _smokes select 0];
-					};
-				} forEach _x;
-				_result set [_forEachIndex,_smoks];
-			};
-		};
-		case 18: { // GRENADES
-			if (_x isEqualType []) then {
-				_gres = [];
-				{	for "_i" from 1 to (_x select 1) do {
-						_gres set [count _gres, _grenades select 0];
-					};
-				} forEach _x;
-				_result set [_forEachIndex,_gres];
-			};
-		};
-		case 19: { // EXPLOSIVES
-			if (_x isEqualType []) then {
-				_exps = [];
-				{	for "_i" from 1 to (_x select 1) do {
-						_exps set [count _exps, _explosives select 0];
-					};
-				} forEach _x;
-				_result set [_forEachIndex,_exps];
-			};
-		};
-		case 20: { // MINES
-			if (_x isEqualType []) then {
-				_mins = [];
-				{	for "_i" from 1 to (_x select 1) do {
-						_mins set [count _mins, _mines select 0];
-					};
-				} forEach _x;
-				_result set [_forEachIndex,_mins];
-			};
-		};
-		case 21: {_result set [_forEachIndex,_compasses select _x]}; // COMPASS
-		case 22: {_result set [_forEachIndex,_maps select _x]}; // MAP
-		case 23: {_result set [_forEachIndex,_watches select _x]}; // WATCH
-		case 24: { // RADIO
-			if (_x isEqualType []) then {
-				_rads = [];
-				{	for "_i" from 1 to (_x select 1) do {
-						_rads set [count _rads, _radios select 0];
-					};
-				} forEach _x;
-				_result set [_forEachIndex,_rads];
-			};
-		};
-		case 25: { // TOOLS
-			if (_x isEqualType []) then {
-				_toos = [];
-				{	for "_i" from 1 to (_x select 1) do {
-						_toos set [count _toos, _tools select 0];
-					};
-				} forEach _x;
-				_result set [_forEachIndex,_toos];
-			};
-		};
-		default {_result = false};
-	};
-} forEach _result;
-_result;
+_role = _roles select _this; // SELECT FACTION ROLE
+_return = [_role,_primaries,_secondaries,_launchers,_voices,_faces,_uniforms,_headgear,_backpacks,_vests] call VVM_fnc_parseRole;
+_return;

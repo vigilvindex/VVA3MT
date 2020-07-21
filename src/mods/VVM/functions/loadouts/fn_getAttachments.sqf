@@ -1,5 +1,5 @@
 // _accessories = 0 call VVM_fnc_getAttachments; _bipods = 1 call VVM_fnc_getAttchments;
-_return = [];
+private _return = [];
 switch (_this) do {
 	case 0: { // Accessories
 		_return = [
@@ -115,6 +115,5 @@ switch (_this) do {
 			"optic_Yorris" // 52
 		];
 	};
-	default {_return = null};
 };
 _return;

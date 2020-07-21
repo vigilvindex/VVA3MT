@@ -45,6 +45,8 @@ class VVM {
     class getMagazines {};
     class getRole {};
     class getWeapon {};
+    class parseRole {};
+    class parseWeapon {};
     class setLoadout {};
     class setTraits {};
   };
