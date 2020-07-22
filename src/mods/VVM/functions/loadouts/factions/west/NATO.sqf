@@ -1,19 +1,35 @@
-// Usage: _co = 0 call compile preprocessFileLineNumbers "NATO.sqf";
-// TODO: Default is daytime gear. Need a switch for night time gear. Maybe also a switch for stealth gear.
-// diag_log format ["# %1 # NATO.sqf _this = %2 #",time,_this];
-// [KEY,VARIANT,[MAGS],[TRACERS],[SMOKES],[FLARES],[GRENADES]] 
+/* Name: NATO.sqf
+ * Description: Faction Definition for NATO.
+ * Authors: vigil.vindex@gmail.com
+ * License: https://creativecommons.org/licenses/by-sa/4.0/
+ * Created: 2020/07/22 Updated: 2020/07/22 Version: 0.0.1
+ * Dependencies: VVM_fnc_parseRole
+ * Returns:
+ *   ROLE ARRAY [ROLE,TRAITS,VOICE,FACE,UNIFORM,HEADGEAR,BACKPACK,VEST,NVG,FACEWEAR,BINOCULAR,TERMINAL,[PRIMARY],[SECONDARY],[LAUNCHER],MEDICAL,CHEMLIGHTS,SMOKES,GRENADES,EXPLOSIVES,MINES,COMPASS,MAP,WATCH,RADIO,TOOLS]
+ *   WEAPON ARRAYS [KEY,VARIANT,[MAGAZINES],[TRACERS],[SMOKES],[FLARES],[GRENADES],[ACCESSORIES],[BIPODS],[MUZZLES],[OPTICS]]
+ *   MAGAZINE & ITEM ARRAYS [[TYPE,COUNT]]
+ * Arguments: index name     (default) TYPE    {Required} min,max    "values"
+ *            d     debug    (false)   BOOLEAN {N}        false,true "Disabled","Enabled"
+ *            r     role 	 (0)       SCALAR  {N}        0,36       "Role Key"
+ * Usage: _co = [] call compile preprocessFileLineNumbers "NATO.sqf";
+ * Developer Notes:
+ * 	Faction role definition array uses "-1" to indicate to the set loadout function skip that element.
+ * 	Voice and face are selected randomly, and only applied to AI via a switch in the set loadout function.
+ * TODO: Switches for climate, stealth, day or night gear.
+ */
+if (isNil "_this") exitWith {["%1 Function called without arguments.",time] call BIS_fnc_error;false;};
+if !(_this isEqualType []) exitWith {["%1 Function called without arguments array.",time] call BIS_fnc_error;false;};
 private ["_key","_side","_year","_classname","_content","_climates","_camo","_roles","_primaries","_secondaries","_launchers","_voices","_faces","_uniforms","_headgear","_backpacks","_vests","_rolekeys","_role","_return"];
 _key = "NATO"; // FACTION KEY https://armedassault.fandom.com/wiki/NATO
 _side = WEST; // FACTION SIDE
 _year = 2035; // FACTION YEAR
 _classname = "BLU_F"; // FACTION CLASSNAME
-_content = ["Vanilla","Tanoa","Mark","GM"]; // FACTION CONTENT = Vanilla; DLC: TANOA,TANKS,MARKS,GM; MODS: CUP,RHS,BAF,IFA3,GEIST,CFP;
+_content = ["Vanilla","Tanoa","Mark","GM"]; // FACTION CONTENT = Vanilla; DLC: TANOA,TANKS,MARKS,GM; MODS: CUP,RHS,BAF,IFA3,GEIST;
 _climates = [0,1,2]; // "Arid","Urban","Lush": _environment selectRandom _environments; _uniform + _environment;
 _camo = ["MTP","Tropic","Woodland"];
 _voice = floor random 12;
 _face = floor random 20;
-_roles = [
-/*INDEX ROLE TRAITS VOICE FACE UNIFORM HEADGEAR BACKPACK VEST NVG FACEWEAR BINOCULAR TERMINAL PRIMARY																				SECONDARY												LAUNCHER									MEDICAL 		CHEMLIGHTS 					SMOKES 					   GRENADES 	  EXPLOSIVES 	 MINES 						COMPASS MAP WATCH RADIO TOOLS */
+_roles = [ // FACTION ROLES: INDEX ROLE TRAITS VOICE FACE UNIFORM HEADGEAR BACKPACK VEST NVG FACEWEAR BINOCULAR TERMINAL PRIMARY													SECONDARY												LAUNCHER									MEDICAL 		CHEMLIGHTS 					SMOKES 					   GRENADES 	  EXPLOSIVES 	 MINES 						COMPASS MAP WATCH RADIO TOOLS
 /*0*/	["co",		0,	_voice,	_face,	0,	0,	0,	0,	-1,	-1,	1,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]], -1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
 /*1*/	["sl",		0,	_voice,	_face,	0,	1,	3,	0,	-1,	-1,	1,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
 /*2*/	["ftl",		0,	_voice,	_face,	0,	2,	3,	0,	-1,	-1,	1,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
@@ -51,8 +67,8 @@ _roles = [
 /*34*/	["p",		0,	_voice,	_face,	16,	27,	23,	-1,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
 /*35*/	["car",		0,	_voice,	_face,	0,	2,	3,	0,	-1,	-1,	0,	0,	[[1,7,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
 /*36*/	["smg",		0,	_voice,	_face,	0,	2,	3,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1]
-]; // FACTION ROLES
-_primaries = [
+];
+_primaries = [	// FACTION PRIMARY WEAPONS
 	"VERMIN",	// 0 SMG
 	"MX",		// 1 AR
 	"SPAR16",	// 2 AR
@@ -66,32 +82,32 @@ _primaries = [
 	"M320",		// 10 DMR
 	"MAR10",	// 11 DMR
 	"SDAR"		// 12 AR
-]; // FACTION PRIMARY WEAPONS
-_secondaries = [
-	"PO7", // 0
-	"4FIVE" // 1
-]; // FACTION SECONDARY WEAPONS
-_launchers = [
+];
+_secondaries = [	// FACTION SECONDARY WEAPONS
+	"PO7",			// 0
+	"4FIVE"			// 1
+];
+_launchers = [	// FACTION LAUNCHER WEAPONS
 	"TITAN",	// 0 AA
 	"MAAWS",	// 1 AT
 	"PCML",		// 2 AT
 	"TITANC"	// 3 AT
-]; // FACTION LAUNCHER WEAPONS
-_voices = [
-	"Male01ENG", // 0
-	"Male02ENG", // 1
-	"Male03ENG", // 2
-	"Male04ENG", // 3
-	"Male05ENG", // 4
-	"Male06ENG", // 5
-	"Male07ENG", // 6
-	"Male08ENG", // 7
-	"Male09ENG", // 8
-	"Male10ENG", // 9
-	"Male11ENG", // 10
-	"Male12ENG" // 11
-]; // FACTION VOICES
-_faces = [
+];
+_voices = [			// FACTION VOICES
+	"Male01ENG",	// 0
+	"Male02ENG",	// 1
+	"Male03ENG",	// 2
+	"Male04ENG",	// 3
+	"Male05ENG",	// 4
+	"Male06ENG",	// 5
+	"Male07ENG",	// 6
+	"Male08ENG",	// 7
+	"Male09ENG",	// 8
+	"Male10ENG",	// 9
+	"Male11ENG",	// 10
+	"Male12ENG"		// 11
+];
+_faces = [			// FACTION FACES
 	"WhiteHead_01", // 0
 	"WhiteHead_02", // 1
 	"WhiteHead_03", // 2
@@ -111,9 +127,9 @@ _faces = [
 	"WhiteHead_17", // 16
 	"WhiteHead_19", // 17
 	"WhiteHead_20", // 18
-	"WhiteHead_21" // 19
-]; // FACTION FACES
-_uniforms = [
+	"WhiteHead_21"	// 19
+];
+_uniforms = [								// FACTION UNIFORMS
 	"U_B_CombatUniform_mcam",				// 0 Combat Fatigues MTP
 	"U_B_T_Soldier_F",						// 1 Combat Fatigues Tropic
 	"U_B_CombatUniform_mcam_wdl_f",			// 2 Combat Fatigues MTP Woodland
@@ -135,8 +151,8 @@ _uniforms = [
 	"U_B_CBRN_Suit_01_MTP_F",				// 18 CBRN Suit MTP
 	"U_B_CBRN_Suit_01_Tropic_F",			// 19 CBRN Suit Tropic
 	"U_B_CBRN_Suit_01_Wdl_F"				// 20 CBRN Suit MTP Woodland
-]; // FACTION UNIFORMS
-_headgear = [
+];
+_headgear = [						// FACTION HEADGEAR
 	"H_Beret_Colonel",				// 0 Beret CO
 	"H_Beret_02",					// 1 Beret SL
 	"H_HelmetB_light_desert",		// 2 Light Combat Helmet Desert
@@ -173,8 +189,8 @@ _headgear = [
 	"H_Bandanna_mcamo",				// 33 Bandana MTP
 	"H_Booniehat_mcamo",			// 34 Booniehat MTP
 	"H_Cap_tan_specops_US"			// 35 Cap MTP
-]; // FACTION HEADGEAR
-_backpacks = [
+];
+_backpacks = [					// FACTION BACKPACKS
 	"B_AssaultPack_mcamo",		// 0 Assault Pack MTP
 	"B_AssaultPack_tna_F",		// 1 Assault Pack Tropic
 	"B_AssaultPack_wdl_F",		// 2 Assault Pack Woodland
@@ -199,8 +215,8 @@ _backpacks = [
 	"B_UAV_01_backpack_F",		// 21 UAV AR2
 	"B_UAV_06_backpack_F",		// 22 UAV AL6
 	"B_B_Parachute_02_F"		// 23
-]; // FACTION BACKPACKS
-_vests = [
+];
+_vests = [						// FACTION VESTS
 	"V_PlateCarrier1_rgr",		// 0 Lite Green
 	"V_PlateCarrier1_tna_F",	// 1 Lite Tropic
 	"V_PlateCarrier1_wdl",		// 2 Lite Woodland
@@ -214,7 +230,8 @@ _vests = [
 	"V_PlateCarrierGL_tna_F",	// 10 GL Tropic
 	"V_PlateCarrierGL_wdl",		// 11 GL Woodland
 	"V_RebreatherB"				// 12
-]; // FACTION VESTS
+];
 _role = _roles select _this; // SELECT FACTION ROLE
-_return = [_role,_primaries,_secondaries,_launchers,_voices,_faces,_uniforms,_headgear,_backpacks,_vests] call VVM_fnc_parseRole;
+_return = [_role,_primaries,_secondaries,_launchers,_voices,_faces,_uniforms,_headgear,_backpacks,_vests] call VVM_fnc_parseRole; // Parse Role Array.
+{_x = nil} forEach [_key,_side,_year,_classname,_content,_climates,_camo,_roles,_primaries,_secondaries,_launchers,_voices,_faces,_uniforms,_headgear,_backpacks,_vests,_role];
 _return;
