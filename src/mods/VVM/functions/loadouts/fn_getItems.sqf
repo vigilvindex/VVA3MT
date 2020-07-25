@@ -13,7 +13,13 @@ switch (_this) do {
 			"Laserdesignator_02_ghex_F" // 6 Green Hex
 		];
 	};
-	case 1: {_return = ["ItemCompass"];}; // Compasses
+	case 1: {						// Compasses
+		_return = [
+			"ItemCompass",			// 0 (Vanilla)
+			"ge_gm_army_conat2",	// 1 (GM)
+			"ge_gc_compass_f73"		// 2 (GM)
+		];
+	};
 	case 2: { // Facewear
 		_return = [
 			"G_B_Diving", // 0
@@ -32,7 +38,8 @@ switch (_this) do {
 			"H_Shemag_tan", // 13
 			"H_ShemagOpen_khk", // 14
 			"H_ShemagOpen_tan", // 15
-			"H_WirelessEarpiece_F" // 16
+			"H_WirelessEarpiece_F", // 16
+			"G_AirPurifyingRespirator_01_F" // 17  (Contact)
 		];
 	};
 	case 3: { // Headgear
@@ -158,22 +165,28 @@ switch (_this) do {
 		];
 	};
 	case 7: {_return = ["ItemRadio"];}; // Radios
-	case 8: { // Terminals
+	case 8: {					// Terminals
 		_return = [
-			"ItemGPS", // 0
-			"B_UavTerminal", // 1 NATO
-			"O_UavTerminal", // 2 CSAT
-			"I_UavTerminal", // 3 AAF
-			"C_UavTerminal", // 4 Civilian
-			"I_E_UavTerminal" // 5 LDF
+			"ItemGPS",			// 0 (Vanilla)
+			"B_UavTerminal",	// 1 NATO (Vanilla)
+			"O_UavTerminal",	// 2 CSAT (Vanilla)
+			"I_UavTerminal",	// 3 AAF (Vanilla)
+			"C_UavTerminal",	// 4 Civilian (LOW)
+			"I_E_UavTerminal"	// 5 LDF (Contact)
 		];
 	};
-	case 9: { // Tools
+	case 9: {				// Tools
 		_return = [
-			"MineDetector", // 0
-			"ToolKit" // 1
+			"MineDetector",	// 0 (Vanilla)
+			"ToolKit"		// 1 (Vanilla)
 		];
 	};
-	case 10: {_return = ["ItemWatch"];}; // Watches
+	case 10: {								// Watches
+		_return = [
+			"ItemWatch",					// 0 (Vanilla)
+			"ChemicalDetector_01_watch_F",	// 1 (Contact)
+			"gm_watch_kosei_80"				// 2 (GM)
+		];
+	};
 };
 _return;

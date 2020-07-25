@@ -17,7 +17,7 @@ _ai = true;
 		case 5: {if !(_x isEqualTo -1) then {_unit addHeadgear _x}}; // HEADGEAR
 		case 6: {if !(_x isEqualTo -1) then {_unit addBackpack _x}}; // BACKPACK
 		case 7: {if !(_x isEqualTo -1) then {_unit addVest _x}}; // VEST
-		case 8: {if !(_x isEqualTo -1) then {_unit addItem _x; _unit assignItem _x}}; // NVG
+		case 8: {if !(_x isEqualTo -1) then {_unit addItemToUniform _x}}; // NVG
 		case 9: {if !(_x isEqualTo -1) then {_unit addGoggles _x}}; // FACEWEAR
 		case 10: {if !(_x isEqualTo -1) then {_unit addWeapon _x}}; // BINOCULARS
 		case 11: {if !(_x isEqualTo -1) then {_unit linkItem _x}}; // TERMINAL

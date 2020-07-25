@@ -3,9 +3,9 @@
 private _return = [];
 diag_log format ["# %1 # fn_getFactionRole.sqf _this = %2 #",time,_this];
 switch (toUpperANSI (_this select 0)) do {
-	case "AAF": {_return = [(_this select 1)] call compile preprocessFileLineNumbers "mods\VVM\functions\loadouts\factions\indy\AAF.sqf"};
-	case "CSAT": {_return = [(_this select 1)] call compile preprocessFileLineNumbers "mods\VVM\functions\loadouts\factions\east\CSAT.sqf"};
-	case "FIA": {_return = [(_this select 1)] call compile preprocessFileLineNumbers "mods\VVM\functions\loadouts\factions\indy\FIA.sqf"};
-	case "NATO": {_return = [(_this select 1)] call compile preprocessFileLineNumbers "mods\VVM\functions\loadouts\factions\west\NATO.sqf"};
+	case "AAF": {_return = [["r",(_this select 1)]] call compile preprocessFileLineNumbers "mods\VVM\functions\loadouts\factions\indy\AAF.sqf"};
+	case "CSAT": {_return = [["r",(_this select 1)]] call compile preprocessFileLineNumbers "mods\VVM\functions\loadouts\factions\east\CSAT.sqf"};
+	case "FIA": {_return = [["r",(_this select 1)]] call compile preprocessFileLineNumbers "mods\VVM\functions\loadouts\factions\indy\FIA.sqf"};
+	case "NATO": {_return = [["r",(_this select 1)]] call compile preprocessFileLineNumbers "mods\VVM\functions\loadouts\factions\west\NATO.sqf"};
 };
 _return;
