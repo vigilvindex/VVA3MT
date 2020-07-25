@@ -41,7 +41,9 @@ _roles = [ // INDEX, KEY, TITLE
 	[36,"P","Pilot"],
 	[37,"PP","Air Vehicle Pilot"],
 	[38,"PCC","Air Vehicle Crew Chief (Repair)"],
-	[39,"PC","Air Vehicle Crew"]
+	[39,"PC","Air Vehicle Crew"],
+	[40,"RAD","Radio Operator"],
+	[41,"CBRN","CBRN Specialist"]
 ];
 if ((_this select 0) == -1) then {
 	_return = _roles;
