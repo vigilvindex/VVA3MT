@@ -80,9 +80,8 @@ if (modVVMSwitch == 1) then {
     };
     _loadout = [w1,"NATO",0] call VVM_fnc_setLoadout;
     _roles = [-1] call VVM_fnc_getRole;
-    diag_log format ["#%1#%2#%3# _roles = %4 #",time,__FILE__ select [count PATH],__LINE__,_roles];
     { diag_log format ["#%1#%2#%3# _x = %4 #",time,__FILE__ select [count PATH],__LINE__,_x];
-      [w1,[format ["%1 - %2",(_x select 1),(_x select 2)],{[_this select 1,"NATO",_this select 3] call VVM_fnc_setLoadout;},(_x select 0)]] remoteExec ["addAction",0,true];
+      [w1,[format ["NATO-%1-%2",(_x select 1),(_x select 2)],{[_this select 1,"NATO",_this select 3] call VVM_fnc_setLoadout;},(_x select 0)]] remoteExec ["addAction",0,true];
     } forEach _roles;
   };
 };

@@ -1,4 +1,5 @@
 private ["_keys","_weaponarray","_weapon","_variants","_magazines","_tracers","_grenades","_flares","_smokes","_accessories","_bipods","_muzzles","_optics","_return","_variant","_mags","_tracs","_grens","_flas","_smos","_accs","_bips","_muzs","_opts"];
+diag_log format ["# %1 # fn_parseWeapon.sqf _this = %2 #",time,_this];
 _keys = _this select 0;
 _weaponarray = _this select 1;
 _weapon = (_keys select (_weaponarray select 0)) call VVM_fnc_getWeapon;

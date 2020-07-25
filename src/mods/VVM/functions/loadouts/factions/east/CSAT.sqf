@@ -1,87 +1,221 @@
-_name = "CSAT"; // FACTION TITLE https://armedassault.fandom.com/wiki/CSAT
+/* Name: CSAT.sqf
+ * Description: Faction Definition for CSAT.
+ * Authors: vigil.vindex@gmail.com
+ * License: https://creativecommons.org/licenses/by-sa/4.0/
+ * Created: 2020/07/22 Updated: 2020/07/22 Version: 0.0.1
+ * Dependencies: VVM_fnc_parseRole
+ * Returns:
+ *   ROLE ARRAY [ROLE,TRAITS,VOICE,FACE,UNIFORM,HEADGEAR,BACKPACK,VEST,NVG,FACEWEAR,BINOCULAR,TERMINAL,[PRIMARY],[SECONDARY],[LAUNCHER],MEDICAL,CHEMLIGHTS,SMOKES,GRENADES,EXPLOSIVES,MINES,COMPASS,MAP,WATCH,RADIO,TOOLS]
+ *   WEAPON ARRAYS [KEY,VARIANT,[MAGAZINES],[TRACERS],[SMOKES],[FLARES],[GRENADES],[ACCESSORIES],[BIPODS],[MUZZLES],[OPTICS]]
+ *   MAGAZINE & ITEM ARRAYS [[TYPE,COUNT]]
+ * Arguments: index name     (default) TYPE    {Required} min,max    "values"
+ *            d     debug    (false)   BOOLEAN {N}        false,true "Disabled","Enabled"
+ *            r     role 	 (0)       SCALAR  {N}        0,36       "Role Key"
+ * Usage: _co = [] call compile preprocessFileLineNumbers "CSAT.sqf";
+ * Developer Notes:
+ * 	Faction role definition array uses "-1" to indicate to the set loadout function skip that element.
+ * 	Voice and face are selected randomly, and only applied to AI via a switch in the set loadout function.
+ * TODO: Switches for climate, stealth, day or night gear.
+ */
+if (isNil "_this") exitWith {["%1 Function called without arguments.",time] call BIS_fnc_error;false;};
+if !(_this isEqualType []) exitWith {["%1 Function called without arguments array.",time] call BIS_fnc_error;false;};
+private ["_key","_side","_year","_classname","_content","_climates","_camo","_roles","_primaries","_secondaries","_launchers","_voices","_faces","_uniforms","_headgear","_backpacks","_vests","_rolekeys","_role","_return"];
+_key = "CSAT"; // FACTION TITLE https://armedassault.fandom.com/wiki/CSAT
 _side = EAST; // FACTION SIDE
 _year = 2035; // FACTION YEAR
 _classname = "OPF_F"; // FACTION CLASSNAME
 _content = ["Vanilla","Tanoa","Mark"]; // FACTION CONTENT = Vanilla; DLC: TANOA,TANKS,MARKS,GM; MODS: CUP,RHS,BAF;
 _climates = [0,1,2]; // "Arid","Urban","Lush": _environment selectRandom _environments; _uniform + _environment;
-_traits = [0,0,0,0]; // [ENG,EXP,MED,UAV] 0 = OFF, 1 = ON.
-_roles = ["co","sl","ftl","r","rat","gre","ar","aar","mmg","mmga","hmg","hmga","mat","mata","hat","hata","mrt","mrta","msam","msama","hsam","hsama","dm","sn","sp","med","eng","engm","eod","uav","div","car","smg","vc","vg","vd","p"]; // FACTION ROLES
-_voices = ["Male01PER","Male02PER","Male03PER"]; // FACTION VOICES
-_faces = ["PersianHead_A3_01","PersianHead_A3_02","PersianHead_A3_03"/*,"PersianHead_A3_04_a","PersianHead_A3_04_l","PersianHead_A3_04_sa"*/]; // FACTION FACES
-_uniforms = [	"U_O_CombatUniform_ocamo","U_O_CombatUniform_oucamo","U_O_T_Soldier_F","U_O_SpecopsUniform_ocamo", // BASE _uniforms select 0;
-				"U_O_OfficerUniform_ocamo","U_O_T_Officer_F",  // CO _uniforms select 4;
-				"U_O_FullGhillie_ard","U_O_FullGhillie_sard","U_O_FullGhillie_lsh","U_O_T_FullGhillie_tna_F", // SN _uniforms select 6;
-				"U_O_GhillieSuit","U_O_T_Sniper_F", // SP _uniforms select 10;
-				"U_O_PilotCoveralls","U_O_Wetsuit","U_B_Wetsuit", // DIV _uniforms select 13; P _uniforms select 12;
-				"U_O_V_Soldier_Viper_hex_F","U_O_V_Soldier_Viper_F"]; // FACTION UNIFORMS
-_headgear = [	"H_HelmetO_ocamo","H_HelmetO_oucamo","H_HelmetO_ghex_F", // BASE _headgear select 0;
-				"H_HelmetLeaderO_ocamo","H_HelmetLeaderO_oucamo","H_HelmetLeaderO_ghex_F",
-				"H_HelmetSpecO_blk","H_HelmetSpecO_ocamo","H_HelmetSpecO_ghex_F",
-				"H_Beret_blk","H_Beret_CSAT_01_F", // CO _headgear select 10;
-				"H_HelmetCrew_O","H_HelmetCrew_O_ghex_F","H_CrewHelmetHeli_O",
-				"H_PilotHelmetHeli_O","H_PilotHelmetHeli_B","H_PilotHelmetFighter_O", // P _headgear select 10;
-				"H_Cap_brn_SPECOPS","H_MilCap_ocamo","H_MilCap_ghex_F",
-				"H_HelmetO_ViperSP_hex_F","H_HelmetO_ViperSP_ghex_F"]; // FACTION HEADGEAR
-_backpacks = [	"B_FieldPack_ocamo","B_FieldPack_oucamo","B_FieldPack_ghex_F","B_FieldPack_blk", // BASE _backpacks select 0;
-				"B_AssaultPack_blk","B_AssaultPack_ocamo","B_Carryall_ocamo","B_Carryall_oucamo","B_Carryall_ghex_F", // MED _backpacks select 6;
-				"O_AA_01_weapon_F","O_AT_01_weapon_F", // AA _backpacks select 0; AT_backpacks select 0;
-				"O_GMG_01_weapon_F","O_GMG_01_high_weapon_F","O_GMG_01_A_weapon_F", // MK32 GMG - NORMAL, RAISED, AUTO _backpacks select 0;
-				"O_HMG_01_weapon_F","O_HMG_01_high_weapon_F","O_HMG_01_A_weapon_F", // MK30 HMG - NORMAL, RAISED, AUTO _backpacks select 0;
-				"O_HMG_01_support_F","O_HMG_01_support_high_F", // TRIPOD - NORMAL, RAISED _backpacks select 0;
-				"O_Mortar_01_support_F","O_Mortar_01_weapon_F", // MK6 - BIPOD _backpacks select 0; TUBE _backpacks select 0;
-				"O_UAV_01_backpack_F","B_Bergen_hex_F", // UAV _backpacks select 0;
-				"B_TacticalPack_blk","B_TacticalPack_ocamo","B_TacticalPack_oucamo","B_TacticalPack_oli","B_TacticalPack_rgr",
-				"B_ViperHarness_blk_F","B_ViperHarness_hex_F","B_ViperHarness_ghex_F","B_ViperHarness_khk_F","B_ViperHarness_oli_F",
-				"B_ViperLightHarness_blk_F","B_ViperLightHarness_hex_F","B_ViperLightHarness_ghex_F","B_ViperLightHarness_khk_F","B_ViperLightHarness_oli_F"]; // FACTION BACKPACKS
-_vests = [		"V_HarnessO_brn","V_HarnessO_gry","V_HarnessO_ghex_F", // BASE _vests select 0;
-				"V_HarnessOGL_brn","V_HarnessOGL_gry","V_HarnessOGL_ghex_F", // GRE _vests select 3;
-				"V_BandollierB_khk","V_BandollierB_blk","V_BandollierB_ghex_F","V_BandollierB_rgr","V_BandollierB_oli","V_BandollierB_cbr",
-				"V_Chestrig_khk","V_Chestrig_blk","V_Chestrig_rgr","V_Chestrig_oli",
-				"V_RebreatherIR","V_RebreatherB", // DIV _vest select 16;
-				"V_TacVest_khk","V_TacVest_blk","V_TacVest_oli","V_TacVest_brn","V_TacVestIR_blk",
-				"V_PlateCarrier1_rgr_noflag_F","V_PlateCarrier2_rgr_noflag_F","V_Rangemaster_belt"]; // FACTION VESTS
-_primaries = ["KATIBA","KATIBA-CARBINE","CAR-95","CMR-76","RAHIM","ASP-1","CAR-95-1","ZAFIR","NAVID","CYRUS","MAR-10","M320","GM6-LYNX","STING","SDAR"]; // FACTION PRIMARY WEAPONS
-_secondaries = ["ROOK-40","ZUBR"]; // FACTION SECONDARY WEAPONS
-_launchers = ["RPG-42","TITAN-COMPACT","TITAN","9M135-VORONA"]; // FACTION LAUNCHER WEAPONS
-_roles = [ // ROLE, TRAITS, VOICE, FACE, UNIFORM, HEADGEAR, BACKPACK, VEST, NVG, FACEWEAR, BINOCULAR, TERMINAL, PRIMARY, SECONDARY, LAUNCHER, MEDICAL, CHEMLIGHTS, SMOKES, GRENADES, EXPLOSIVES, MINES, COMPASS, MAP, WATCH, RADIO, TOOLS
-	["co",		-1,			selectRandom _voices,	selectRandom _faces,	4,	10,	-1,	-1,	0,	-1,	0,	0,	0,	1,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["sl",		-1,			selectRandom _voices,	selectRandom _faces,	0,	9,	-1,	-1,	0,	-1,	0,	0,	0,	1,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["ftl",		-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["med",		[0,0,1,0],	selectRandom _voices,	selectRandom _faces,	0,	0,	6,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["eng",		[1,0,0,0],	selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["engm",	[0,1,0,0],	selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["eod",		[1,1,0,0],	selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["uav",		[0,0,0,1],	selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["r",		-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["rat",		-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["ar",		-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["aar",		-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["mat",		-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["mata",	-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["hat",		-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["hata",	-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["mmg",		-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	2,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["mmga",	-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["hmg",		-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	3,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["hmga",	-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["msam",	-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	2,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["msama",	-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["hsam",	-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	2,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["hsama",	-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["mrt",		-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["mrta",	-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["gre",		-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["dm",		-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	1,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["sn",		-1,			selectRandom _voices,	selectRandom _faces,	6,	0,	-1,	-1,	0,	-1,	0,	0,	5,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["sp",		-1,			selectRandom _voices,	selectRandom _faces,	10,	0,	-1,	-1,	0,	-1,	0,	0,	4,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["div",		-1,			selectRandom _voices,	selectRandom _faces,	13,	-1,	-1,	16,	4,	-1,	0,	0,	7,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["vc",		-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	6,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["vd",		-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	6,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["vg",		-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	6,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["p",		-1,			selectRandom _voices,	selectRandom _faces,	12,	10,	-1,	-1,	0,	-1,	0,	0,	6,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["car",		-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	0,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0],
-	["smg",		-1,			selectRandom _voices,	selectRandom _faces,	0,	0,	-1,	-1,	0,	-1,	0,	0,	6,	0,	-1,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0,	0]
-];  // FACTION ROLES
-_role = 0; _result = _roles select _role; // SELECT FACTION ROLE
-{ /* Expand SCALAR to STRINGS. */ } forEach _result;
-_result;
+_camo = ["Arid","Urban","Lush"];
+_voice = floor random 12;
+_face = floor random 20;
+_roles = [ // FACTION ROLES: INDEX ROLE TRAITS VOICE FACE UNIFORM HEADGEAR BACKPACK VEST NVG FACEWEAR BINOCULAR TERMINAL PRIMARY													SECONDARY												LAUNCHER									MEDICAL 		CHEMLIGHTS 					SMOKES 					   GRENADES 	  EXPLOSIVES 	 MINES 						COMPASS MAP WATCH RADIO TOOLS
+/*0*/	["co",		0,	_voice,	_face,	0,	0,	0,	0,	-1,	-1,	1,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]], -1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*1*/	["sl",		0,	_voice,	_face,	0,	1,	3,	0,	-1,	-1,	1,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*2*/	["ftl",		0,	_voice,	_face,	0,	2,	3,	0,	-1,	-1,	1,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*3*/	["med",		1,	_voice,	_face,	0,	2,	7,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,10],[1,1]],	[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*4*/	["eng",		2,	_voice,	_face,	0,	2,	7,	9,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],[[1,1]]],
+/*5*/	["engm",	3,	_voice,	_face,	0,	2,	7,	9,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 [[0,1],[1,1],[2,1],[3,1],[4,1],[5,1]],	0,0,0,[[0,1]],[[0,1],[1,1]]],
+/*6*/	["eod",		4,	_voice,	_face,	0,	2,	7,	9,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], [[0,2],[1,1]], -1,									0,0,0,[[0,1]],[[0,1]]],
+/*7*/	["uav",		5,	_voice,	_face,	0,	2,	21,	0,	-1,	-1,	0,	1,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*8*/	["r",		0,	_voice,	_face,	0,	2,	3,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*9*/	["rat",		0,	_voice,	_face,	0,	2,	3,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		[[0,0,[[0,2]],-1,-1,-1,-1,-1,-1,-1]],		[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*10*/	["ar",		0,	_voice,	_face,	0,	2,	3,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*11*/	["aar",		0,	_voice,	_face,	0,	2,	3,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]],[1,-1,[[1,5]],-1,-1,-1,-1,-1,-1,-1,-1]],	[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*12*/	["mat",		0,	_voice,	_face,	0,	2,	3,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		[[0,0,[[0,2],[1,2]],-1,-1,-1,-1,-1,-1,-1]],	[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*13*/	["mata",	0,	_voice,	_face,	0,	2,	7,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		[[0,-1,[[0,2],[1,2]],-1,-1,-1,-1,-1,-1,-1]],[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*14*/	["hat",		0,	_voice,	_face,	0,	2,	20,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		[[0,0,[[0,2],[1,2]],-1,-1,-1,-1,-1,-1,-1]],	[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*15*/	["hata",	0,	_voice,	_face,	0,	2,	9,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		[[0,-1,[[0,2],[1,2]],-1,-1,-1,-1,-1,-1,-1]],[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*16*/	["mmg",		0,	_voice,	_face,	0,	2,	3,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*17*/	["mmga",	0,	_voice,	_face,	0,	2,	7,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*18*/	["hmg",		0,	_voice,	_face,	0,	2,	11,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*19*/	["hmga",	0,	_voice,	_face,	0,	2,	9,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*20*/	["msam",	0,	_voice,	_face,	0,	2,	3,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*21*/	["msama",	0,	_voice,	_face,	0,	2,	7,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*22*/	["hsam",	0,	_voice,	_face,	0,	2,	19,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*23*/	["hsama",	0,	_voice,	_face,	0,	2,	9,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*24*/	["mrt",		0,	_voice,	_face,	0,	2,	17,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*25*/	["mrta",	0,	_voice,	_face,	0,	2,	18,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*26*/	["gre",		0,	_voice,	_face,	0,	2,	3,	9,	-1,	-1,	0,	0,	[[1,4,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*27*/	["dm",		0,	_voice,	_face,	0,	2,	3,	0,	-1,	-1,	1,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*28*/	["sn",		0,	_voice,	_face,	9,	6,	3,	0,	-1,	-1,	1,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*29*/	["sp",		0,	_voice,	_face,	6,	6,	3,	0,	-1,	-1,	1,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*30*/	["div",		0,	_voice,	_face,	17,	-1,	0,	12,	-1,	0,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*31*/	["vc",		0,	_voice,	_face,	0,	2,	0,	-1,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*32*/	["vd",		0,	_voice,	_face,	0,	2,	0,	-1,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*33*/	["vg",		0,	_voice,	_face,	0,	2,	0,	-1,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*34*/	["p",		0,	_voice,	_face,	16,	27,	23,	-1,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*35*/	["car",		0,	_voice,	_face,	0,	2,	3,	0,	-1,	-1,	0,	0,	[[1,7,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
+/*36*/	["smg",		0,	_voice,	_face,	0,	2,	3,	0,	-1,	-1,	0,	0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[0,0,[[0,2]],[[0,0]],-1,-1,-1,-1,-1,[[0,1]],-1]],		-1,											[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1]
+];
+_primaries = [	// FACTION PRIMARY WEAPONS
+	"STING",	// 0 SMG
+	"KATIBA",	// 1 AR
+	"CAR95",	// 2 AR
+	"CAR951",	// 3 LSW
+	"ZAFIR",	// 4 LMG
+	"NAVID",	// 5 HMG
+	"ASP1",		// 6 DMR
+	"CMR76",	// 7 DMR
+	"CYRUS",	// 8 DMR
+	"M320",		// 9 DMR
+	"MAR10",	// 10 DMR
+	"RAHIM",	// 11 DMR
+	"GM6LYNX",	// 12 AMR
+	"SDAR"		// 13 AR
+];
+_secondaries = [	// FACTION SECONDARY WEAPONS
+	"ROOK",			// 0	
+	"ZUBR"			// 1
+];
+_launchers = [	// FACTION LAUNCHER WEAPONS
+	"TITAN",	// 0 AA
+	"RPG42",	// 1 AT
+	"9M135",	// 2 AT
+	"TITANC"	// 3 AT
+];
+_voices = [			// FACTION VOICES
+	"Male01PER",	// 0
+	"Male02PER",	// 1
+	"Male03PER"		// 2
+];
+_faces = [					// FACTION FACES
+	"PersianHead_A3_01",	// 0
+	"PersianHead_A3_02",	// 1
+	"PersianHead_A3_03"		// 2
+];
+_uniforms = [					// FACTION UNIFORMS
+	"U_O_CombatUniform_ocamo",	// 0
+	"U_O_CombatUniform_oucamo",	// 1
+	"U_O_T_Soldier_F",			// 2
+	"U_O_SpecopsUniform_ocamo", // 3
+	"U_O_OfficerUniform_ocamo",	// 4
+	"U_O_T_Officer_F",			// 5
+	"U_O_FullGhillie_ard",		// 6
+	"U_O_FullGhillie_sard",		// 7
+	"U_O_FullGhillie_lsh",		// 8
+	"U_O_T_FullGhillie_tna_F",	// 9
+	"U_O_GhillieSuit",			// 10
+	"U_O_T_Sniper_F",			// 11
+	"U_O_PilotCoveralls",		// 12
+	"U_O_Wetsuit",				// 13
+	"U_B_Wetsuit",				// 14
+	"U_O_V_Soldier_Viper_hex_F",// 15
+	"U_O_V_Soldier_Viper_F"		// 16
+];
+_headgear = [					// FACTION HEADGEAR
+	"H_Beret_CSAT_01_F",		// 0
+	"H_Beret_blk",				// 1
+	"H_HelmetO_ocamo",			// 2
+	"H_HelmetO_oucamo",			// 3
+	"H_HelmetO_ghex_F",			// 4
+	"H_HelmetLeaderO_ocamo",	// 5
+	"H_HelmetLeaderO_oucamo",	// 6
+	"H_HelmetLeaderO_ghex_F",	// 7
+	"H_HelmetSpecO_blk",		// 8
+	"H_HelmetSpecO_ocamo",		// 9
+	"H_HelmetSpecO_ghex_F",		// 10
+	"H_HelmetCrew_O",			// 11
+	"H_HelmetCrew_O_ghex_F",	// 12
+	"H_CrewHelmetHeli_O",		// 13
+	"H_PilotHelmetHeli_O",		// 14
+	"H_PilotHelmetHeli_B",		// 15
+	"H_PilotHelmetFighter_O",	// 16
+	"H_Cap_brn_SPECOPS",		// 17
+	"H_MilCap_ocamo",			// 18
+	"H_MilCap_ghex_F",			// 19
+	"H_HelmetO_ViperSP_hex_F",	// 20
+	"H_HelmetO_ViperSP_ghex_F"	// 21
+];
+_backpacks = [						// FACTION BACKPACKS
+	"B_FieldPack_ocamo",			// 0
+	"B_FieldPack_oucamo",			// 1
+	"B_FieldPack_ghex_F",			// 2
+	"B_FieldPack_blk",				// 3
+	"B_AssaultPack_blk",			// 4
+	"B_AssaultPack_ocamo",			// 5
+	"B_Carryall_ocamo",				// 6
+	"B_Carryall_oucamo",			// 7
+	"B_Carryall_ghex_F",			// 8
+	"O_AA_01_weapon_F",				// 9 TITAN
+	"O_AT_01_weapon_F",				// 10 TITAN COMPACT
+	"O_GMG_01_weapon_F",			// 11 MK32 GMG
+	"O_GMG_01_high_weapon_F",		// 12 MK32 GMG RAISED
+	"O_GMG_01_A_weapon_F",			// 13 MK32 GMG AUTO
+	"O_HMG_01_weapon_F",			// 14 MK30 HMG
+	"O_HMG_01_high_weapon_F",		// 15 MK30 HMG RAISED
+	"O_HMG_01_A_weapon_F",			// 16 MK30 HMG AUTO
+	"O_HMG_01_support_F",			// 17 TRIPOD
+	"O_HMG_01_support_high_F",		// 18 TRIPOD RAISED
+	"O_Mortar_01_support_F",		// 19 MK6 BIPOD
+	"O_Mortar_01_weapon_F",			// 20 MK6 TUBE
+	"O_UAV_01_backpack_F",			// 21
+	"B_Bergen_hex_F",				// 22
+	"B_TacticalPack_blk",			// 23
+	"B_TacticalPack_ocamo",			// 24
+	"B_TacticalPack_oucamo",		// 25
+	"B_TacticalPack_oli",			// 26
+	"B_TacticalPack_rgr",			// 27
+	"B_ViperHarness_blk_F",			// 28
+	"B_ViperHarness_hex_F",			// 29
+	"B_ViperHarness_ghex_F",		// 30
+	"B_ViperHarness_khk_F",			// 31
+	"B_ViperHarness_oli_F",			// 32
+	"B_ViperLightHarness_blk_F",	// 33
+	"B_ViperLightHarness_hex_F",	// 34
+	"B_ViperLightHarness_ghex_F",	// 35
+	"B_ViperLightHarness_khk_F",	// 36
+	"B_ViperLightHarness_oli_F"		// 37
+];
+_vests = [							// FACTION VESTS
+	"V_HarnessO_brn",				// 0
+	"V_HarnessO_gry",				// 1
+	"V_HarnessO_ghex_F",			// 2
+	"V_HarnessOGL_brn",				// 3
+	"V_HarnessOGL_gry",				// 4
+	"V_HarnessOGL_ghex_F",			// 5
+	"V_BandollierB_khk",			// 6
+	"V_BandollierB_blk",			// 7
+	"V_BandollierB_ghex_F",			// 8
+	"V_BandollierB_rgr",			// 9
+	"V_BandollierB_oli",			// 10
+	"V_BandollierB_cbr",			// 11
+	"V_Chestrig_khk",				// 12
+	"V_Chestrig_blk",				// 13
+	"V_Chestrig_rgr",				// 14
+	"V_Chestrig_oli",				// 15
+	"V_RebreatherIR",				// 16
+	"V_RebreatherB",				// 17
+	"V_TacVest_khk",				// 18
+	"V_TacVest_blk",				// 19
+	"V_TacVest_oli",				// 20
+	"V_TacVest_brn",				// 21
+	"V_TacVestIR_blk",				// 22
+	"V_PlateCarrier1_rgr_noflag_F",	// 23
+	"V_PlateCarrier2_rgr_noflag_F",	// 24
+	"V_Rangemaster_belt"			// 25
+];
+_role = _roles select _this; // SELECT FACTION ROLE
+_return = [_role,_primaries,_secondaries,_launchers,_voices,_faces,_uniforms,_headgear,_backpacks,_vests] call VVM_fnc_parseRole; // Parse Role Array.
+{_x = nil} forEach [_key,_side,_year,_classname,_content,_climates,_camo,_roles,_primaries,_secondaries,_launchers,_voices,_faces,_uniforms,_headgear,_backpacks,_vests,_role];
+_return;

@@ -2,7 +2,7 @@
 
 ## DESCRIPTION
 
-Functions to set a load out of gear for a crate, unit or vehicle.
+Functions to set a load out of gear for a faction.
 
 ## LICENCE
 
@@ -15,30 +15,27 @@ Functions to set a load out of gear for a crate, unit or vehicle.
 ## Usage
 
 ```sqf
-_result = [_unit,_side,_faction,_role] call VVLO_fnc_createLoadout;
+_result = [_unit,_faction,_role] call VVLO_fnc_createLoadout;
 ```
 
 ## TODO
 
 * Player UUID specific loadouts.
-* Deduplicate classname usage.
-* Isolated side & faction agnostic gear.
 * Support Vanilla, DLC, CUP, RHS, BAF, CFP, ACE, TFAR, ACRE.
 * Environmental Uniforms: ARID: BROWN, ARTIC: WHITE, LUSH: GREEN, STEALTH: BLACK, MARINE: BLUE
+* Create A Loadout For A Crate.
+* Create A Loadout For A Vehicle.
 
 ## Functions
 
-* Create A Loadout For A Crate.
 * Create A Loadout For A Unit.
-* Create A Loadout For A Vehicle.
 
 ## Arguments (NAME OPTIONS)
 
-* SIDES (EAST / WEST)
 * EAST FACTIONS (CSAT,CSAT Pacific)
 * WEST FACTIONS (US,CTRG)
 * INDY FACTIONS (AAF,FIA)
-* ROLE
+* ROLE (CO,SL,FTL,MED,ENG,ENGM,EOD,UAV,R,RAT,GRE,AR,AAR,MMG,MMGA,HMG,HMGA,MAT,MATA,HAT,HATA,MRT,MRTA,MSAM,MSAMA,HSAM,HSAMA,DM,SN,SP,DIV,CAR,SMG,VC,VG,VD,P,PP,PCC,PC)
 
 ## WEAPON ATTACHMENTS
 

@@ -1,4 +1,5 @@
 private ["_role","_traits","_primaries","_secondaries","_launchers","_voices","_faces","_uniforms","_headgear","_backpacks","_vests","_voices","_faces","_uniforms","_headgear","_backpacks","_vests","_binoculars","_compasses","_facewear","_maps","_medical","_nvgs","_radios","_terminals","_tools","_watches","_chemlights","_explosives","_grenades","_mines","_smokes","_return","_prim","_sec","_lau","_meds","_chems","_smoks","_gres","_exps","_mins","_rads","_toos","_a","_b"];
+diag_log format ["# %1 # fn_parseRole.sqf _this = %2 #",time,_this];
 _role = _this select 0;
 _traits = [[0,0,0,0],[0,0,1,0],[1,0,0,0],[0,1,0,0],[1,1,0,0],[0,0,0,1]]; // [ENG,EXP,MED,UAV] 0 = OFF, 1 = ON. [NONE,MED,ENG,ENGM,EOD,UAV]
 _primaries = _this select 1;

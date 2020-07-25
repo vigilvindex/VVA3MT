@@ -1,15 +1,12 @@
 private _unit = _this select 0;
 removeBackpack _unit;
-removeBackpackGlobal _unit;
-removeAllWeapons _unit;
 removeAllAssignedItems _unit;
-removeAllContainers _unit;
 removeUniform _unit;
 removeVest _unit;
-clearAllItemsFromBackpack _unit;
-deleteVehicle objectParent unitBackpack _unit;
 removeGoggles _unit;
 removeHeadgear _unit;
 removeAllItems _unit;
-removeAllWeapons _unit;
 removeAllItemsWithMagazines _unit;
+clearAllItemsFromBackpack _unit;
+removeAllContainers _unit;
+removeAllWeapons _unit;

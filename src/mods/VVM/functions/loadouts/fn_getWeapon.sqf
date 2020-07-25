@@ -1,5 +1,5 @@
 // _titan = "TITAN" call VVM_fnc_getWeapon;
-// diag_log format ["# %1 #% 2 # %3 # VVM_fnc_getWeapon _this = %4 #",time,__FILE__ select [count PATH],__LINE__,_this];
+diag_log format ["# %1 # fn_getWeapon.sqf _this = %2 #",time,_this];
 private _return = [];
 switch (toUpperANSI _this) do {
 	case "TITAN": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\loadouts\weapons\launchers\aa\TITAN.sqf";};

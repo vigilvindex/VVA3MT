@@ -1,5 +1,6 @@
 // USAGE: _result = [UNIT,FACTION,ROLE,AI] call VVLO_fnc_setLoadout;
 private ["_unit","_faction","_role","_roledata","_ai","_addWeapon","_classname"];
+diag_log format ["# %1 # fn_setLoadout.sqf _this = %2 #",time,_this];
 _unit = _this select 0;
 _faction = _this select 1;
 _role = _this select 2;
