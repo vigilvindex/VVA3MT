@@ -6,7 +6,7 @@ Created: 2016/07/21 Updated: 2016/08/16 Version: 0.0.1
 */
 if (isNil "modVVDTSwitch") then {modVVDTSwitch = 0;};
 if (modVVDTSwitch == 1) then {
-  diag_log format ["#%1#%2#%3#Loading VVDT.#",time,__FILE__ select [count (parsingNamespace getVariable "MISSION_ROOT")],__LINE__];
+  diag_log format ["# %1 # %2 # %3 # Loading VVDT. #",time,__FILE__ select [count (parsingNamespace getVariable "MISSION_ROOT")],__LINE__];
 	systemChat "Loading VVDT.";
 	if (isServer) then {
 		if (isNil "modVVDTRandom") then {modVVDTRandom = 0;};

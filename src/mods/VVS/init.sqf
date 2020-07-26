@@ -7,7 +7,7 @@ Created: 2016/07/21 Updated: 2016/08/16 Version: 0.0.1
 if (isNil "modVVSSwitch") then {modVVSSwitch = 0;};
 if (modVVSSwitch == 1) then {
   if (modDebug == 1) then {
-    diag_log format ["#%1#%2#%3#Loading VVS.#",time,__FILE__ select [count (parsingNamespace getVariable "MISSION_ROOT")],__LINE__];
+    diag_log format ["# %1 # %2 # %3 # Loading VVS. #",time,__FILE__ select [count (parsingNamespace getVariable "MISSION_ROOT")],__LINE__];
     systemChat "Loading VVS.";
     // Only display vehicles for that players side, if true Opfor can only spawn Opfor vehicles and so on.
     if (modVVSSide == 1) then { VVS_SideOnly = true; } else { VVS_SideOnly = false; };

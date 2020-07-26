@@ -7,7 +7,7 @@ Created: 2013/08/09 Updated: 2016/08/16 Version: 0.0.1
 if (isNil "modVVMSwitch") then {modVVMSwitch = 0;};
 if (modVVMSwitch == 1) then {
   if (modDebug == 1) then {
-    diag_log format ["#%1#%2#%3#Loading VVM.#",time,__FILE__ select [count PATH],__LINE__];
+    diag_log format ["# %1 # %2 # %3 # Loading VVM. #",time,__FILE__ select [count PATH],__LINE__];
 	  systemChat "Loading VVM.";
   };
   [] execVM "mods\VVM\scripts\fn_clickMapPositionToClipboard.sqf";
@@ -78,9 +78,10 @@ if (modVVMSwitch == 1) then {
       _orbattextmarker= [[_opx - 460,_opy - 450],[0,1], ["EAGLE      LR 1","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
       _orbattextmarker= [[_opx - 460,_opy - 480],[0,1], ["HAWK       LR 1","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
     };
+    _wammobox = [["p",WESTHQPOS]] call VVM_fnc_createArsenal;
     _loadout = [w1,"NATO",0] call VVM_fnc_setLoadout;
     _roles = [-1] call VVM_fnc_getRole;
-    { diag_log format ["#%1#%2#%3# _x = %4 #",time,__FILE__ select [count PATH],__LINE__,_x];
+    { // diag_log format ["# %1 # %2 # %3 # _x = %4 #",time,__FILE__ select [count PATH],__LINE__,_x];
       [w1,[format ["NATO-%1-%2",(_x select 1),(_x select 2)],{[_this select 1,"NATO",_this select 3] call VVM_fnc_setLoadout;},(_x select 0)]] remoteExec ["addAction",0,true];
     } forEach _roles;
   };
