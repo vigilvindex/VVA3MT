@@ -19,7 +19,7 @@ if (modVVMSwitch == 1) then {
     WESTHQPOS = [500,500];
     WHQX = WESTHQPOS select 0;
     WHQY = WESTHQPOS select 1;
-    [[1500,1500],[3000,3000]] call VVM_fnc_bordersToMapGlobal;
+    //[[1500,1500],[3000,3000]] call VVM_fnc_bordersToMapGlobal;
     _aomarker = [[[1000,1000],[1000,2000],[2000,2000],[2000,1000],[1000,1000]],10,["ColorOrange",1]] call VVM_fnc_lineToMapGlobal;
     _aotextmarker= [[1250,950],[0,2],["AREA OF OPERATION","ColorBlack",0.5]] call VVM_fnc_textToMapGlobal;
     _qrfmarker = [[1170,785],[45,450,80,10],["ColorRed",1],["QRF!","center","ColorBlack",0.5]] call VVM_fnc_arrowToMapGlobal;
@@ -77,9 +77,10 @@ if (modVVMSwitch == 1) then {
       _orbattextmarker= [[_opx - 460,_opy - 480],[0,1], ["HAWK       LR 1","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
     };
     _base = [WESTHQPOS] execVM "mods\VVM\functions\compositions\base_desert.sqf";
-    _wrolebox = [["p",([WESTHQPOS,0,3,1] call BIS_fnc_findSafePos)],["f",1]] call VVM_fnc_createFactionRoleBox;
-    _erolebox = [["p",([WESTHQPOS,0,3,1] call BIS_fnc_findSafePos)],["f",0]] call VVM_fnc_createFactionRoleBox;
-    _irolebox = [["p",([WESTHQPOS,0,3,1] call BIS_fnc_findSafePos)],["f",2]] call VVM_fnc_createFactionRoleBox;
+    _wmedbox = [["p",([WESTHQPOS,1,3,1] call BIS_fnc_findSafePos)]] call VVM_fnc_createMedicalBox;
+    _wrolebox = [["p",([WESTHQPOS,1,3,1] call BIS_fnc_findSafePos)],["f",1]] call VVM_fnc_createFactionRoleBox;
+    _erolebox = [["p",([WESTHQPOS,1,3,1] call BIS_fnc_findSafePos)],["f",0]] call VVM_fnc_createFactionRoleBox;
+    //_irolebox = [["p",([WESTHQPOS,1,3,1] call BIS_fnc_findSafePos)],["f",2]] call VVM_fnc_createFactionRoleBox;
     _loadout = [w1,"NATO",0] call VVM_fnc_setLoadout;
   };
 };

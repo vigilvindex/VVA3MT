@@ -40,7 +40,7 @@ if (_debug) then {
   { diag_log format ["# %1 # %2 # %3 # _param %4 = %5 #",time,__FILE__ select [count (parsingNamespace getVariable "MISSION_ROOT")],__LINE__,_forEachIndex,_x];
   } forEach [_debug,_role];
 };
-_key = "AAF"; // FACTION KEY https://armedassault.fandom.com/wiki/NATO
+_key = "AAF"; // FACTION KEY https://armedassault.fandom.com/wiki/AAF
 _side = INDEPENDENT; // FACTION SIDE
 _year = 2035; // FACTION YEAR
 _classname = "IND_F"; // FACTION CLASSNAME

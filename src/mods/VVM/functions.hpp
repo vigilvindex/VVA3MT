@@ -21,6 +21,7 @@ class VVM {
     class createFactionRoleBox {};
     class createFlagpole {};
     class createGarage {};
+    class createMedicalBox {};
     class createVVS {};
   };
   class cron {
