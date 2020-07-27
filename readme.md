@@ -1,1 +1,1 @@
-# VVA3MM - VigilVindex's Arma 3 Mission Template
+# VVA3MT - VigilVindex's Arma 3 Mission Template
