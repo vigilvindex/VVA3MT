@@ -32,9 +32,6 @@ class VVM {
 		class cronJobRemove {};
 		class cronJobRun {};
   };
-  class data {
-    file = "mods\VVM\functions\data";
-  };
   class environment {
     file = "mods\VVM\functions\environment";
   };
@@ -97,7 +94,7 @@ class VVM {
   };
   class tasks {
     file = "mods\VVM\functions\tasks";
-    class taskMaster {};
+    class createTask {};
   };
   class triggers {
     file = "mods\VVM\functions\triggers";
@@ -106,6 +103,5 @@ class VVM {
   class waypoints {
     file = "mods\VVM\functions\waypoints";
     class createWaypoint {};
-    class patrol {};
   };
 };
