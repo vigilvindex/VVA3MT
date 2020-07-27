@@ -23,7 +23,7 @@ _diver = false;
 			if (_x in ["V_RebreatherB","V_RebreatherIR","V_RebreatherIA"]) then {_diver = true;};
 			_unit addVest _x;
 		}};
-		case 8: {if !(_x isEqualTo -1) then {_unit addItemToUniform _x}}; // NVG
+		case 8: {if !(_x isEqualTo -1) then {(uniformContainer _unit) addItemCargoGlobal [_x,1]}}; // NVG
 		case 9: {if !(_x isEqualTo -1) then {_unit addGoggles _x}}; // FACEWEAR
 		case 10: {if !(_x isEqualTo -1) then {_unit addWeapon _x}}; // BINOCULARS
 		case 11: {if !(_x isEqualTo -1) then {_unit linkItem _x}}; // TERMINAL
@@ -57,11 +57,11 @@ _diver = false;
 					{	_addWeapon = false; _classname = "";
 						{	switch (_forEachIndex) do {
 								case 0: {if !(_x isEqualTo -1) then {_addWeapon = true; _classname = _x}}; // VARIANT
-								case 1: {if !(_x isEqualTo -1) then {{_unit addItemToUniform _x} forEach _x}}; // Magazines
-								case 2: {if !(_x isEqualTo -1) then {{_unit addItemToUniform _x} forEach _x}}; // Tracers
-								case 3: {if !(_x isEqualTo -1) then {{_unit addItemToUniform _x} forEach _x}}; // Grenades
-								case 4: {if !(_x isEqualTo -1) then {{_unit addItemToUniform _x} forEach _x}}; // Flares
-								case 5: {if !(_x isEqualTo -1) then {{_unit addItemToUniform _x} forEach _x}}; // Smokes
+								case 1: {if !(_x isEqualTo -1) then {{(uniformContainer _unit) addItemCargoGlobal [_x,1]} forEach _x}}; // Magazines
+								case 2: {if !(_x isEqualTo -1) then {{(uniformContainer _unit) addItemCargoGlobal [_x,1]} forEach _x}}; // Tracers
+								case 3: {if !(_x isEqualTo -1) then {{(uniformContainer _unit) addItemCargoGlobal [_x,1]} forEach _x}}; // Grenades
+								case 4: {if !(_x isEqualTo -1) then {{(uniformContainer _unit) addItemCargoGlobal [_x,1]} forEach _x}}; // Flares
+								case 5: {if !(_x isEqualTo -1) then {{(uniformContainer _unit) addItemCargoGlobal [_x,1]} forEach _x}}; // Smokes
 								case 6: { // Accessories & Add Gun
 									if (_addWeapon isEqualTo true) then {_unit addWeapon _classname};
 									if !(_x isEqualTo -1) then {{_unit addHandgunItem _x} forEach _x};
@@ -100,19 +100,19 @@ _diver = false;
 			};
 		};
 		case 15: {if !(_x isEqualTo -1) then {{(backpackContainer _unit) addItemCargoGlobal [_x,1]} forEach _x}}; // MEDICAL
-		case 16: {if !(_x isEqualTo -1) then {{_unit addItemToUniform _x} forEach _x}}; // CHEMLIGHTS
+		case 16: {if !(_x isEqualTo -1) then {{(uniformContainer _unit) addItemCargoGlobal [_x,1]} forEach _x}}; // CHEMLIGHTS
 		case 17: {if !(_x isEqualTo -1) then { // SMOKES
 			if (_diver isEqualTo true) then {
 				{(backpackContainer _unit) addItemCargoGlobal [_x,1]} forEach _x;
 			} else {
-				{_unit addItemToVest _x} forEach _x;
+				{(vestContainer _unit) addItemCargoGlobal [_x,1]} forEach _x;
 			};
 		}};
 		case 18: {if !(_x isEqualTo -1) then { // GRENADES
 			if (_diver isEqualTo true) then {
 				{(backpackContainer _unit) addItemCargoGlobal [_x,1]} forEach _x;
 			} else {
-				{_unit addItemToVest _x} forEach _x;
+				{(vestContainer _unit) addItemCargoGlobal [_x,1]} forEach _x;
 			};
 		}};
 		case 19: {if !(_x isEqualTo -1) then {{(backpackContainer _unit) addItemCargoGlobal [_x,1]} forEach _x}}; // EXPLOSIVES

@@ -18,6 +18,7 @@ class VVM {
   class compositions {
     file = "mods\VVM\functions\compositions";
     class createArsenal {};
+    class createFactionRoleBox {};
     class createFlagpole {};
     class createGarage {};
     class createVVS {};

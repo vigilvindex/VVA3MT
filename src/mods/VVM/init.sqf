@@ -78,11 +78,9 @@ if (modVVMSwitch == 1) then {
       _orbattextmarker= [[_opx - 460,_opy - 450],[0,1], ["EAGLE      LR 1","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
       _orbattextmarker= [[_opx - 460,_opy - 480],[0,1], ["HAWK       LR 1","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
     };
-    _wammobox = [["p",WESTHQPOS]] call VVM_fnc_createArsenal;
+    _wammobox = [["p",([WESTHQPOS,0,3,1] call BIS_fnc_findSafePos)]] call VVM_fnc_createArsenal;
+    _wrolebox = [["p",([WESTHQPOS,0,3,1] call BIS_fnc_findSafePos)],["f",1]] call VVM_fnc_createFactionRoleBox;
+    _erolebox = [["p",([WESTHQPOS,0,3,1] call BIS_fnc_findSafePos)],["f",0]] call VVM_fnc_createFactionRoleBox;
     _loadout = [w1,"NATO",0] call VVM_fnc_setLoadout;
-    _roles = [-1] call VVM_fnc_getRole;
-    { // diag_log format ["# %1 # %2 # %3 # _x = %4 #",time,__FILE__ select [count PATH],__LINE__,_x];
-      [w1,[format ["NATO-%1-%2",(_x select 1),(_x select 2)],{[_this select 1,"NATO",_this select 3] call VVM_fnc_setLoadout;},(_x select 0)]] remoteExec ["addAction",0,true];
-    } forEach _roles;
   };
 };
