@@ -41,7 +41,6 @@ class VVM {
   class loadouts {
     file = "mods\VVM\functions\loadouts";
     class clearGear {};
-    class getAttachments {};
     class getFactionRole {};
     class getItems {};
     class getMagazines {};

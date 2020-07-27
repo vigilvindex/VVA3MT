@@ -1,6 +1,6 @@
 _position = _this select 0;
 _composition = [
-	["Box_CSAT_Equip_F",[8.51526,-0.0356445,3.33786e-006],269.613,1,0,[-6.30287e-005,0.000939933],"EAMMO","",true,false], 
+	["Box_CSAT_Equip_F",[8.51526,-0.0356445,3.33786],269.613,1,0,[-6.30287,0.000939933],"EAMMO","",true,false], 
 	["Flag_Red_F",[-8.03027,-0.116272,0],0,1,0,[0,0],"EFLAG","",true,false], 
 	["SignAd_Sponsor_F",[-3.30194,13.7534,0],0,1,0,[0,0],"ESIGN1","",true,false],
 	["SignAd_Sponsor_F",[-1.19794,13.7335,0],0,1,0,[0,0],"ESIGN2","",true,false], 

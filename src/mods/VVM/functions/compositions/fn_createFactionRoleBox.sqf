@@ -51,6 +51,9 @@ clearMagazineCargo _return;
 clearItemCargo _return;
 clearBackpackCargo _return;
 _return allowDamage false;
+removeAllActions _return;
+["Preload"] call BIS_fnc_arsenal;
+[_return,["Arsenal",{["Open",true] call BIS_fnc_arsenal;}]] remoteExec ["addAction",0,true];
 _roles = [-1] call VVM_fnc_getRole;
 switch (_faction) do {
   case "CSAT": {

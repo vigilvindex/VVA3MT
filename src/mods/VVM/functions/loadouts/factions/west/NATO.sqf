@@ -260,7 +260,7 @@ _backpacks = [					// FACTION BACKPACKS
 	"B_AA_01_weapon_F",			// 26 AA (Vanilla)
 	"B_AT_01_weapon_F",			// 27 AT (Vanilla)
 	"B_UAV_01_backpack_F",		// 28 UAV AR2 (Vanilla)
-	"B_UAV_06_backpack_F",		// 29 UAV AL6 (LOW)
+	"B_UAV_06_backpack_F",		// 29 UAV AL6 (Orange)
 	"B_Parachute"				// 30 (Vanilla)
 ];
 _role = _roles select _role; // SELECT FACTION ROLE

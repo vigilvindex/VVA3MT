@@ -13,12 +13,12 @@ if (!isDedicated) then {
 	player createDiaryRecord ["Diary",["Author","vigil.vindex@gmail.com"]];
 	switch (side player) do {
 		case WEST: { //BLUFOR
-			player createDiaryRecord ["Diary",["Intel","Attackers Mission Intel"]];
-			player createDiaryRecord ["Diary",["Briefing","Attackers Mission Briefing"]];
+			player createDiaryRecord ["Diary",["Intel","BLUFOR Mission Intel"]];
+			player createDiaryRecord ["Diary",["Briefing","BLUFOR Mission Briefing"]];
 		};
 		case EAST: { //OPFOR
-			player createDiaryRecord ["Diary",["Intel","Defenders Mission Intel"]];
-			player createDiaryRecord ["Diary",["Briefing","Defenders Mission Briefing"]];
+			player createDiaryRecord ["Diary",["Intel","OPFOR Mission Intel"]];
+			player createDiaryRecord ["Diary",["Briefing","OPFOR Mission Briefing"]];
 		};
 	};
 };
