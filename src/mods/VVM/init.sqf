@@ -4,7 +4,7 @@ Authors: vigil.vindex@gmail.com
 License: https://creativecommons.org/licenses/by-sa/4.0/
 Created: 2013/08/09 Updated: 2016/08/16 Version: 0.0.1
 */
-if (isNil "modVVMSwitch") then {modVVMSwitch = 0;};
+if (isNil "modVVMSwitch") then {modVVMSwitch = 0};
 if (modVVMSwitch == 1) then {
   if (modDebug == 1) then {
     diag_log format ["# %1 # %2 # %3 # Loading VVM. #",time,__FILE__ select [count PATH],__LINE__];
@@ -12,7 +12,7 @@ if (modVVMSwitch == 1) then {
   };
   [] execVM "mods\VVM\scripts\fn_clickMapPositionToClipboard.sqf";
   if (isServer) then {
-    [{([daytime,"HH:MM:SS"] call BIS_fnc_timeToString) remoteExec ["systemChat",0];},[],0,1,0] call VVM_fnc_cronJobAdd;
+    [{([daytime,"HH:MM:SS"] call BIS_fnc_timeToString) remoteExec ["systemChat",0]},[],0,1,0] call VVM_fnc_cronJobAdd;
     EASTHQPOS = [500, 1500];
     EHQX = EASTHQPOS select 0;
     EHQY = EASTHQPOS select 1;

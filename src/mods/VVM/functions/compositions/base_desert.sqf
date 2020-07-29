@@ -1,23 +1,23 @@
 private ["_position","_composition","_return","_marker"];
 _position = _this select 0;
 _composition = [
-	["B_supplyCrate_F",[-3.17627,1.97186,3.8147],355.787,1,0.196559,[-0.000360726,0.000389611],"AMMOBOX1","",true,false], 
-	["Land_HelipadSquare_F",[-28.9163,-13.9582,0],360,1,0,[0,0],"HELIPAD1","",true,false], 
-	["Land_RepairDepot_01_tan_F",[-12.6763,-3.95825,0.000503063],269.999,1,0,[0.00935556,-0.000305788],"GARAGE1","",true,false], 
-	["Flag_NATO_F",[-3.25629,-1.53815,0],360,1,0,[0,0],"FLAGPOLE1","",true,false], 
-	["Land_Cargo_House_V3_F",[-11.7263,12.2719,0],360,1,0,[0,0],"BARRACK1","",true,false], 
-	["Land_Cargo_House_V3_F",[-20.1063,12.0718,0],360,1,0,[0,0],"BARRACK2","",true,false], 
-	["Land_Cargo_House_V3_F",[-28.5163,11.5818,0],360,1,0,[0,0],"BARRACK3","",true,false], 
-	["Land_Cargo_House_V3_F",[-36.8363,11.6618,0],360,1,0,[0,0],"BARRACK4","",true,false], 
-	["Land_Cargo_House_V3_F",[-45.6863,11.2018,0],360,1,0,[0,0],"BARRACK5","",true,false], 
-	["Land_Cargo_House_V3_F",[-58.4063,-27.7482,0],270,1,0,[0,0],"BARRACK9","",true,false], 
-	["Land_Cargo_House_V3_F",[-58.7463,-19.7782,0],270,1,0,[0,0],"BARRACK8","",true,false], 
-	["Land_Cargo_House_V3_F",[-58.9363,-11.3782,0],270,1,0,[0,0],"BARRACK7","",true,false], 
-	["Land_Cargo_House_V3_F",[-59.5563,-3.1582,0],270,1,0,[0,0],"BARRACK6","",true,false], 
-	["Land_Cargo_HQ_V3_F",[4.9137,7.94183,0],270,1,0,[0,0],"HQ1","",true,false], 
-	["Land_Cargo_Patrol_V3_F",[-58.9363,8.68182,0],90,1,0,[0,-0],"POST1","",true,false], 
-	["Land_Cargo_Patrol_V3_F",[1.39374,-24.5082,0],360,1,0,[0,0],"POST2","",true,false], 
-	["Land_Cargo_Tower_V3_F",[-55.9963,-39.4282,0],88.825,1,0,[0,0],"TOWER1","",true,false], 
+	["B_supplyCrate_F",[-3.17627,1.97186,3.8147],355.787,1,0.196559,[-0.000360726,0.000389611],"VVM_AI_W_AMMOBOX1","",true,false], 
+	["Land_HelipadSquare_F",[-28.9163,-13.9582,0],360,1,0,[0,0],"VVM_AI_W_HELIPAD1","",true,false], 
+	["Land_RepairDepot_01_tan_F",[-12.6763,-3.95825,0.000503063],269.999,1,0,[0.00935556,-0.000305788],"VVM_AI_W_GARAGE1","",true,false], 
+	["Flag_NATO_F",[-3.25629,-1.53815,0],360,1,0,[0,0],"VVM_AI_W_FLAGPOLE1","",true,false], 
+	["Land_Cargo_House_V3_F",[-11.7263,12.2719,0],360,1,0,[0,0],"VVM_AI_W_SPAWN1","",true,false], 
+	["Land_Cargo_House_V3_F",[-20.1063,12.0718,0],360,1,0,[0,0],"VVM_AI_W_SPAWN2","",true,false], 
+	["Land_Cargo_House_V3_F",[-28.5163,11.5818,0],360,1,0,[0,0],"VVM_AI_W_SPAWN3","",true,false], 
+	["Land_Cargo_House_V3_F",[-36.8363,11.6618,0],360,1,0,[0,0],"VVM_AI_W_SPAWN4","",true,false], 
+	["Land_Cargo_House_V3_F",[-45.6863,11.2018,0],360,1,0,[0,0],"VVM_AI_W_SPAWN5","",true,false], 
+	["Land_Cargo_House_V3_F",[-58.4063,-27.7482,0],270,1,0,[0,0],"VVM_AI_W_SPAWN9","",true,false], 
+	["Land_Cargo_House_V3_F",[-58.7463,-19.7782,0],270,1,0,[0,0],"VVM_AI_W_SPAWN8","",true,false], 
+	["Land_Cargo_House_V3_F",[-58.9363,-11.3782,0],270,1,0,[0,0],"VVM_AI_W_SPAWN7","",true,false], 
+	["Land_Cargo_House_V3_F",[-59.5563,-3.1582,0],270,1,0,[0,0],"VVM_AI_W_SPAWN6","",true,false], 
+	["Land_Cargo_HQ_V3_F",[4.9137,7.94183,0],270,1,0,[0,0],"VVM_AI_W_HQ1","",true,false], 
+	["Land_Cargo_Patrol_V3_F",[-58.9363,8.68182,0],90,1,0,[0,-0],"VVM_AI_W_POST1","",true,false], 
+	["Land_Cargo_Patrol_V3_F",[1.39374,-24.5082,0],360,1,0,[0,0],"VVM_AI_W_POST2","",true,false], 
+	["Land_Cargo_Tower_V3_F",[-55.9963,-39.4282,0],88.825,1,0,[0,0],"VVM_AI_W_TOWER1","",true,false], 
 	//["Land_Cargo20_sand_F",[-10.2338,-25.298,-0.000999451],115.123,1,0,[1.10604,8.6616],"","",true,false], 
 	//["Land_Cargo40_sand_F",[-45.5822,-24.4449,0.0406694],87.6371,1,0,[0.845812,-0.213951],"","",true,false], 
 	["Land_HBarrierWall6_F",[-11.0063,-32.1482,0],180,1,0,[0,0],"","",true,false], 
@@ -76,30 +76,34 @@ _composition = [
 	["Land_HBarrierWall6_F",[9.03369,-16.9781,0],90,1,0,[0,-0],"","",true,false]
 ];
 _return = [_position,0,_composition,0] call BIS_fnc_objectsMapper;
+// Perimeter Marker
 _positions = [];
 {_positions pushBack getPos _x} forEach _return;
 _box = [["p",_positions]] call VVM_fnc_getBoundingBox;
 _boxmarker = [_box,10,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
 _pos = _box select 0;
 _boxtext = [[(_pos select 0) + 12 ,(_pos select 1)],[0,0.3],["WEST HQ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-_marker = [["n","GSPAWN1"],["p",(getPos HELIPAD1)],["a",0],["ty",0]] call VVM_fnc_createMarker;
-
-[GARAGE1,["Garage",VVS_fnc_openVVS,["GSPAWN1","All"]]] remoteExec ["addAction",0,true];
-_garpos = getPos GARAGE1;
+// Garage
+_marker = [["n","VVM_AI_W_HELIPADMARKER1"],["p",(getPos VVM_AI_W_HELIPAD1)],["a",0],["ty",0]] call VVM_fnc_createMarker;
+[VVM_AI_W_GARAGE1,["Garage",VVS_fnc_openVVS,["VVM_AI_W_HELIPADMARKER1","All"]]] remoteExec ["addAction",0,true];
+_garpos = getPos VVM_AI_W_GARAGE1;
 _garbox = [["p",[_garpos]],["m",0.5]] call VVM_fnc_getBoundingBox;
 _garboxmarker = [_garbox,0.5,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
 _garboxtextpos = _garbox select 0;
 _garboxtext = [[(_garboxtextpos select 0),(_garboxtextpos select 1)],[0,0.01],["GARAGE","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-[AMMOBOX1,["Arsenal",{["Open",true] call BIS_fnc_arsenal;}]] remoteExec ["addAction",0,true];
-_ammopos = getPos AMMOBOX1;
+// Ammobox
+[VVM_AI_W_AMMOBOX1,["Arsenal",{["Open",true] call BIS_fnc_arsenal;}]] remoteExec ["addAction",0,true];
+_ammopos = getPos VVM_AI_W_AMMOBOX1;
 _ammobox = [["p",[_ammopos]],["m",0.5]] call VVM_fnc_getBoundingBox;
 _ammoboxmarker = [_ammobox,0.5,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
 _ammoboxtextpos = _ammobox select 0;
 _ammoboxtext = [[(_ammoboxtextpos select 0),(_ammoboxtextpos select 1)],[0,0.01],["ARSENAL","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-[FLAGPOLE1,["Halo Jump",{}]] remoteExec ["addAction",0,true];
-[FLAGPOLE1,["Teleport",{}]] remoteExec ["addAction",0,true];
-_flagpos = getPos FLAGPOLE1;
+// Flag Teleport & Halo
+[VVM_AI_W_FLAGPOLE1,["Halo Jump",{}]] remoteExec ["addAction",0,true];
+[VVM_AI_W_FLAGPOLE1,["Teleport",{}]] remoteExec ["addAction",0,true];
+_flagpos = getPos VVM_AI_W_FLAGPOLE1;
 _flagbox = [["p",[_flagpos]],["m",0.5]] call VVM_fnc_getBoundingBox;
 _flagboxmarker = [_flagbox,0.5,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
 _flagboxtextpos = _flagbox select 0;
 _flagboxtext = [[(_flagboxtextpos select 0),(_flagboxtextpos select 1)],[0,0.01],["FLAGPOLE","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+// Medical Box

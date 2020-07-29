@@ -18,11 +18,11 @@
 vv_obj_active = true;
 publicVariable"vv_obj_active";
 [{vv_objective removeAction 0;},"BIS_fnc_spawn",WEST,FALSE] spawn BIS_fnc_MP;
-[{vv_objective addAction["Defuse Explosives","modules\vv_mod\scripts\vv_add_action_defuse_explosives.sqf"];},"BIS_fnc_spawn",EAST,FALSE] spawn BIS_fnc_MP;
+[{vv_objective addAction["Defuse Explosives","modules\vv_mod\scripts\vv_add_action_defuse_explosives.sqf"]},"BIS_fnc_spawn",EAST,FALSE] spawn BIS_fnc_MP;
 vv_obj_time = 180;
 publicVariable"vv_obj_time";
 while {vv_obj_active} do {
-    [{hintsilent format ["Detonation in %1", [((vv_obj_time)/60)+.01,"HH:MM"] call bis_fnc_timetostring];},"BIS_fnc_spawn",TRUE,FALSE] spawn BIS_fnc_MP;
+    [{hintsilent format ["Detonation in %1", [((vv_obj_time)/60)+.01,"HH:MM"] call bis_fnc_timetostring]},"BIS_fnc_spawn",TRUE,FALSE] spawn BIS_fnc_MP;
     vv_obj_time = vv_obj_time -1;
     publicVariable"vv_obj_time";
     sleep 1;

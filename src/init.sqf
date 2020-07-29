@@ -25,4 +25,4 @@ if (isNull player && !isServer) then { // JIP Client Scope
 diag_log format ["# %1 # %2 # %3 # Loading Mission. #",time,__FILE__ select [count PATH],__LINE__];
 systemChat "Loading Mission.";
 enableSaving[false,false]; // https://community.bistudio.com/wiki/enableSaving
-{call compile format["call compile preprocessfilelinenumbers 'mods\%1\init.sqf';",_x];} forEach MODS;
+{call compile format["call compile preprocessfilelinenumbers 'mods\%1\init.sqf';",_x]} forEach MODS;

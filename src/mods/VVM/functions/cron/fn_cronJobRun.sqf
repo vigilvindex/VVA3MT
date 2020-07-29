@@ -10,12 +10,12 @@ private ["_time","_earliest","_jobs"];
 _time = time; // current time
 if (isServer) then {
 	if (count VVM_var_cronSchedule == 0) exitWith {
-		if (VVM_var_cronDebug) then	{ diag_log format ["VVM_fnc_cronJobRun: __LINE__: No job to run at this time: %1",_time]; };
+		if (VVM_var_cronDebug) then	{diag_log format ["VVM_fnc_cronJobRun: __LINE__: No job to run at this time: %1",_time]};
 		false
 	}; // exit if no jobs
 	_earliest = VVM_var_cronSchedule select 0; // get the time of earliest event
 	if (_time < _earliest) exitWith {
-		if (VVM_var_cronDebug) then	{ diag_log "VVM_fnc_cronJobRur: __LINE__: Jobs are scheduled for later."; };
+		if (VVM_var_cronDebug) then	{diag_log "VVM_fnc_cronJobRur: __LINE__: Jobs are scheduled for later."};
 		false
 	}; // exit if earliest event is in future
 	VVM_var_cronSchedule deleteAt 0; // remove event from timetable if it occurs
@@ -25,11 +25,11 @@ if (isServer) then {
 		false;
 	};
 	{	private ["_job","_interval","_new_time","_index"];
-		if (VVM_var_cronDebug) then	{ diag_log format ["VVM_fnc_cronJobRun: __LINE__: Job ID: %1",_x]; };
+		if (VVM_var_cronDebug) then	{ diag_log format ["VVM_fnc_cronJobRun: __LINE__: Job ID: %1",_x]};
 		_new_time = 0; // read job data
 		_index = _x; // job we run in this iteration
 		_job = missionNamespace getVariable format["VVM_var_cronJob_%1", _index];
-		if (VVM_var_cronDebug) then	{ diag_log format ["VVM_fnc_cronJobRun: __LINE__: Job: %1",_job]; };
+		if (VVM_var_cronDebug) then	{ diag_log format ["VVM_fnc_cronJobRun: __LINE__: Job: %1",_job]};
 		_interval = _job select 3; // finding job interval
 		[_index,(_job select 1)] spawn (_job select 0); // spawn function defined in _job's code
 		if (_interval != 0) then {	// reschedule job for new time
@@ -37,7 +37,7 @@ if (isServer) then {
 			_job set [2,_new_time];
 			_job set [4,_index];
 			_job call VVM_fnc_cronJobAdd;
-		} else {_index call VVM_fnc_cronJobRemove;};
+		} else {_index call VVM_fnc_cronJobRemove};
 	} forEach _jobs; // run jobs
 	missionNamespace setVariable [format["VVM_var_cronJobsAt_%1", _earliest], nil]; // nil var with jobs, since we ran them
 };

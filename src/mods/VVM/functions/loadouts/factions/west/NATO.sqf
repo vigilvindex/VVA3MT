@@ -17,25 +17,17 @@
  * 	Voice and face are selected randomly, and only applied to AI via a switch in the set loadout function.
  * TODO: Switches for climate, stealth, day or night gear.
  */
-if (isNil "_this") exitWith {["%1 Function called without arguments.",time] call BIS_fnc_error;false;};
-if !(_this isEqualType []) exitWith {["%1 Function called without arguments array.",time] call BIS_fnc_error;false;};
+if (isNil "_this") exitWith {["%1 Function called without arguments.",time] call BIS_fnc_error;false};
+if !(_this isEqualType []) exitWith {["%1 Function called without arguments array.",time] call BIS_fnc_error;false};
 private ["_debug","_key","_side","_year","_classname","_content","_climates","_camo","_roles","_primaries","_secondaries","_launchers","_v","_f","_uniforms","_headgear","_backpacks","_vests","_rolekeys","_role","_return"];
-{ if (_x isEqualType []) then {
-    if (_x select 0 isEqualType "") then {
-      switch (toLower (_x select 0)) do {
-        case "d": {_debug = [_x select 1] param [0,false,[true]];};
-        case "r": {_role = [_x select 1] param [0,0,[0]];};
-      };
-    };
-  };
-} forEach _this;
-{ if (isNil _x) then {
-    switch (_forEachIndex) do {
-      case 0: {_debug = false;};
-      case 1: {_role = 0;};
-    };
-  };
-} forEach ["_debug","_role"];
+{ if (_x isEqualType []) then { if (_x select 0 isEqualType "") then { switch (toLower (_x select 0)) do {
+	case "d": {_debug = [_x select 1] param [0,false,[true]]};
+	case "r": {_role = [_x select 1] param [0,0,[0]]};
+}}}} forEach _this;
+{ if (isNil _x) then { switch (_forEachIndex) do {
+	case 0: {_debug = false};
+	case 1: {_role = 0};
+}}} forEach ["_debug","_role"];
 if (_debug) then {
   { diag_log format ["# %1 # %2 # %3 # _param %4 = %5 #",time,__FILE__ select [count (parsingNamespace getVariable "MISSION_ROOT")],__LINE__,_forEachIndex,_x];
   } forEach [_debug,_role];
@@ -265,6 +257,6 @@ _backpacks = [					// FACTION BACKPACKS
 ];
 _role = _roles select _role; // SELECT FACTION ROLE
 _return = [_role,_primaries,_secondaries,_launchers,_voices,_faces,_uniforms,_headgear,_backpacks,_vests] call VVM_fnc_parseRole; // Parse Role Array.
-if (_debug) then {diag_log format ["# %1 # %2 # %3 # _return = %4 #",time,__FILE__ select [count (parsingNamespace getVariable "MISSION_ROOT")],__LINE__,_return];};
+if (_debug) then {diag_log format ["# %1 # %2 # %3 # _return = %4 #",time,__FILE__ select [count (parsingNamespace getVariable "MISSION_ROOT")],__LINE__,_return]};
 {_x = nil} forEach [_debug,_key,_side,_year,_classname,_content,_climates,_camo,_roles,_primaries,_secondaries,_launchers,_voices,_faces,_uniforms,_headgear,_backpacks,_vests,_role];
 _return;

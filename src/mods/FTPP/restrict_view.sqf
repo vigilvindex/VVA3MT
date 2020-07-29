@@ -28,9 +28,9 @@ _debug = false;
 // if (isServer) exitWith {};
 if (isDedicated) exitWith {};
 params [["_input",0]];
-if ((difficultyOption "ThirdPersonView" ) == 1) then {
+if ((difficultyOption "ThirdPersonView") == 1) then {
     switch (_input) do {
-        case 0: { 	if (_debug) then { systemchat "RestrictView: Disabled"; };	};
+        case 0: { 	if (_debug) then { systemchat "RestrictView: Disabled" }	};
         case 1: {	if (_debug) then { systemchat "RestrictView: Enabled - INF: FP VEH: FP/TP"; };
 					while {(true)} do {
 						if ((vehicle player) == player) then {

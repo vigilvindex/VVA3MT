@@ -8,6 +8,6 @@
  * 	0.1 06-Mar-2015 Initial release
  */
 if (isServer) then {
-	if (VVM_var_cronDebug) then	{ diag_log format ["VVM_fnc_cronJobRemove: __LINE__: removing job with id: %1",_this]; };
+	if (VVM_var_cronDebug) then	{diag_log format ["VVM_fnc_cronJobRemove: __LINE__: removing job with id: %1",_this]};
 	missionNamespace setVariable [format["VVM_var_cronJob_%1",_this],nil];
 };
