@@ -38,7 +38,8 @@ _faction = getText(configFile >> "CfgVehicles" >> _class >> "faction");
 _superClass = configName(inheritsFrom (configFile >> "CfgVehicles" >> _class));
 
 if ((_picture == "pictureThing" && _vehicleClass == "Support") || ((_picture == "picturestaticobject" || _picture ==  "picturething") && _vehicleClass == "rhs_vehclass_radar")) then 
-{   _picture = "support_no_images.paa";
+{   //_picture = "support_no_images.paa";
+	_picture = "\A3\Air_F_Heli\Heli_Transport_04\Data\UI\Pod_Heli_Transport_04_bench_CA.paa";
     // diag_log format["_picture: %1", _picture];
 };
 

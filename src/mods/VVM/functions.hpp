@@ -78,6 +78,7 @@ class VVM {
 		class findClosestPosition {};
 		class findPosition {};
 		class findRandomPositionInMarker {};
+    class getBoundingBox {};
 		class getMarkerCorners {};
 		class getMarkerShape {};
 		class getPos {};

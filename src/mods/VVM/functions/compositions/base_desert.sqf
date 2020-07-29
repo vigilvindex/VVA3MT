@@ -76,6 +76,30 @@ _composition = [
 	["Land_HBarrierWall6_F",[9.03369,-16.9781,0],90,1,0,[0,-0],"","",true,false]
 ];
 _return = [_position,0,_composition,0] call BIS_fnc_objectsMapper;
+_positions = [];
+{_positions pushBack getPos _x} forEach _return;
+_box = [["p",_positions]] call VVM_fnc_getBoundingBox;
+_boxmarker = [_box,10,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
+_pos = _box select 0;
+_boxtext = [[(_pos select 0) + 12 ,(_pos select 1)],[0,0.3],["WEST HQ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
 _marker = [["n","GSPAWN1"],["p",(getPos HELIPAD1)],["a",0],["ty",0]] call VVM_fnc_createMarker;
+
 [GARAGE1,["Garage",VVS_fnc_openVVS,["GSPAWN1","All"]]] remoteExec ["addAction",0,true];
+_garpos = getPos GARAGE1;
+_garbox = [["p",[_garpos]],["m",0.5]] call VVM_fnc_getBoundingBox;
+_garboxmarker = [_garbox,0.5,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
+_garboxtextpos = _garbox select 0;
+_garboxtext = [[(_garboxtextpos select 0),(_garboxtextpos select 1)],[0,0.01],["GARAGE","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
 [AMMOBOX1,["Arsenal",{["Open",true] call BIS_fnc_arsenal;}]] remoteExec ["addAction",0,true];
+_ammopos = getPos AMMOBOX1;
+_ammobox = [["p",[_ammopos]],["m",0.5]] call VVM_fnc_getBoundingBox;
+_ammoboxmarker = [_ammobox,0.5,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
+_ammoboxtextpos = _ammobox select 0;
+_ammoboxtext = [[(_ammoboxtextpos select 0),(_ammoboxtextpos select 1)],[0,0.01],["ARSENAL","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+[FLAGPOLE1,["Halo Jump",{}]] remoteExec ["addAction",0,true];
+[FLAGPOLE1,["Teleport",{}]] remoteExec ["addAction",0,true];
+_flagpos = getPos FLAGPOLE1;
+_flagbox = [["p",[_flagpos]],["m",0.5]] call VVM_fnc_getBoundingBox;
+_flagboxmarker = [_flagbox,0.5,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
+_flagboxtextpos = _flagbox select 0;
+_flagboxtext = [[(_flagboxtextpos select 0),(_flagboxtextpos select 1)],[0,0.01],["FLAGPOLE","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
