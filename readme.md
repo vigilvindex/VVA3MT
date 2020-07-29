@@ -39,23 +39,37 @@ Mission template with scripts & functions for Arma 3.
 * Support Vanilla, DLC, CUP, RHS, BAF, ACE, TFAR, ACRE content.
 * Environmental Uniforms: ARID: BROWN, ARTIC: WHITE, LUSH: GREEN, STEALTH: BLACK, MARINE: BLUE
 
+### Links
+
+#### AI Forum Threads
+
+* [AI Compilation](https://forums.bohemia.net/forums/topic/165560-ai-compilation-list-of-addonsmodsscripts-threads-for-arma3/)
+
+#### Example Rifle Companies / Platoons
+
+* [RU 2010](https://www.battleorder.org/rus-btr-co)
+* [US 2016](https://www.battleorder.org/us-stryker-platoon-2019)
+* [UK 2019](https://www.battleorder.org/brit-armoured-inf-2019)
+* [USSR 1949](https://www.battleorder.org/ussr-mot-rifles-1949)
+* [DE 2016](https://www.battleorder.org/egb-fallschirmjager-2016)
+* [DE 1944](https://www.battleorder.org/1944-schutzenkompanie)
+* [GDR 1985](https://www.battleorder.org/ddr-motorized-1985)
+
 ### Progress
 
-TOTAL: 100%
-CURRENT: 14%
-REMAINING: 86%
-
-* Actions 1%
-* AI 1%
-* Briefing 1%
-* Compositions 1%
-* Environment 1%
-* Locations 1%
-* Markers 5%
-* Modules 1%
-* Tasks 0%
-* Triggers 1%
-* Waypoints 1%
+* [Actions](https://github.com/vigilvindex/VVA3MT#actions) 0 %
+* [AI](https://github.com/vigilvindex/VVA3MT#ai) 0 %
+* [Briefing](https://github.com/vigilvindex/VVA3MT#briefing) 0 %
+* [Compositions](https://github.com/vigilvindex/VVA3MT#compositions) 20 %
+* [Environment](https://github.com/vigilvindex/VVA3MT#environment) 0 %
+* [Loadouts](https://github.com/vigilvindex/VVA3MT#loadouts) 50 %
+* [Locations](https://github.com/vigilvindex/VVA3MT#markers) 10 %
+* [Markers](https://github.com/vigilvindex/VVA3MT#markers) 50 %
+* [Modules](https://github.com/vigilvindex/VVA3MT#modules) 0 %
+* [Positions](https://github.com/vigilvindex/VVA3MT#positions) 10 %
+* [Tasks](https://github.com/vigilvindex/VVA3MT#tasks) 0 %
+* [Triggers](https://github.com/vigilvindex/VVA3MT#triggers) 10 %
+* [Waypoints](https://github.com/vigilvindex/VVA3MT#waypoints) 10 %
 
 ### Categories
 
@@ -78,7 +92,55 @@ REMAINING: 86%
 * Loadouts
 * Vehicles
 
-##### ROLES (TAG - DESCRIPTION)
+##### Vehicles
+
+* Air (Heli,UAV,Wing)
+* Land (Track,UGV,Wheel)
+* Seas (Surface,Sub)
+
+#### Briefing
+
+* Execution
+* Gear
+* Intel
+* Objectives
+* Orbat
+* Signals
+* Tasks
+* Debriefing
+
+#### Compositions
+
+* Bases
+* Bunkers
+* Check Points
+* Helipads
+* Mortar Pits
+* Pillboxes
+
+#### Environment
+
+* Date & Time
+* Weather: Fog, Wind, Rain, Storms
+* Moon Phase
+* Climates: Arid, Semi-Arid, Temperate, Tropical, Urban, Polar
+
+#### Loadouts
+
+##### Weapons
+
+* Launchers (AA,AT)
+* Primaries (AMR,AR,DMR,HMG,LMG,LSW,Shotgun,SMG)
+* Secondaries (Hangun,Pistol)
+
+##### Factions
+
+* West (NATO)
+* East (CSAT)
+* Independent (AAF)
+* Civilian (IDAP)
+
+##### Roles
 
 * CO - Commander
 * SL - Squad Leader
@@ -120,49 +182,6 @@ REMAINING: 86%
 * PCC - Air Vehicle Co-Pilot (Repair) / Crew Chief (Repair)
 * PC - Air Vehicle Crew
 
-##### Links
-
-###### AI Forum Threads
-
-* [AI Compilation](https://forums.bohemia.net/forums/topic/165560-ai-compilation-list-of-addonsmodsscripts-threads-for-arma3/)
-
-###### Rifle Companies / Platoons
-
-* [RU 2010](https://www.battleorder.org/rus-btr-co)
-* [US 2016](https://www.battleorder.org/us-stryker-platoon-2019)
-* [UK 2019](https://www.battleorder.org/brit-armoured-inf-2019)
-* [USSR 1949](https://www.battleorder.org/ussr-mot-rifles-1949)
-* [DE 2016](https://www.battleorder.org/egb-fallschirmjager-2016)
-* [DE 1944](https://www.battleorder.org/1944-schutzenkompanie)
-* [GDR 1985](https://www.battleorder.org/ddr-motorized-1985)
-
-#### Briefing
-
-* Execution
-* Gear
-* Intel
-* Objectives
-* Orbat
-* Signals
-* Tasks
-* Debriefing
-
-#### Compositions
-
-* Bases
-* Bunkers
-* Check Points
-* Helipads
-* Mortar Pits
-* Pillboxes
-
-#### Environment
-
-* Date & Time
-* Weather: Fog, Wind, Rain, Storms
-* Moon Phase
-* Climates: Arid, Semi-Arid, Temperate, Tropical, Urban, Polar
-
 #### Locations
 
 * Airports
@@ -194,9 +213,15 @@ REMAINING: 86%
 
 #### Modules
 
+* Curator
 * Respawn
 * Revive
+* Spectator
 * Supports
+
+#### Positions
+
+* Bounding Box Of A Set Of Positions.
 
 #### Tasks
 
