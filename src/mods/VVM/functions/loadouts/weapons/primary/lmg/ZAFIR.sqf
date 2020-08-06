@@ -23,7 +23,8 @@ _accessories = [
 _bipods = [];
 _muzzles = [];
 _optics = [
-	"optic_Arco" // 0
+	"optic_Arco",		// 0
+	"optic_Arco_blk_F"	// 1
 ];
 _return = [_variants,_magazines,_tracers,_grenades,_flares,_smokes,_accessories,_bipods,_muzzles,_optics];
 _return;

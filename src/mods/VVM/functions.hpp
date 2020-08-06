@@ -11,6 +11,8 @@ class VVM {
   };
   class ai {
     file = "mods\VVM\functions\ai";
+    class createVehicle {};
+    class getVehicle {};
   };
   class briefing {
     file = "mods\VVM\functions\briefing";
@@ -44,6 +46,7 @@ class VVM {
     class getMagazines {};
     class getRole {};
     class getWeapon {};
+    class parseCfgWeapons {};
     class parseRole {};
     class parseWeapon {};
     class setLoadout {};
@@ -51,9 +54,41 @@ class VVM {
   };
   class locations {
     file = "mods\VVM\functions\locations";
-    class getSafePosition {};
+    class getMapBaseSpawnLocs {};
     class getMapLocations {};
+    class getMapDynamicLocations {};
+  };
+  class locations_maps {
+    file = "mods\VVM\functions\locations\maps";
+    class getMapAltis {};
+    class getMapChernarus {};
+    class getMapEnoch {};
+    class getMapMalden {};
+    class getMapStratis {};
+    class getMapTakistan {};
+    class getMapTanoa {};
+    class getMapVr {};
+    class getMapWeferlingen {};
+  };
+  class locations_strat {
+    file = "mods\VVM\functions\locations\strategic";
+    class getMapAir {};
+    class getMapFactory {};
+    class getMapFuel {};
+    class getMapMilitary {};
+    class getMapPort {};
+    class getMapPower {};
+    class getMapRadio {};
+    class getMapRoads {};
+    class getMapDynamicRoads {};
+  };
+  class locations_tech {
+    file = "mods\VVM\functions\locations\technical";
+    class getMapArea {};
+    class getMapCenter {};
     class getMapCenterPosition {};
+    class getMapSize {};
+    class getSafePosition {};
   };
   class markers {
     file = "mods\VVM\functions\markers";
@@ -74,11 +109,14 @@ class VVM {
   };
   class positions {
 		file = "mods\VVM\functions\positions";
+    class getBoundingBox {};
+  };
+  class positions_shk {
+		file = "mods\VVM\functions\positions\shk";
 		class executeFindPosition {};
 		class findClosestPosition {};
 		class findPosition {};
 		class findRandomPositionInMarker {};
-    class getBoundingBox {};
 		class getMarkerCorners {};
 		class getMarkerShape {};
 		class getPos {};

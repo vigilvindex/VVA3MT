@@ -4,7 +4,7 @@ set src=".\src"
 set maps=".\maps"
 set build=".\dist\VVA3MT"
 set mission="mission.sqm"
-FOR %%G IN (ALTIS,ENOCH,MALDEN,STRATIS,TANOA,VR) DO (
+FOR %%G IN (ALTIS,ENOCH,GM_WEFERLINGEN_SUMMER,GM_WEFERLINGEN_WINTER,MALDEN,STRATIS,TANOA,VR) DO (
 IF EXIST %build%.%%G RMDIR /S /Q %build%.%%G
 IF EXIST %build%.%%G.pbo DEL %build%.%%G.pbo
 MD %build%.%%G

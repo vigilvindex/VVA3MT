@@ -12,38 +12,43 @@ if (modVVMSwitch == 1) then {
   };
   [] execVM "mods\VVM\scripts\fn_clickMapPositionToClipboard.sqf";
   if (isServer) then {
+    //[] call VVM_fnc_parseCfgWeapons;
     [{([daytime,"HH:MM:SS"] call BIS_fnc_timeToString) remoteExec ["systemChat",0]},[],0,1,0] call VVM_fnc_cronJobAdd;
-    EASTHQPOS = [500, 1500];
-    EHQX = EASTHQPOS select 0;
-    EHQY = EASTHQPOS select 1;
-    WESTHQPOS = [500,500];
-    WHQX = WESTHQPOS select 0;
-    WHQY = WESTHQPOS select 1;
-    //[[1500,1500],[3000,3000]] call VVM_fnc_bordersToMapGlobal;
-    _aomarker = [[[1000,1000],[1000,2000],[2000,2000],[2000,1000],[1000,1000]],10,["ColorOrange",1]] call VVM_fnc_lineToMapGlobal;
-    _aotextmarker= [[1250,950],[0,2],["AREA OF OPERATION","ColorBlack",0.5]] call VVM_fnc_textToMapGlobal;
-    _qrfmarker = [[1170,785],[45,450,80,10],["ColorRed",1],["QRF!","center","ColorBlack",0.5]] call VVM_fnc_arrowToMapGlobal;
+    EASTHQPOS = [0,0,0];
+    WESTHQPOS = [0,0,0];
+    GUERHQPOS = [0,0,0];
+    _locations = [] call VVM_fnc_getMapBaseSpawnLocs;
+    { _loc = floor random count _locations;
+      _location = _locations select _loc;
+      _string = format["
+        %1HQPOS = %2;
+        [%1HQPOS] execVM 'mods\VVM\functions\compositions\hqs\HQ_%1_DES.sqf';
+        _side = _x;
+        {if (side _x == _side) then {_x setPos %1HQPOS}} forEach allPlayers;
+      ",_x,_location];
+      _code = compile _string;
+      call _code;
+      _locations deleteAt _loc;
+    } forEach [EAST,WEST,INDEPENDENT];
     respawn_east = [["n","respawn_east"],["p",EASTHQPOS],["c",9],["ty",8],["a",0]] call VVM_fnc_createMarker;
-    //_eastbasemarker = [[[EHQX - 20,EHQY - 20],[EHQX + 20,EHQY - 20],[EHQX + 20,EHQY + 20],[EHQX - 20,EHQY + 20],[EHQX - 20,EHQY - 20]],2,["ColorRed",1]] call VVM_fnc_lineToMapGlobal;
-    //_eastbasetextmarker = [[EHQX + 40 ,EHQY],[0,2],["EAST HQ","ColorBlack",0.5]] call VVM_fnc_textToMapGlobal;
     respawn_west = [["n","respawn_west"],["p",WESTHQPOS],["c",2],["ty",8],["a",0]] call VVM_fnc_createMarker;
-    //_westbasemarker = [[[WHQX - 100,WHQY - 100],[WHQX + 100,WHQY - 100],[WHQX + 100,WHQY + 100],[WHQX - 100,WHQY + 100],[WHQX - 100,WHQY - 100]],2,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
-    //_westbasetextmarker = [[WHQX + 50 ,WHQY],[0,0.1],["WEST HQ","ColorBlack",0.5]] call VVM_fnc_textToMapGlobal;
-    _base = [WESTHQPOS] execVM "mods\VVM\functions\compositions\base_desert.sqf";
-    _wmedbox = [["p",([WESTHQPOS,1,3,1] call BIS_fnc_findSafePos)]] call VVM_fnc_createMedicalBox;
-    _wrolebox = [["p",([WESTHQPOS,1,3,1] call BIS_fnc_findSafePos)],["f",1]] call VVM_fnc_createFactionRoleBox;
-    _erolebox = [["p",([WESTHQPOS,1,3,1] call BIS_fnc_findSafePos)],["f",0]] call VVM_fnc_createFactionRoleBox;
-    //_irolebox = [["p",([WESTHQPOS,1,3,1] call BIS_fnc_findSafePos)],["f",2]] call VVM_fnc_createFactionRoleBox;
-    _loadout = [w1,"NATO",0] call VVM_fnc_setLoadout;
-    {
-      if (side _x == east) then {_x setPos EASTHQPOS};
-      if (side _x == west) then {_x setPos WESTHQPOS};
-    } forEach allPlayers;
+    respawn_guerrila = [["n","respawn_guerrila"],["p",GUERHQPOS],["c",4],["ty",8],["a",0]] call VVM_fnc_createMarker;
+    _wrolebox = [["p",([WESTHQPOS,1,3,1] call BIS_fnc_findSafePos)],["f",1]] call VVM_fnc_createFactionRoleBox; _wrolebox setPos (getPos _wrolebox);
+    _erolebox = [["p",([EASTHQPOS,1,3,1] call BIS_fnc_findSafePos)],["f",0]] call VVM_fnc_createFactionRoleBox; _erolebox setPos (getPos _erolebox);
+    _irolebox = [["p",([GUERHQPOS,1,3,1] call BIS_fnc_findSafePos)],["f",2]] call VVM_fnc_createFactionRoleBox; _irolebox setPos (getPos _irolebox);
+    //_wmedbox = [["p",([WESTHQPOS,1,3,1] call BIS_fnc_findSafePos)]] call VVM_fnc_createMedicalBox;
+    //_loadout = [w1,"NATO",0] call VVM_fnc_setLoadout;
+    //[[1500,1500],[3000,3000]] call VVM_fnc_bordersToMapGlobal;
     [] spawn {
+      _aomarker = [[[1000,1000],[1000,2000],[2000,2000],[2000,1000],[1000,1000]],10,["ColorOrange",1]] call VVM_fnc_lineToMapGlobal;
+      _aotextmarker= [[1250,950],[0,2],["AREA OF OPERATION","ColorBlack",0.5]] call VVM_fnc_textToMapGlobal;
+      _qrfmarker = [[1170,785],[45,450,80,10],["ColorRed",1],["QRF!","center","ColorBlack",0.5]] call VVM_fnc_arrowToMapGlobal;
+
       _loamarker = [[[1365,2260],[2220,1490]],10,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
       _loatextmarker= [[1465,2210],[([2220,1490] getDir [1365,2260])+5,2],["LOA 1","ColorBlue",0.5]] call VVM_fnc_textToMapGlobal;
       _loamarker2 = [[[1095,2110],[2065,1210]],10,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
       _loatextmarker2= [[1195,2060],[([2065,1210] getDir [1095,2110])+5,2],["LOA 2","ColorBlue",0.5]] call VVM_fnc_textToMapGlobal;
+
       _signalspos = [-30,405];
       _spx = _signalspos select 0;
       _spy = _signalspos select 1;
@@ -61,6 +66,7 @@ if (modVVMSwitch == 1) then {
       _signalstextmarker= [[_spx - 360,_spy - 330],[0,1],["SR 6 - 160HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
       _signalstextmarker= [[_spx - 360,_spy - 360],[0,1],["SR 7 - 170HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
       _signalstextmarker= [[_spx - 360,_spy - 390],[0,1],["SR 8 - 180HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
+      
       _orbatpos = [-30,985];
       _opx = _orbatpos select 0;
       _opy = _orbatpos select 1;

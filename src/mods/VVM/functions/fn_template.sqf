@@ -1,16 +1,16 @@
 /* Name: fn_template.sqf
-Description: Template function.
-Authors: vigil.vindex@gmail.com
-License: https://creativecommons.org/licenses/by-sa/4.0/
-Created: 2016/08/23 Updated: 2016/08/23 Version: 0.0.1
-Dependencies: n/a
-Arguments: index name     (default) TYPE    {Required} min,max    "values"
-           d     debug    (false)   BOOLEAN {N}        false,true "Disabled","Enabled"
-           p     position ([0,0,0]) ARRAY   {Y}        *          "[x,y,z]"
-           r     rotation (0)       SCALAR  {N}        0,360      "Degrees"
-Returns: OBJECT on success. FALSE on failure.
-Usage: [["d",false]] call VVM_fnc_template;
-*/
+ * Description: Template function.
+ * Authors: vigil.vindex@gmail.com
+ * License: https://creativecommons.org/licenses/by-sa/4.0/
+ * Created: 2016/08/23 Updated: 2016/08/23 Version: 0.0.1
+ * Dependencies: n/a
+ * Arguments: index name     (default) TYPE    {Required} min,max    "values"
+ *            d     debug    (false)   BOOLEAN {N}        false,true "Disabled","Enabled"
+ *            p     position ([0,0,0]) ARRAY   {Y}        *          "[x,y,z]"
+ *            r     rotation (0)       SCALAR  {N}        0,360      "Degrees"
+ * Returns: OBJECT on success. FALSE on failure.
+ * Usage: [["d",false]] call VVM_fnc_template;
+ */
 if (isNil "_this") exitWith {["%1 Function called without arguments.",time] call BIS_fnc_error;false};
 if !(_this isEqualType []) exitWith {["%1 Function called without arguments array.",time] call BIS_fnc_error;false};
 private ["_debug","_position","_rotation","_return"];

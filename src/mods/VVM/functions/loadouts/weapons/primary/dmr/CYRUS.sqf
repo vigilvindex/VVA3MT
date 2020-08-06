@@ -20,7 +20,9 @@ _smokes = [];
 _accessories = [
 	"acc_pointer_IR" // 0
 ];
-_bipods = [];
+_bipods = [
+	"bipod_02_F_blk"	// 0
+];
 _muzzles = [
 	"muzzle_snds_93mmg", // 0 Black 9.3mm
 	"muzzle_snds_93mmg_tan" // 1 Tan 9.3mm
@@ -30,8 +32,9 @@ _optics = [
 	"optic_Arco", // 1
 	"optic_DMS", // 2
 	"optic_KHS_blk", // 3
-	"optic_MRCO", // 4
-	"optic_SOS" // 5
+	"optic_KHS_hex", // 4
+	"optic_MRCO", // 5
+	"optic_SOS" // 6
 ];
 _return = [_variants,_magazines,_tracers,_grenades,_flares,_smokes,_accessories,_bipods,_muzzles,_optics];
 _return;

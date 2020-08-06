@@ -7,7 +7,7 @@ set mission="mission.sqm"
 set srcmin=".\dist\src"
 ROBOCOPY "%src%" "%srcmin%" /E
 FOR /R %srcmin% %%G IN (*.sqf) DO start python .\lib\minify.py "%%G" "%%G"
-FOR %%G IN (ALTIS,ENOCH,MALDEN,STRATIS,TANOA,VR) DO (
+FOR %%G IN (ALTIS,ENOCH,GM_WEFERLINGEN_SUMMER,GM_WEFERLINGEN_WINTER,MALDEN,STRATIS,TANOA,VR) DO (
 IF EXIST %build%.%%G RMDIR /S /Q %build%.%%G
 IF EXIST %build%.%%G.pbo DEL %build%.%%G.pbo
 MD %build%.%%G

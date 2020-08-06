@@ -172,9 +172,15 @@ switch (_this) do {
 	};
 	case 4: {_return = ["ItemMap"];}; // Maps
 	case 5: {
-		_return = [			// Medical
-			"FirstAidKit",	// 0 (Vanilla)
-			"Medikit"		// 1 (Vanilla)
+		_return = [						// Medical
+			"FirstAidKit",				// 0 (Vanilla)
+			"Medikit",					// 1 (Vanilla)
+			"gm_gc_army_gauzeBandage",	// 2 (GM)
+			"gm_gc_army_medkit",		// 3 (GM)
+			"gm_ge_army_burnBandage",	// 4 (GM)
+			"gm_ge_army_gauzeBandage",	// 5 (GM)
+			"gm_ge_army_gauzeCompress",	// 6 (GM)
+			"gm_ge_army_medkit_80"		// 7 (GM)
 		];
 	};
 	case 6: {
@@ -214,9 +220,10 @@ switch (_this) do {
 		];
 	};
 	case 9: {
-		_return = [			// Tools
-			"MineDetector",	// 0 (Vanilla)
-			"ToolKit"		// 1 (Vanilla)
+		_return = [				// Tools
+			"MineDetector",		// 0 (Vanilla)
+			"ToolKit",			// 1 (Vanilla)
+			"gm_repairkit_01"	// 2 (GM)
 		];
 	};
 	case 10: {

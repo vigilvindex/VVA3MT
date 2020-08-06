@@ -60,7 +60,7 @@ for "_i" from 0 to (count _Cfg)-1 do
 				_superClass = _cfgInfo select 7;    
 
 // 1) ADD YOUR OWN VEHICLE CLASS AT THE END OF CLASSES ARRAY ON THE NEXT STRING:
-				if(_scope >= 2 && _picture != "" && _displayName != "" && _vehicleClass in ["Car","Ship","Air","Armored","Submarine","Autonomous","Support","rhs_vehclass_apc","rhs_vehclass_ifv","rhs_vehclass_car","rhs_vehclass_truck","rhs_vehclass_tank","rhs_vehclass_artillery","rhs_vehclass_radar","rhs_vehclass_targeting","rhs_vehclass_launcher","rhs_vehclass_aircraft","rhs_vehclass_helicopter","rhs_vehclass_aa"] // << ADD YOUR VEHICLE CLASS AT THE END OF THE CLASSES ARRAY ","YOUR CLASS"]
+				if(_scope >= 2 && _picture != "" && _displayName != "" && _vehicleClass in ["Car","Ship","Air","Armored","Submarine","Autonomous","Support","gm_vc_prototype","gm_vc_armor_oli","rhs_vehclass_apc","rhs_vehclass_ifv","rhs_vehclass_car","rhs_vehclass_truck","rhs_vehclass_tank","rhs_vehclass_artillery","rhs_vehclass_radar","rhs_vehclass_targeting","rhs_vehclass_launcher","rhs_vehclass_aircraft","rhs_vehclass_helicopter","rhs_vehclass_aa"] // << ADD YOUR VEHICLE CLASS AT THE END OF THE CLASSES ARRAY ","YOUR CLASS"]
 				&& !(_className in VVS_R_Car) && !(_superClass in VVS_R_Car)
 				&& !(_className in VVS_R_Air) && !(_superClass in VVS_R_Air)
 				&& !(_className in VVS_R_Ship) && !(_superClass in VVS_R_Ship)
@@ -83,7 +83,7 @@ for "_i" from 0 to (count _Cfg)-1 do
 					if ((count VVS_Air == 0) && (_vehicleClass in ["Air","rhs_vehclass_aircraft","rhs_vehclass_helicopter"])) then
 					{ VVS_pre_Air set[count VVS_pre_Air,_className]; };
 		// ARMORED (TANKS, APC, IFV, ARTILLERY)
-					if ((count VVS_Armored == 0) && (_vehicleClass in ["Armored","rhs_vehclass_tank","rhs_vehclass_apc","rhs_vehclass_ifv","rhs_vehclass_artillery"])) then
+					if ((count VVS_Armored == 0) && (_vehicleClass in ["Armored","gm_vc_prototype","gm_vc_armor_oli","rhs_vehclass_tank","rhs_vehclass_apc","rhs_vehclass_ifv","rhs_vehclass_artillery"])) then
 					{ VVS_pre_Armored set[count VVS_pre_Armored,_className]; };
 		// Autonomous and rhs AA
 					if ((count VVS_Autonomous == 0) && (_vehicleClass in ["Autonomous","rhs_vehclass_aa"])) then
