@@ -94,6 +94,9 @@ class VVM {
     file = "mods\VVM\functions\markers";
     class createMarker {};
     class setRespawnMarkerAlpha {};
+  };
+  class markers_gkb {
+    file = "mods\VVM\functions\markers\gkb";
     class arrowToMapGlobal {};
     class arrowToMapLocal {};
     class bordersToMapGlobal {};

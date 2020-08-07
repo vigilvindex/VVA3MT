@@ -64,8 +64,25 @@ switch (toUpperANSI _this) do {
 	case "M4": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\arty\M4.sqf"};
 	case "M5": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\arty\M5.sqf"};
 	case "ZMRL": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\arty\ZMRL.sqf"};
+	// LAND - BIKE
+	case "BICYCLE": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\bike\BICYCLE.sqf"};
+	case "K125": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\bike\K125.sqf"};
+	case "QUAD": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\bike\QUAD.sqf"};
 	// LAND - CAR
-
+	case "HATCHBACK": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\car\HATCHBACK.sqf"};
+	case "HUNTER": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\car\HUNTER.sqf"};
+	case "IFRIT": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\car\IFRIT.sqf"};
+	case "ILTIS": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\car\ILTIS.sqf"};
+	case "KART": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\car\KART.sqf"};
+	case "MB4WD": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\car\MB4WD.sqf"};
+	case "P601": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\car\P601.sqf"};
+	case "PROWLER": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\car\PROWLER.sqf"};
+	case "QILIN": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\car\QILIN.sqf"};
+	case "STRIDER": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\car\STRIDER.sqf"};
+	case "SUV": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\car\SUV.sqf"};
+	case "TRACTOR": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\car\TRACTOR.sqf"};
+	case "TYP1200": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\car\TYP1200.sqf"};
+	case "VAN": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\car\VAN.sqf"};
 	// LAND - TANK
 	case "AWC301": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\tank\AWC301.sqf"};
 	case "BPZ2A0": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\tank\BPZ2A0.sqf"};
@@ -76,8 +93,34 @@ switch (toUpperANSI _this) do {
 	case "T55": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\tank\T55.sqf"};
 	case "T100": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\tank\T100.sqf"};
 	case "T140": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\tank\T140.sqf"};
+	// LAND - TRUCK
+	case "HEMTT": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\truck\HEMTT.sqf"};
+	case "KAT1": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\truck\KAT1.sqf"};
+	case "OFFROAD": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\truck\OFFROAD.sqf"};
+	case "TEMPEST": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\truck\TEMPEST.sqf"};
+	case "TRUCK": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\truck\TRUCK.sqf"};
+	case "U1300L": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\truck\U1300L.sqf"};
+	case "URAL": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\truck\URAL.sqf"};
+	case "ZAMAK": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\truck\ZAMAK.sqf"};
 	// LAND - TURRET
-
+	case "FAGOT": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\FAGOT.sqf"};
+	case "LATGM": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\LATGM.sqf"};
+	case "M2": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\M2.sqf"};
+	case "MG3": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\MG3.sqf"};
+	case "MIM145": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\MIM145.sqf"};
+	case "MK6": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\MK6.sqf"};
+	case "MK21": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\MK21.sqf"};
+	case "MK30": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\MK30.sqf"};
+	case "MK32": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\MK32.sqf"};
+	case "MK41": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\MK41.sqf"};
+	case "MK45": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\MK45.sqf"};
+	case "MK49": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\MK49.sqf"};
+	case "MPQ105": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\MPQ105.sqf"};
+	case "P1C": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\P1C.sqf"};
+	case "R750": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\R750.sqf"};
+	case "RD": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\RD.sqf"};
+	case "S750": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\S750.sqf"};
+	case "TITAN": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\TITAN.sqf"};
 	// LAND - UGV
 	case "ED1": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\ugv\ED1.sqf"};
 	case "UGV": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\ugv\UGV.sqf"};
