@@ -120,6 +120,7 @@ switch (toUpperANSI _this) do {
 	case "R750": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\R750.sqf"};
 	case "RD": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\RD.sqf"};
 	case "S750": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\S750.sqf"};
+	case "Searchlight": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\Searchlight.sqf"};
 	case "TITAN": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\turret\TITAN.sqf"};
 	// LAND - UGV
 	case "ED1": {_return = call compile preprocessFileLineNumbers "mods\VVM\functions\ai\vehicles\land\ugv\ED1.sqf"};
