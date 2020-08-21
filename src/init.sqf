@@ -26,3 +26,4 @@ diag_log format ["# %1 # %2 # %3 # Loading Mission. #",time,__FILE__ select [cou
 systemChat "Loading Mission.";
 enableSaving[false,false]; // https://community.bistudio.com/wiki/enableSaving
 {call compile format["call compile preprocessfilelinenumbers 'mods\%1\init.sqf';",_x]} forEach MODS;
+systemChat "Mission Loaded.";

@@ -111,6 +111,7 @@ _index = (count _waypoints);
 if (_debug) then {diag_log format ["# %1 # %2 # _index = %3 #",time,__FILE__,_index];};
 _return = _group addWaypoint [_target,_radius,_index,_name];
 if !(typeName _target == "OBJECT") then {_return setWaypointPosition [_target,_radius];};
+_return setWPPos _target;
 _return setWaypointName _name;
 _return setWaypointDescription _description;
 _return setWaypointType _type;

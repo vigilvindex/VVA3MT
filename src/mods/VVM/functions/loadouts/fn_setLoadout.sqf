@@ -1,4 +1,4 @@
-// USAGE: _result = [UNIT,FACTION,ROLE,AI] call VVLO_fnc_setLoadout;
+// USAGE: _result = [UNIT,FACTION,ROLE,AI] call VVM_fnc_setLoadout;
 // TODO: Use BIS_fnc_setIdentity for JIP support of faces & voices.
 private ["_unit","_faction","_role","_roledata","_ai","_addWeapon","_classname","_diver"];
 //diag_log format ["# %1 # fn_setLoadout.sqf _this = %2 #",time,_this];
@@ -8,7 +8,7 @@ _role = _this select 2;
 _roledata = [_faction,_role] call VVM_fnc_getFactionRole;
 _result = [_unit] call VVM_fnc_clearGear;
 _unit setVariable ["BIS_enableRandomization",false]; // Disable gear randomization.
-[_unit,""] call BIS_fnc_setUnitInsignia; // Remove insignia.
+//[_unit,""] call BIS_fnc_setUnitInsignia; // Remove insignia.
 if (isPlayer _unit) then {_ai = false} else {_ai = true}; // AI switch to not set face & voice for players.
 _diver = false;
 {	switch (_forEachIndex) do {

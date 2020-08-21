@@ -1,0 +1,22 @@
+// ["PAPABEAR","PAPA BEAR",0] call VVM_fnc_hq;
+private ["_id","_side","_logic","_group","_callsign","_code","_return"];
+_id = _this select 0;
+_callsign = _this select 1;
+_side = _this select 2;
+_sides = [EAST,WEST,INDEPENDENT];
+_side = _sides select _side;
+_logic = createCenter sideLogic;
+_group = createGroup _logic;
+_return = _group createUnit ["logic",[0,0,0],[],0,"NONE"];
+_return setVehicleVarName _id;
+_code = compile format ["
+	%1 = _return;
+	publicVariable '%1';
+	%1 setVariable ['callsign','STR_A3_CfgHQIdentities_Base_0',true];
+	%1 setVariable ['side',%3,true];
+	%1 setVariable ['identity',1,true];
+	%1 setVariable ['callsigncustom','%2',true];
+	0 = [%1] remoteExec ['BIS_fnc_moduleHQ',0,true];
+",_id,_callsign,_side];
+call _code;
+_return;

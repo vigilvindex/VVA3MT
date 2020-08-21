@@ -53,7 +53,6 @@ clearMagazineCargo _return;
 clearItemCargo _return;
 clearBackpackCargo _return;
 _return allowDamage false;
-["Preload"] call BIS_fnc_arsenal;
 [_return,["Arsenal",{["Open",true] call BIS_fnc_arsenal;}]] remoteExec ["addAction",0,true];
 if (_debug) then {diag_log format ["# %1 # %2 # %3 # _return = %4 #",time,__FILE__ select [count (parsingNamespace getVariable "MISSION_ROOT")],__LINE__,_return];};
 {_x = nil;} forEach [_debug,_position,_rotation,_type,_side];

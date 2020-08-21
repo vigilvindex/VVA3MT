@@ -24,7 +24,8 @@ _muzzles = [
 	"muzzle_snds_L" // 0
 ];
 _optics = [
-	"optic_Holosight_smg" // 0
+	"optic_Holosight_smg", // 0
+	"optic_Holosight_smg_blk_F" // 1
 ];
 _return = [_variants,_magazines,_tracers,_grenades,_flares,_smokes,_accessories,_bipods,_muzzles,_optics];
 _return;

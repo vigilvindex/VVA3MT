@@ -14,7 +14,7 @@ _composition = [
 	["Land_Cargo_House_V3_F",[-58.7463,-19.7782,0],270,1,0,[0,0],"VVM_AI_I_SPAWN8","",true,false], 
 	["Land_Cargo_House_V3_F",[-58.9363,-11.3782,0],270,1,0,[0,0],"VVM_AI_I_SPAWN7","",true,false], 
 	["Land_Cargo_House_V3_F",[-59.5563,-3.1582,0],270,1,0,[0,0],"VVM_AI_I_SPAWN6","",true,false], 
-	["Land_Cargo_HQ_V3_F",[4.9137,7.94183,0],270,1,0,[0,0],"VVM_AI_I_HQ1","",true,false], 
+	["Land_Cargo_HQ_V3_F",[4.9137,7.94183,-0.1],270,1,0,[0,0],"VVM_AI_I_HQ1","",true,false], 
 	["Land_Cargo_Patrol_V3_F",[-58.9363,8.68182,0],90,1,0,[0,-0],"VVM_AI_I_POST1","",true,false], 
 	["Land_Cargo_Patrol_V3_F",[1.39374,-24.5082,0],360,1,0,[0,0],"VVM_AI_I_POST2","",true,false], 
 	["Land_Cargo_Tower_V3_F",[-55.9963,-39.4282,0],88.825,1,0,[0,0],"VVM_AI_I_TOWER1","",true,false], 

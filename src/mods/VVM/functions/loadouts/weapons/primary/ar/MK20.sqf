@@ -5,12 +5,12 @@ _content = ["Vanilla"];
 _type = "Bullpup Assault Rifle";
 _factions = ["AAF","FIA"];
 _variants = [
-	"arifle_Mk20_F", // 0 Camo
-	"arifle_Mk20_plain_F", // 1 Sand
-	"arifle_Mk20_GL_F", // 2 GL Camo
-	"arifle_Mk20_GL_plain_F", // 3 GL Sand
-	"arifle_Mk20C_F", // 4 Carbine Camo
-	"arifle_Mk20C_plain_F" // 5 Carbine Sand
+	"arifle_Mk20_F",			// 0 Camo
+	"arifle_Mk20_plain_F",		// 1 Sand
+	"arifle_Mk20_GL_F",			// 2 GL Camo
+	"arifle_Mk20_GL_plain_F",	// 3 GL Sand
+	"arifle_Mk20C_F",			// 4 Carbine Camo
+	"arifle_Mk20C_plain_F"		// 5 Carbine Sand
 ];
 _magazines = [
 	"30Rnd_556x45_Stanag" // 0

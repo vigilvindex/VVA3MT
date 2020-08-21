@@ -1,35 +1,38 @@
-/* Name: init.sqf
-Description: Initialises the VVM module.
-Authors: vigil.vindex@gmail.com
-License: https://creativecommons.org/licenses/by-sa/4.0/
-Created: 2013/08/09 Updated: 2016/08/16 Version: 0.0.1
-*/
+/* Name: init.sqf - Description: Initialises the VVM module. - Authors: vigil.vindex@gmail.com - License: https://creativecommons.org/licenses/by-sa/4.0/ - Created: 2013/08/09 Updated: 2016/08/16 Version: 0.0.1 */
 if (isNil "modVVMSwitch") then {modVVMSwitch = 0};
 if (modVVMSwitch == 1) then {
   if (modDebug == 1) then {
     diag_log format ["# %1 # %2 # %3 # Loading VVM. #",time,__FILE__ select [count PATH],__LINE__];
 	  systemChat "Loading VVM.";
   };
-  [] execVM "mods\VVM\scripts\fn_clickMapPositionToClipboard.sqf";
   if (isServer) then {
-    //[] call VVM_fnc_parseCfgWeapons;
-    [{([daytime,"HH:MM:SS"] call BIS_fnc_timeToString) remoteExec ["systemChat",0]},[],0,1,0] call VVM_fnc_cronJobAdd;
-    EASTHQPOS = [0,0,0];
-    WESTHQPOS = [0,0,0];
-    GUERHQPOS = [0,0,0];
+    [] call VVM_fnc_parseCfg;
+    [] call VVM_fnc_militaryMarkers;
+    [] call VVM_fnc_clickMapPositionToClipboard;
+    [] call VVM_fnc_displayMapDateTime;
+    [] spawn {
+      [["TEXT1","<t align = 'center' shadow = '1' size = '1.0'>%1</t><br/>"],["0500, ALTIS","<t align = 'center' shadow = '1' size = '0.7'>%1</t><br/>"]] call VVM_fnc_displayText;
+    };
+    // [{([daytime,"HH:MM:SS"] call BIS_fnc_timeToString) remoteExec ["systemChat",0]},[],0,1,0] call VVM_fnc_cronJobAdd;
+    EASTHQPOS = nil;
+    WESTHQPOS = nil;
+    GUERHQPOS = nil;
     _locations = [] call VVM_fnc_getMapBaseSpawnLocs;
     { _loc = floor random count _locations;
       _location = _locations select _loc;
       _string = format["
         %1HQPOS = %2;
-        [%1HQPOS] execVM 'mods\VVM\functions\compositions\hqs\HQ_%1_DES.sqf';
+        [%1HQPOS] call compile preprocessFileLineNumbers 'mods\VVM\functions\compositions\hqs\HQ_%1_DES.sqf';
         _side = _x;
         {if (side _x == _side) then {_x setPos %1HQPOS}} forEach allPlayers;
-      ",_x,_location];
+      ",_x,_location,_forEachIndex];
       _code = compile _string;
       call _code;
       _locations deleteAt _loc;
-    } forEach [EAST,WEST,INDEPENDENT];
+    } forEach [WEST,EAST,INDEPENDENT];
+    diag_log format["WESTHQPOS = %1",WESTHQPOS];
+    diag_log format["EASTHQPOS = %1",EASTHQPOS];
+    diag_log format["GUERHQPOS = %1",GUERHQPOS];
     respawn_east = [["n","respawn_east"],["p",EASTHQPOS],["c",9],["ty",8],["a",0]] call VVM_fnc_createMarker;
     respawn_west = [["n","respawn_west"],["p",WESTHQPOS],["c",2],["ty",8],["a",0]] call VVM_fnc_createMarker;
     respawn_guerrila = [["n","respawn_guerrila"],["p",GUERHQPOS],["c",4],["ty",8],["a",0]] call VVM_fnc_createMarker;
@@ -39,54 +42,81 @@ if (modVVMSwitch == 1) then {
     //_wmedbox = [["p",([WESTHQPOS,1,3,1] call BIS_fnc_findSafePos)]] call VVM_fnc_createMedicalBox;
     //_loadout = [w1,"NATO",0] call VVM_fnc_setLoadout;
     //[[1500,1500],[3000,3000]] call VVM_fnc_bordersToMapGlobal;
-    [] spawn {
-      _aomarker = [[[1000,1000],[1000,2000],[2000,2000],[2000,1000],[1000,1000]],10,["ColorOrange",1]] call VVM_fnc_lineToMapGlobal;
-      _aotextmarker= [[1250,950],[0,2],["AREA OF OPERATION","ColorBlack",0.5]] call VVM_fnc_textToMapGlobal;
-      _qrfmarker = [[1170,785],[45,450,80,10],["ColorRed",1],["QRF!","center","ColorBlack",0.5]] call VVM_fnc_arrowToMapGlobal;
 
-      _loamarker = [[[1365,2260],[2220,1490]],10,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
-      _loatextmarker= [[1465,2210],[([2220,1490] getDir [1365,2260])+5,2],["LOA 1","ColorBlue",0.5]] call VVM_fnc_textToMapGlobal;
-      _loamarker2 = [[[1095,2110],[2065,1210]],10,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
-      _loatextmarker2= [[1195,2060],[([2065,1210] getDir [1095,2110])+5,2],["LOA 2","ColorBlue",0.5]] call VVM_fnc_textToMapGlobal;
-
-      _signalspos = [-30,405];
-      _spx = _signalspos select 0;
-      _spy = _signalspos select 1;
-      _signalsmarker = [[[_spx,_spy],[_spx,_spy - 410],[_spx - 410,_spy - 410],[_spx - 410,_spy],[_spx,_spy]],10,["ColorWhite",1]] call VVM_fnc_lineToMapGlobal;
-      _signalstextmarker= [[_spx - 360,_spy - 30],[0,1],[" SIGNALS - CHANNEL - FREQ ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _signalstextmarker= [[_spx - 360,_spy - 60],[0,1],["LR 0 - 50HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _signalstextmarker= [[_spx - 360,_spy - 90],[0,1],["LR 1 - 60HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _signalstextmarker= [[_spx - 360,_spy - 120],[0,1],["LR 2 - 70HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _signalstextmarker= [[_spx - 360,_spy - 150],[0,1],["SR 0 - 100HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _signalstextmarker= [[_spx - 360,_spy - 180],[0,1],["SR 1 - 110HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _signalstextmarker= [[_spx - 360,_spy - 210],[0,1],["SR 2 - 120HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _signalstextmarker= [[_spx - 360,_spy - 240],[0,1],["SR 3 - 130HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _signalstextmarker= [[_spx - 360,_spy - 270],[0,1],["SR 4 - 140HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _signalstextmarker= [[_spx - 360,_spy - 300],[0,1],["SR 5 - 150HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _signalstextmarker= [[_spx - 360,_spy - 330],[0,1],["SR 6 - 160HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _signalstextmarker= [[_spx - 360,_spy - 360],[0,1],["SR 7 - 170HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _signalstextmarker= [[_spx - 360,_spy - 390],[0,1],["SR 8 - 180HZ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      
-      _orbatpos = [-30,985];
-      _opx = _orbatpos select 0;
-      _opy = _orbatpos select 1;
-      _orbatmarker = [[[_opx,_opy],[_opx,_opy - 500],[_opx - 500,_opy - 500],[_opx - 500,_opy],[_opx,_opy]],10,["ColorWhite",1]] call VVM_fnc_lineToMapGlobal;
-      _orbattextmarker= [[_opx - 460,_opy - 30],[0,1],  [" ORBAT - CALLSIGN - RADIO ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _orbattextmarker= [[_opx - 460,_opy - 60],[0,1],  [" ","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _orbattextmarker= [[_opx - 460,_opy - 90],[0,1],  ["CO         LR 0, SR 0","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _orbattextmarker= [[_opx - 460,_opy - 120],[0,1], ["JTAC       LR 1, SR 0","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _orbattextmarker= [[_opx - 460,_opy - 150],[0,1], ["ALPHA SL   LR 0, SR 1","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _orbattextmarker= [[_opx - 460,_opy - 180],[0,1], ["ALPHA      SR 1","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _orbattextmarker= [[_opx - 460,_opy - 210],[0,1], ["BRAVO SL   LR 0, SR 2","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _orbattextmarker= [[_opx - 460,_opy - 240],[0,1], ["BRAVO      SR 2","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _orbattextmarker= [[_opx - 460,_opy - 270],[0,1], ["CHARLIE SL  LR 0, SR 3","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _orbattextmarker= [[_opx - 460,_opy - 300],[0,1], ["CHARLIE     SR 3","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _orbattextmarker= [[_opx - 460,_opy - 330],[0,1], ["DELTA SL   LR 0, SR 4","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _orbattextmarker= [[_opx - 460,_opy - 360],[0,1], ["DELTA      SR 4","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _orbattextmarker= [[_opx - 460,_opy - 390],[0,1], ["ECHO SL    LR 0, SR 5","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _orbattextmarker= [[_opx - 460,_opy - 420],[0,1], ["ECHO       SR 5","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _orbattextmarker= [[_opx - 460,_opy - 450],[0,1], ["EAGLE      LR 1","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-      _orbattextmarker= [[_opx - 460,_opy - 480],[0,1], ["HAWK       LR 1","ColorWhite",1]] call VVM_fnc_textToMapGlobal;
-    };
+    // West
+    _w_group = [0] call VVM_fnc_createGroup;
+    _w_unit = [_w_group,0,0,0,([WESTHQPOS,1,1,1] call BIS_fnc_findSafePos),6,1] call VVM_fnc_createUnit;
+    _w_unit = [_w_group,0,0,1,([WESTHQPOS,1,1,1] call BIS_fnc_findSafePos),3,0] call VVM_fnc_createUnit;
+    _w_group setFormation "FILE";
+    diag_log format["Group Waypoints = %1",count waypoints _w_group];
+	  [_w_group,(currentWaypoint _w_group)] setWaypointPosition [getPosASL ((units _w_group) select 0), -1];
+	  for "_i" from count waypoints _w_group - 1 to 0 step -1 do { deleteWaypoint [_w_group, _i] };
+    diag_log format["Group Waypoints = %1",count waypoints _w_group];
+    // diag_log format["VVM_AI_W_HQ1 = %1",getPos VVM_AI_W_HQ1];
+    // diag_log format["VVM_AI_W_HQ1 BOX = %1",(0 boundingBoxReal VVM_AI_W_HQ1)];
+    _w_hq_positions = VVM_AI_W_HQ1 buildingPos -1;
+    // diag_log format["_w_hq_positions = %1",_w_hq_positions];
+    { _xPos = _x select 0; _yPos = _x select 1; _zPos = _x select 2; _wp = [_xPos,_yPos,_zPos + 0.5];
+      // diag_log format["Waypoint %1 = %2",_forEachIndex,_wp];
+      [format["VVM_AI_WP_W_A1_%1",_forEachIndex],"onEachFrame",{
+        drawIcon3D["a3\ui_f\data\map\groupicons\badge_simple.paa",[1,1,1,0.5],(_this select 0),1,1,0,format["%1-%2","WP",str (_this select 1)]];
+      },[_wp,_forEachIndex]] call BIS_fnc_addStackedEventHandler;
+      if (_forEachIndex == (count _w_hq_positions) - 1) then {
+        [["g",_w_group],["t",_wp],["ty",7],["s",1],["b",2],["to",[0.1,0.5,1]],["cr",0],["r",0]] call VVM_fnc_createWaypoint; // diag_log "WP CYCLE";
+      } else {
+        [["g",_w_group],["t",_wp],["ty",0],["s",1],["b",2],["to",[0.1,0.5,1]],["cr",0],["r",0]] call VVM_fnc_createWaypoint; // diag_log "WP MOVE";
+      };
+    } forEach _w_hq_positions;
+    diag_log format["Group Waypoints = %1",count waypoints _w_group];
+    
+/*  // East
+    _e_group = [1] call VVM_fnc_createGroup;
+    _e_unit = [_e_group,1,1,0,([EASTHQPOS,1,1,1] call BIS_fnc_findSafePos),6,1] call VVM_fnc_createUnit;
+    _e_unit = [_e_group,1,1,1,([EASTHQPOS,1,1,1] call BIS_fnc_findSafePos),3,0] call VVM_fnc_createUnit;
+	  [_e_group,(currentWaypoint _e_group)] setWaypointPosition [getPosASL ((units _e_group) select 0), -1];
+	  for "_i" from count waypoints _e_group - 1 to 0 step -1 do { deleteWaypoint [_e_group, _i] };
+    // diag_log format["VVM_AI_E_HQ1 = %1",getPos VVM_AI_E_HQ1];
+    _e_hq_positions = VVM_AI_E_HQ1 buildingPos -1;
+    // diag_log str _e_hq_positions;
+    { _xPos = _x select 0; _yPos = _x select 1; _zPos = _x select 2; _wp = [_xPos,_yPos,_zPos + 0.5];
+      // diag_log format["Waypoint %1 = %2",_forEachIndex,_wp];
+      [format["VVM_AI_WP_E_A1_%1",_forEachIndex], "onEachFrame",{
+        drawIcon3D["a3\ui_f\data\map\groupicons\badge_simple.paa",[1,1,1,0.5],(_this select 0),1,1,0,format["%1-%2","WP",str (_this select 1)]];
+      },[_wp,_forEachIndex]] call BIS_fnc_addStackedEventHandler;
+      if (_forEachIndex == (count _e_hq_positions) - 1) then {
+        [["g",_e_group],["t",_wp],["ty",7],["s",1],["b",2],["to",[0.1,0.5,1]],["cr",0],["r",0]] call VVM_fnc_createWaypoint; // diag_log "WP CYCLE";
+      } else {
+        [["g",_e_group],["t",_wp],["ty",0],["s",1],["b",2],["to",[0.1,0.5,1]],["cr",0],["r",0]] call VVM_fnc_createWaypoint; // diag_log "WP MOVE";
+      };
+    } forEach _e_hq_positions;
+    // Independent
+    _i_group = [2] call VVM_fnc_createGroup;
+    _i_unit = [_i_group,2,2,0,([GUERHQPOS,1,1,1] call BIS_fnc_findSafePos),6,1] call VVM_fnc_createUnit;
+    _i_unit = [_i_group,2,2,1,([GUERHQPOS,1,1,1] call BIS_fnc_findSafePos),3,0] call VVM_fnc_createUnit;
+	  [_i_group,(currentWaypoint _i_group)] setWaypointPosition [getPosASL ((units _i_group) select 0), -1];
+	  for "_i" from count waypoints _i_group - 1 to 0 step -1 do { deleteWaypoint [_i_group, _i] };
+    // diag_log format["VVM_AI_I_HQ1 = %1",getPos VVM_AI_I_HQ1];
+    _i_hq_positions = VVM_AI_I_HQ1 buildingPos -1;
+    // diag_log str _i_hq_positions;
+    { _xPos = _x select 0; _yPos = _x select 1; _zPos = _x select 2; _wp = [_xPos,_yPos,_zPos + 0.5];
+      // diag_log format["Waypoint %1 = %2",_forEachIndex,_wp];
+      [format["VVM_AI_WP_I_A1_%1",_forEachIndex],"onEachFrame",{
+        drawIcon3D["a3\ui_f\data\map\groupicons\badge_simple.paa",[1,1,1,0.5],(_this select 0),1,1,0,format["%1-%2","WP",str (_this select 1)]];
+      },[_wp,_forEachIndex]] call BIS_fnc_addStackedEventHandler;
+      if (_forEachIndex == (count _i_hq_positions) - 1) then {
+        [["g",_i_group],["t",_wp],["ty",7],["s",1],["b",2],["to",[0.1,0.5,1]],["cr",0],["r",0]] call VVM_fnc_createWaypoint; // diag_log "WP CYCLE";
+      } else {
+        [["g",_i_group],["t",_wp],["ty",0],["s",1],["b",2],["to",[0.1,0.5,1]],["cr",0],["r",0]] call VVM_fnc_createWaypoint; // diag_log "WP MOVE";
+      };
+    } forEach _i_hq_positions;
+*/
+/*  _aomarker = [[[1000,1000],[1000,2000],[2000,2000],[2000,1000],[1000,1000]],10,["ColorOrange",1]] call VVM_fnc_lineToMapGlobal;
+    _aotextmarker= [[1250,950],[0,2],["AREA OF OPERATION","ColorBlack",0.5]] call VVM_fnc_textToMapGlobal;
+    _qrfmarker = [[1170,785],[45,450,80,10],["ColorRed",1],["QRF!","center","ColorBlack",0.5]] call VVM_fnc_arrowToMapGlobal;
+    _loamarker = [[[1365,2260],[2220,1490]],10,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
+    _loatextmarker= [[1465,2210],[([2220,1490] getDir [1365,2260])+5,2],["LOA 1","ColorBlue",0.5]] call VVM_fnc_textToMapGlobal;
+    _loamarker2 = [[[1095,2110],[2065,1210]],10,["ColorBlue",1]] call VVM_fnc_lineToMapGlobal;
+    _loatextmarker2= [[1195,2060],[([2065,1210] getDir [1095,2110])+5,2],["LOA 2","ColorBlue",0.5]] call VVM_fnc_textToMapGlobal;
+*/
   };
 };

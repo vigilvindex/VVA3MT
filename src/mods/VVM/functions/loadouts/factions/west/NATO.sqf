@@ -11,7 +11,7 @@
  * Arguments: index name     (default) TYPE    {Required} min,max    "values"
  *            d     debug    (false)   BOOLEAN {N}        false,true "Disabled","Enabled"
  *            r     role 	 (0)       SCALAR  {N}        0,36       "Role Key"
- * Usage: _co = [] call compile preprocessFileLineNumbers "NATO.sqf";
+ * Usage: _co = [0] call compile preprocessFileLineNumbers "NATO.sqf";
  * Developer Notes:
  * 	Faction role definition array uses "-1" to indicate to the set loadout function skip that element.
  * 	Voice and face are selected randomly, and only applied to AI via a switch in the set loadout function.
@@ -85,6 +85,7 @@ _roles = [ // ROLE TRAITS VOICE FACE UNIFORM HEADGEAR BACKPACK VEST NVG FACEWEAR
 /*40*/["rad",	0,_v,_f,0,2,13,0,0,-1,0,0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,													[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1],
 /*41*/["cbrn",	0,_v,_f,18,-1,0,0,0,17,0,0,	[[1,1,[[1,5]],[[1,5]],-1,-1,-1,[[0,1]],[[1,1]],[[1,1]],[[2,1]]]],											[[1,0,[[0,2]],-1,-1,-1,-1,[[0,1]],-1,[[0,1]],[[0,1]]]],	-1,													[[0,1]],		[[0,1],[1,1],[2,1],[3,1]],	[[0,2],[1,2],[2,2],[4,2]], [[0,2],[1,2]], -1,			 -1,									0,0,0,[[0,1]],-1]
 ];
+// _primaries = [0,1,2,3,4,5,6,7,8] call VVM_fnc_getPrimaryWeapons;
 _primaries = [	// FACTION PRIMARY WEAPONS
 	"VERMIN",	// 0 SMG (Vanilla)
 	"MX",		// 1 AR (Vanilla)
@@ -184,6 +185,7 @@ _headgear = [						// FACTION HEADGEAR
 	"H_Booniehat_mcamo",			// 34 Booniehat MTP
 	"H_Cap_tan_specops_US"			// 35 Cap MTP
 ];
+// _uniforms = [0,1,2,3,4,5,5,6,7,8] call VVM_fnc_getUniforms;
 _uniforms = [								// FACTION UNIFORMS
 	"U_B_CombatUniform_mcam",				// 0 Combat Fatigues MTP (Vanilla)
 	"U_B_T_Soldier_F",						// 1 Combat Fatigues Tropic (Apex)
